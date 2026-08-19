@@ -286,6 +286,7 @@
       <a href="#v2-location">Location</a>
       <a href="#v2-timeline">Timeline</a>
       <a href="#v2-account">Account</a>
+      <a href="#v2-rsvp">RSVP</a>
       <a href="#v2-share">Share</a>
     </nav>
 
@@ -331,6 +332,7 @@
           <span class="v2-amp">&amp;</span>
           <span class="v2-name">박소연</span>
         </h2>
+        <p class="v2-datetime">2026.11.14 1:30 PM</p>
         <div class="v2-letter-stack">
           <img
             class="v2-open-envelope"
@@ -358,6 +360,7 @@
           height="461"
           draggable="false"
         >
+        <button class="v2-rsvp-btn v2-rsvp-btn-secondary js-rsvp-open" type="button">참석여부 전달하기</button>
       </section>
 
       <!-- Invitation message -->
@@ -374,39 +377,56 @@
           <p>그 첫날을</p>
           <p>소중한 분들과 함께하고 싶습니다.</p>
         </div>
+        <div class="v2-parents">
+          <p>
+            <span class="v2-parent-names">지현호 · 김윤정</span>
+            <span class="v2-parent-rel">의 아들</span>
+            <strong>지상원</strong>
+          </p>
+          <p>
+            <span class="v2-parent-names">박수근 · 이혜경</span>
+            <span class="v2-parent-rel">의 딸</span>
+            <strong>박소연</strong>
+          </p>
+        </div>
       </section>
 
       <!-- Gallery -->
       <section class="v2-section v2-gallery" id="v2-gallery">
         <h2 class="v2-section-title">GALLERY</h2>
-        <div class="v2-gallery-grid">
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="0" aria-label="갤러리 사진 1 확대">
-            <img src="assets/v2-gallery-01.png" alt="웨딩 스튜디오 전신 사진" loading="lazy" decoding="async">
+        <div class="v2-gallery-viewer">
+          <button class="v2-gallery-main" id="v2-gallery-main" type="button" aria-label="갤러리 사진 확대">
+            <img id="v2-gallery-main-image" src="assets/v2-gallery-01.png" alt="웨딩 스튜디오 전신 사진">
           </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="1" aria-label="갤러리 사진 2 확대">
-            <img src="assets/v2-gallery-02.png" alt="웨딩 클로즈업 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="2" aria-label="갤러리 사진 3 확대">
-            <img src="assets/v2-gallery-03.png" alt="부케를 든 웨딩 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="3" aria-label="갤러리 사진 4 확대">
-            <img src="assets/v2-gallery-04.png" alt="꽃다발을 건네는 커플 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="4" aria-label="갤러리 사진 5 확대">
-            <img src="assets/v2-gallery-05.png" alt="의자에 앉아있는 커플 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="5" aria-label="갤러리 사진 6 확대">
-            <img src="assets/v2-gallery-06.png" alt="신랑 신부 정면 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="6" aria-label="갤러리 사진 7 확대">
-            <img src="assets/v2-gallery-07.png" alt="베일을 쓴 웨딩 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="7" aria-label="갤러리 사진 8 확대">
-            <img src="assets/v2-gallery-08.png" alt="속삭이는 커플 웨딩 사진" loading="lazy" decoding="async">
-          </button>
-          <button class="v2-gallery-item v2-gallery-trigger" type="button" data-gallery-index="8" aria-label="갤러리 사진 9 확대">
-            <img src="assets/v2-gallery-09.png" alt="부케를 든 클로즈업 웨딩 사진" loading="lazy" decoding="async">
-          </button>
+          <div class="v2-gallery-thumbs" id="v2-gallery-thumbs" role="list">
+            <button class="v2-gallery-thumb is-active" type="button" role="listitem" data-gallery-index="0" aria-label="갤러리 사진 1" aria-current="true">
+              <img src="assets/v2-gallery-01.png" alt="웨딩 스튜디오 전신 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="1" aria-label="갤러리 사진 2">
+              <img src="assets/v2-gallery-02.png" alt="웨딩 클로즈업 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="2" aria-label="갤러리 사진 3">
+              <img src="assets/v2-gallery-03.png" alt="부케를 든 웨딩 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="3" aria-label="갤러리 사진 4">
+              <img src="assets/v2-gallery-04.png" alt="꽃다발을 건네는 커플 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="4" aria-label="갤러리 사진 5">
+              <img src="assets/v2-gallery-05.png" alt="의자에 앉아있는 커플 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="5" aria-label="갤러리 사진 6">
+              <img src="assets/v2-gallery-06.png" alt="신랑 신부 정면 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="6" aria-label="갤러리 사진 7">
+              <img src="assets/v2-gallery-07.png" alt="베일을 쓴 웨딩 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="7" aria-label="갤러리 사진 8">
+              <img src="assets/v2-gallery-08.png" alt="속삭이는 커플 웨딩 사진">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="8" aria-label="갤러리 사진 9">
+              <img src="assets/v2-gallery-09.png" alt="부케를 든 클로즈업 웨딩 사진">
+            </button>
+          </div>
         </div>
       </section>
 
@@ -428,18 +448,23 @@
             <p class="v2-venue-phone">676-3456</p>
           </div>
         </div>
-        <div class="v2-map-preview">
-          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-            <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          <span>MAP PREVIEW</span>
-        </div>
+        <button class="v2-map-preview" id="v2-map-open" type="button" aria-label="삼청각 안내도 확대">
+          <img
+            src="assets/v2-samcheonggak-map.jpg?v=3"
+            alt="삼청각 일화당 안내도"
+            width="1024"
+            height="682"
+            loading="lazy"
+            decoding="async"
+          >
+        </button>
         <div class="v2-transport">
           <div class="v2-transport-block">
             <h4>[셔틀버스]</h4>
             <p>4호선 한성대입구역 6번 출구 앞 정류장 탑승</p>
             <p>3호선 안국역 5번 출구 앞 탑승</p>
             <p class="v2-transport-note">※ 일화당 정문 앞 하차 (무료 운행)</p>
+            <button class="v2-shuttle-btn" id="v2-shuttle-open" type="button">셔틀버스 시간표 보기</button>
           </div>
           <div class="v2-transport-block">
             <h4>[자가용 / 택시]</h4>
@@ -529,11 +554,11 @@
         <p class="v2-account-sub">마음 전하실 곳</p>
         <div class="v2-accordion">
           <div class="v2-accordion-item">
-            <button class="v2-accordion-trigger" aria-expanded="true">
+            <button class="v2-accordion-trigger" aria-expanded="false">
               <span>신랑측 계좌번호</span>
               <svg class="v2-chevron" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
             </button>
-            <div class="v2-accordion-panel open">
+            <div class="v2-accordion-panel">
               <div class="v2-account-row">
                 <div>
                   <span class="v2-account-label">지현호</span>
@@ -601,6 +626,24 @@
         </div>
       </section>
 
+      <!-- RSVP -->
+      <section class="v2-section v2-rsvp" id="v2-rsvp">
+        <p class="v2-rsvp-badge">RSVP</p>
+        <h2 class="v2-rsvp-title">참석여부</h2>
+        <div class="v2-rsvp-message">
+          <p>참석에 부담 가지지 말아주시고,</p>
+          <p>편하게 알려주세요.</p>
+          <p>참석 여부를 미리 알려주시면</p>
+          <p>식사 및 자리를 준비하는 데 큰 도움이 됩니다.</p>
+        </div>
+        <div class="v2-rsvp-rule" aria-hidden="true"></div>
+        <p class="v2-rsvp-date">11 / 14</p>
+        <p class="v2-rsvp-meta">토요일 오후 1시 30분</p>
+        <p class="v2-rsvp-meta">삼청각 일화당</p>
+        <p class="v2-rsvp-meta">서울 성북구 대사관로 3</p>
+        <button class="v2-rsvp-btn js-rsvp-open" id="v2-rsvp-open" type="button">참석여부 전달하기</button>
+      </section>
+
       <!-- Share -->
       <section class="v2-section v2-share" id="v2-share">
         <div class="v2-share-rule" aria-hidden="true"></div>
@@ -632,6 +675,143 @@
         <p>With love, Sangwon &amp; Soyun</p>
         <p class="v2-footer-date">2026.11.14</p>
       </footer>
+
+      <div class="v2-rsvp-modal" id="v2-rsvp-modal" aria-hidden="true">
+        <div class="v2-rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="v2-rsvp-dialog-title">
+          <button class="v2-rsvp-close" id="v2-rsvp-close" type="button" aria-label="닫기">&times;</button>
+          <p class="v2-rsvp-badge">RSVP</p>
+          <h3 id="v2-rsvp-dialog-title">참석여부 전달</h3>
+          <form class="v2-rsvp-form" id="v2-rsvp-form">
+            <label class="v2-rsvp-field">
+              <span>성함</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <fieldset class="v2-rsvp-field">
+              <legend>구분</legend>
+              <div class="v2-rsvp-choices">
+                <label class="v2-rsvp-choice">
+                  <input type="radio" name="side" value="신랑측" required>
+                  <span>신랑측</span>
+                </label>
+                <label class="v2-rsvp-choice">
+                  <input type="radio" name="side" value="신부측">
+                  <span>신부측</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset class="v2-rsvp-field">
+              <legend>참석 여부</legend>
+              <div class="v2-rsvp-choices">
+                <label class="v2-rsvp-choice">
+                  <input type="radio" name="attendance" value="참석" required>
+                  <span>참석</span>
+                </label>
+                <label class="v2-rsvp-choice">
+                  <input type="radio" name="attendance" value="불참">
+                  <span>불참</span>
+                </label>
+              </div>
+            </fieldset>
+            <label class="v2-rsvp-field">
+              <span>참석 인원</span>
+              <input type="number" name="guests" min="1" max="20" value="1">
+            </label>
+            <button class="v2-rsvp-submit" type="submit">제출하기</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="v2-shuttle-modal" id="v2-shuttle-modal" aria-hidden="true">
+        <div class="v2-shuttle-dialog" role="dialog" aria-modal="true" aria-labelledby="v2-shuttle-title">
+          <button class="v2-shuttle-close" id="v2-shuttle-close" type="button" aria-label="닫기">&times;</button>
+          <h3 id="v2-shuttle-title">삼청각 셔틀버스 시간표</h3>
+          <div class="v2-shuttle-tabs" role="tablist">
+            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">한성대입구</button>
+            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">안국</button>
+          </div>
+
+          <div class="v2-shuttle-panel is-active" id="v2-shuttle-hansung" role="tabpanel">
+            <p class="v2-shuttle-route">4호선 한성대입구역 6번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:10</td><td>—</td></tr>
+                <tr><td>11:30</td><td>11:40</td><td>11:20</td></tr>
+                <tr><td>12:00</td><td>12:10</td><td>11:50</td></tr>
+                <tr><td>12:30</td><td>12:40</td><td>12:20</td></tr>
+                <tr><td>13:00</td><td>13:10</td><td>12:50</td></tr>
+                <tr><td>13:30</td><td>13:40</td><td>13:20</td></tr>
+                <tr><td>14:00</td><td>14:10</td><td>13:50</td></tr>
+                <tr><td>14:30</td><td>14:40</td><td>14:20</td></tr>
+                <tr><td>15:00</td><td>15:10</td><td>14:50</td></tr>
+                <tr><td>15:30</td><td>15:40</td><td>15:20</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:40–16:50</td></tr>
+                <tr><td>17:00</td><td>17:10</td><td>16:50</td></tr>
+                <tr><td>17:30</td><td>17:40</td><td>17:20</td></tr>
+                <tr><td>18:00</td><td>18:10</td><td>17:50</td></tr>
+                <tr><td>18:30</td><td>18:40</td><td>18:20</td></tr>
+                <tr><td>19:00</td><td>19:10</td><td>18:50</td></tr>
+                <tr><td>19:30</td><td>19:40</td><td>19:20</td></tr>
+                <tr><td>20:00</td><td>20:10</td><td>19:50</td></tr>
+                <tr><td>20:30</td><td>20:40</td><td>20:20</td></tr>
+                <tr><td>21:00</td><td>21:10</td><td>20:50</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="v2-shuttle-panel" id="v2-shuttle-anguk" role="tabpanel" hidden>
+            <p class="v2-shuttle-route">3호선 안국역 5번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:15</td><td>10:45</td></tr>
+                <tr><td>11:40</td><td>11:55</td><td>11:25</td></tr>
+                <tr><td>12:20</td><td>12:35</td><td>12:05</td></tr>
+                <tr><td>13:00</td><td>13:15</td><td>12:45</td></tr>
+                <tr><td>13:40</td><td>13:55</td><td>13:25</td></tr>
+                <tr><td>14:20</td><td>14:35</td><td>14:05</td></tr>
+                <tr><td>15:00</td><td>15:15</td><td>14:45</td></tr>
+                <tr><td>15:40</td><td>15:55</td><td>15:25</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:55–16:25</td></tr>
+                <tr><td>16:40</td><td>16:55</td><td>16:25</td></tr>
+                <tr><td>17:20</td><td>17:35</td><td>17:05</td></tr>
+                <tr><td>18:00</td><td>18:15</td><td>17:45</td></tr>
+                <tr><td>18:40</td><td>18:55</td><td>18:25</td></tr>
+                <tr><td>19:20</td><td>19:35</td><td>19:05</td></tr>
+                <tr><td>20:00</td><td>20:15</td><td>19:45</td></tr>
+                <tr><td>20:40</td><td>20:55</td><td>20:25</td></tr>
+                <tr><td>21:20</td><td>21:35</td><td>21:05</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="v2-shuttle-note">※ 영업 및 도로사정에 따라 운행시간이 변경될 수 있습니다.</p>
+          <a class="v2-shuttle-link" href="https://www.samcheonggak.or.kr/location/" target="_blank" rel="noopener noreferrer">삼청각 오시는 길 ↗</a>
+        </div>
+      </div>
+
+      <div class="v2-map-modal" id="v2-map-modal" aria-hidden="true">
+        <button class="v2-gallery-close" id="v2-map-close" type="button" aria-label="지도 닫기">&times;</button>
+        <div class="v2-map-modal-stage">
+          <img
+            class="v2-map-modal-image"
+            src="assets/v2-samcheonggak-map.jpg?v=3"
+            alt="삼청각 일화당 안내도 확대"
+          >
+        </div>
+      </div>
 
       <div class="v2-gallery-modal" id="v2-gallery-modal" aria-hidden="true">
         <button class="v2-gallery-close" id="v2-gallery-close" type="button" aria-label="갤러리 닫기">&times;</button>
