@@ -64,7 +64,7 @@ body[data-active-version="2"] {
 }
 
 body[data-active-version="3"] {
-  background-color: #5f5732;
+  background-color: #1c261f;
 }
 
 .bgm-toggle {
@@ -980,6 +980,13 @@ body.is-handoff .envelope-stage {
   background-size: 320px auto;
 }
 
+#version-3 {
+  --v2-bg: #1c261f;
+  --v2-bg-deep: #15201a;
+  background-color: #1c261f;
+  background-image: none;
+}
+
 .v2-header {
   position: fixed;
   top: 0;
@@ -1095,7 +1102,7 @@ body.is-handoff .envelope-stage {
 }
 
 #v3-nav {
-  background-color: #5f5732;
+  background-color: #1c261f;
   background-image: none;
 }
 
@@ -1123,11 +1130,9 @@ body.is-handoff .envelope-stage {
 }
 
 /* Main content */
-.v2-main {
-  background-color: var(--v2-bg);
-  background-image: var(--v2-olive-texture);
-  background-repeat: repeat;
-  background-size: 320px auto;
+#version-3 .v2-main {
+  background-color: #1c261f;
+  background-image: none;
 }
 
 .v2-section {

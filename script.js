@@ -249,6 +249,20 @@
       });
     }
 
+    function scrollToY(top, duration) {
+      const startY = window.scrollY;
+      const delta = top - startY;
+      if (Math.abs(delta) < 2) return;
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        window.scrollTo(0, startY + delta * ease);
+        if (t < 1) window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    }
+
     function openInvitation() {
       const target = root.querySelector('.v2-main > .v2-section') || join || save;
       if (!target) return;
@@ -261,7 +275,7 @@
       }
 
       const top = target.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
+      scrollToY(top, 2200);
 
       if (target !== join) return;
 
@@ -279,7 +293,7 @@
       window.setTimeout(() => {
         window.removeEventListener('scroll', tryStart);
         revealJoinSequence();
-      }, 1100);
+      }, 2300);
     }
 
     if (envelope) {
