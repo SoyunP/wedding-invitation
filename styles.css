@@ -2000,8 +2000,13 @@ body.is-handoff .envelope-stage {
   box-shadow: none;
 }
 
+#v3-gallery .v2-gallery-thumb {
+  border-color: transparent;
+  background: transparent;
+}
+
 #v3-gallery .v2-gallery-thumb.is-active {
-  border-color: #5f5732;
+  border-color: transparent;
 }
 
 #v3-gallery .v2-gallery-viewer {
