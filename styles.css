@@ -1130,6 +1130,13 @@ body.is-handoff .envelope-stage {
 }
 
 /* Main content */
+.v2-main {
+  background-color: var(--v2-bg);
+  background-image: var(--v2-olive-texture);
+  background-repeat: repeat;
+  background-size: 320px auto;
+}
+
 #version-3 .v2-main {
   background-color: #1c261f;
   background-image: none;
