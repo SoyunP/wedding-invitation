@@ -16,6 +16,7 @@
     <select id="version-select" aria-label="Select invitation version">
       <option value="1" selected>Version 1</option>
       <option value="2">Version 2</option>
+      <option value="3">Version 3</option>
     </select>
   </div>
 
@@ -395,37 +396,195 @@
       <section class="v2-section v2-gallery" id="v2-gallery">
         <h2 class="v2-section-title">GALLERY</h2>
         <div class="v2-gallery-viewer">
-          <button class="v2-gallery-main" id="v2-gallery-main" type="button" aria-label="갤러리 사진 확대">
-            <img id="v2-gallery-main-image" src="assets/v2-gallery-01.png" alt="웨딩 스튜디오 전신 사진">
-          </button>
-          <div class="v2-gallery-thumbs" id="v2-gallery-thumbs" role="list">
+          <div class="v2-gallery-stage">
+            <button class="v2-gallery-main-nav" id="v2-gallery-main-prev" type="button" aria-label="이전 사진">&#10094;</button>
+            <button class="v2-gallery-main" id="v2-gallery-main" type="button" aria-label="갤러리 사진 확대">
+              <img id="v2-gallery-main-image" src="assets/v2-gallery-01.jpg" alt="웨딩 사진 1">
+            </button>
+            <button class="v2-gallery-main-nav" id="v2-gallery-main-next" type="button" aria-label="다음 사진">&#10095;</button>
+          </div>
+          <div class="v2-gallery-thumbs-wrap">
+            <button class="v2-gallery-thumbs-nav" id="v2-gallery-thumbs-prev" type="button" aria-label="썸네일 왼쪽으로 이동">&#10094;</button>
+            <div class="v2-gallery-thumbs" id="v2-gallery-thumbs" role="list">
             <button class="v2-gallery-thumb is-active" type="button" role="listitem" data-gallery-index="0" aria-label="갤러리 사진 1" aria-current="true">
-              <img src="assets/v2-gallery-01.png" alt="웨딩 스튜디오 전신 사진">
+              <img src="assets/v2-gallery-01.jpg" alt="웨딩 사진 1">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="1" aria-label="갤러리 사진 2">
-              <img src="assets/v2-gallery-02.png" alt="웨딩 클로즈업 사진">
+              <img src="assets/v2-gallery-02.jpg" alt="웨딩 사진 2" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="2" aria-label="갤러리 사진 3">
-              <img src="assets/v2-gallery-03.png" alt="부케를 든 웨딩 사진">
+              <img src="assets/v2-gallery-03.jpg" alt="웨딩 사진 3" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="3" aria-label="갤러리 사진 4">
-              <img src="assets/v2-gallery-04.png" alt="꽃다발을 건네는 커플 사진">
+              <img src="assets/v2-gallery-04.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="4" aria-label="갤러리 사진 5">
-              <img src="assets/v2-gallery-05.png" alt="의자에 앉아있는 커플 사진">
+              <img src="assets/v2-gallery-05.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="5" aria-label="갤러리 사진 6">
-              <img src="assets/v2-gallery-06.png" alt="신랑 신부 정면 사진">
+              <img src="assets/v2-gallery-06.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="6" aria-label="갤러리 사진 7">
-              <img src="assets/v2-gallery-07.png" alt="베일을 쓴 웨딩 사진">
+              <img src="assets/v2-gallery-07.jpg" alt="웨딩 사진 7" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="7" aria-label="갤러리 사진 8">
-              <img src="assets/v2-gallery-08.png" alt="속삭이는 커플 웨딩 사진">
+              <img src="assets/v2-gallery-08.jpg" alt="웨딩 사진 8" loading="lazy" decoding="async">
             </button>
             <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="8" aria-label="갤러리 사진 9">
-              <img src="assets/v2-gallery-09.png" alt="부케를 든 클로즈업 웨딩 사진">
+              <img src="assets/v2-gallery-09.jpg" alt="웨딩 사진 9" loading="lazy" decoding="async">
             </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="9" aria-label="갤러리 사진 10">
+              <img src="assets/v2-gallery-10.jpg" alt="웨딩 사진 10" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="10" aria-label="갤러리 사진 11">
+              <img src="assets/v2-gallery-11.jpg" alt="웨딩 사진 11" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="11" aria-label="갤러리 사진 12">
+              <img src="assets/v2-gallery-12.jpg" alt="웨딩 사진 12" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="12" aria-label="갤러리 사진 13">
+              <img src="assets/v2-gallery-13.jpg" alt="웨딩 사진 13" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="13" aria-label="갤러리 사진 14">
+              <img src="assets/v2-gallery-14.jpg" alt="웨딩 사진 14" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="14" aria-label="갤러리 사진 15">
+              <img src="assets/v2-gallery-15.jpg" alt="웨딩 사진 15" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="15" aria-label="갤러리 사진 16">
+              <img src="assets/v2-gallery-16.jpg" alt="웨딩 사진 16" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="16" aria-label="갤러리 사진 17">
+              <img src="assets/v2-gallery-17.jpg" alt="웨딩 사진 17" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="17" aria-label="갤러리 사진 18">
+              <img src="assets/v2-gallery-18.jpg" alt="웨딩 사진 18" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="18" aria-label="갤러리 사진 19">
+              <img src="assets/v2-gallery-19.jpg" alt="웨딩 사진 19" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="19" aria-label="갤러리 사진 20">
+              <img src="assets/v2-gallery-20.jpg" alt="웨딩 사진 20" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="20" aria-label="갤러리 사진 21">
+              <img src="assets/v2-gallery-21.jpg" alt="웨딩 사진 21" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="21" aria-label="갤러리 사진 22">
+              <img src="assets/v2-gallery-22.jpg" alt="웨딩 사진 22" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="22" aria-label="갤러리 사진 23">
+              <img src="assets/v2-gallery-23.jpg" alt="웨딩 사진 23" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="23" aria-label="갤러리 사진 24">
+              <img src="assets/v2-gallery-24.jpg" alt="웨딩 사진 24" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="24" aria-label="갤러리 사진 25">
+              <img src="assets/v2-gallery-25.jpg" alt="웨딩 사진 25" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="25" aria-label="갤러리 사진 26">
+              <img src="assets/v2-gallery-26.jpg" alt="웨딩 사진 26" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="26" aria-label="갤러리 사진 27">
+              <img src="assets/v2-gallery-27.jpg" alt="웨딩 사진 27" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="27" aria-label="갤러리 사진 28">
+              <img src="assets/v2-gallery-28.jpg" alt="웨딩 사진 28" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="28" aria-label="갤러리 사진 29">
+              <img src="assets/v2-gallery-29.jpg" alt="웨딩 사진 29" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="29" aria-label="갤러리 사진 30">
+              <img src="assets/v2-gallery-30.jpg" alt="웨딩 사진 30" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="30" aria-label="갤러리 사진 31">
+              <img src="assets/v2-gallery-31.jpg" alt="웨딩 사진 31" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="31" aria-label="갤러리 사진 32">
+              <img src="assets/v2-gallery-32.jpg" alt="웨딩 사진 32" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="32" aria-label="갤러리 사진 33">
+              <img src="assets/v2-gallery-33.jpg" alt="웨딩 사진 33" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="33" aria-label="갤러리 사진 34">
+              <img src="assets/v2-gallery-34.jpg" alt="웨딩 사진 34" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="34" aria-label="갤러리 사진 35">
+              <img src="assets/v2-gallery-35.jpg" alt="웨딩 사진 35" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="35" aria-label="갤러리 사진 36">
+              <img src="assets/v2-gallery-36.jpg" alt="웨딩 사진 36" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="36" aria-label="갤러리 사진 37">
+              <img src="assets/v2-gallery-37.jpg" alt="웨딩 사진 37" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="37" aria-label="갤러리 사진 38">
+              <img src="assets/v2-gallery-38.jpg" alt="웨딩 사진 38" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="38" aria-label="갤러리 사진 39">
+              <img src="assets/v2-gallery-39.jpg" alt="웨딩 사진 39" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="39" aria-label="갤러리 사진 40">
+              <img src="assets/v2-gallery-40.jpg" alt="웨딩 사진 40" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="40" aria-label="갤러리 사진 41">
+              <img src="assets/v2-gallery-41.jpg" alt="웨딩 사진 41" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="41" aria-label="갤러리 사진 42">
+              <img src="assets/v2-gallery-42.jpg" alt="웨딩 사진 42" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="42" aria-label="갤러리 사진 43">
+              <img src="assets/v2-gallery-43.jpg" alt="웨딩 사진 43" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="43" aria-label="갤러리 사진 44">
+              <img src="assets/v2-gallery-44.jpg" alt="웨딩 사진 44" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="44" aria-label="갤러리 사진 45">
+              <img src="assets/v2-gallery-45.jpg" alt="웨딩 사진 45" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="45" aria-label="갤러리 사진 46">
+              <img src="assets/v2-gallery-46.jpg" alt="웨딩 사진 46" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="46" aria-label="갤러리 사진 47">
+              <img src="assets/v2-gallery-47.jpg" alt="웨딩 사진 47" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="47" aria-label="갤러리 사진 48">
+              <img src="assets/v2-gallery-48.jpg" alt="웨딩 사진 48" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="48" aria-label="갤러리 사진 49">
+              <img src="assets/v2-gallery-49.jpg" alt="웨딩 사진 49" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="49" aria-label="갤러리 사진 50">
+              <img src="assets/v2-gallery-50.jpg" alt="웨딩 사진 50" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="50" aria-label="갤러리 사진 51">
+              <img src="assets/v2-gallery-51.jpg" alt="웨딩 사진 51" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="51" aria-label="갤러리 사진 52">
+              <img src="assets/v2-gallery-52.jpg" alt="웨딩 사진 52" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="52" aria-label="갤러리 사진 53">
+              <img src="assets/v2-gallery-53.jpg" alt="웨딩 사진 53" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="53" aria-label="갤러리 사진 54">
+              <img src="assets/v2-gallery-54.jpg" alt="웨딩 사진 54" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="54" aria-label="갤러리 사진 55">
+              <img src="assets/v2-gallery-55.jpg" alt="웨딩 사진 55" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="55" aria-label="갤러리 사진 56">
+              <img src="assets/v2-gallery-56.jpg" alt="웨딩 사진 56" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="56" aria-label="갤러리 사진 57">
+              <img src="assets/v2-gallery-57.jpg" alt="웨딩 사진 57" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="57" aria-label="갤러리 사진 58">
+              <img src="assets/v2-gallery-58.jpg" alt="웨딩 사진 58" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="58" aria-label="갤러리 사진 59">
+              <img src="assets/v2-gallery-59.jpg" alt="웨딩 사진 59" loading="lazy" decoding="async">
+            </button>
+          </div>
+            <button class="v2-gallery-thumbs-nav" id="v2-gallery-thumbs-next" type="button" aria-label="썸네일 오른쪽으로 이동">&#10095;</button>
           </div>
         </div>
       </section>
@@ -818,6 +977,784 @@
         <button class="v2-gallery-nav v2-gallery-prev" id="v2-gallery-prev" type="button" aria-label="이전 사진">&#10094;</button>
         <img class="v2-gallery-modal-image" id="v2-gallery-modal-image" src="" alt="">
         <button class="v2-gallery-nav v2-gallery-next" id="v2-gallery-next" type="button" aria-label="다음 사진">&#10095;</button>
+      </div>
+    </main>
+  </div>
+
+  <div class="version-panel" id="version-3" data-version="3" hidden>
+    <header class="v2-header" id="v3-header">
+      <span class="v2-header-label">The Wedding of</span>
+      <button class="v2-menu-btn" id="v3-menu-btn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <nav class="v2-nav" id="v3-nav" aria-hidden="true">
+      <button class="v2-nav-close" aria-label="Close menu">&times;</button>
+      <a href="#v3-invitation">Invitation</a>
+      <a href="#v3-family">Family</a>
+      <a href="#v3-gallery">Gallery</a>
+      <a href="#v3-date">Date</a>
+      <a href="#v3-location">Location</a>
+      <a href="#v3-timeline">Timeline</a>
+      <a href="#v3-account">Account</a>
+      <a href="#v3-rsvp">RSVP</a>
+      <a href="#v3-share">Share</a>
+    </nav>
+
+    <!-- Envelope intro (full-bleed image) -->
+    <section class="v2-envelope" id="v3-envelope" aria-label="Opening love letter">
+      <img
+        class="v2-envelope-hero"
+        src="assets/v2-envelope-hero.png"
+        alt="A love letter from Sangwon &amp; Soyun — Open the invitation"
+        width="1024"
+        height="768"
+        draggable="false"
+      >
+    </section>
+
+    <main class="v2-main">
+      <!-- Invitation message -->
+      <section class="v2-section v2-invitation v3-letter-scene" id="v3-invitation">
+        <div class="v3-letter-sticky">
+          <div class="v3-letter-card">
+            <div class="v3-letter-inner">
+              <span class="v3-celebrate-star" aria-hidden="true">✦</span>
+              <p class="v3-letter-kicker">WITH LOVE</p>
+              <figure class="v3-polaroid">
+                <img src="assets/v2-gallery-12.jpg" alt="상원과 소연" width="800" height="800" decoding="async">
+                <figcaption>상원 ♥ 소연</figcaption>
+              </figure>
+              <p class="v3-letter-venue">삼청각 일화당</p>
+              <p class="v3-letter-date">2026.11.14 1:30 PM</p>
+              <h3 class="v3-invite-heading">초대합니다</h3>
+              <div class="v2-message">
+                <p>늘 곁에 있던 사람이</p>
+                <p>평생 곁에 있고 싶은 사람이 되었습니다.</p>
+                <p>서로의 기쁨을 함께하고</p>
+                <p>힘든 날에는 가장 가까이 머물며</p>
+                <p>어느새 가장 고마운 사람이 되었습니다.</p>
+                <p>이제 서로의 곁에서</p>
+                <p>앞으로의 모든 날을 함께하려 합니다.</p>
+                <p>그 첫날을</p>
+                <p>소중한 분들과 함께하고 싶습니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="v3-letter-frame" aria-hidden="true">
+            <div class="v3-letter-bar">INVITED</div>
+            <div class="v3-letter-side v3-letter-side--left"></div>
+            <div class="v3-letter-side v3-letter-side--right"></div>
+            <svg class="v3-letter-flap" viewBox="0 0 400 160" preserveAspectRatio="none">
+              <path d="M0 88L200 10L400 88V160H0Z"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="v2-section v3-celebrate" id="v3-celebrate">
+        <span class="v3-celebrate-star" aria-hidden="true">✦</span>
+        <p class="v3-celebrate-kicker">CELEBRATE!</p>
+        <div class="v3-celebrate-photo">
+          <img src="assets/v3-celebrate-photo.png" alt="상원과 소연" width="1200" height="600" decoding="async">
+        </div>
+        <h2 class="v3-celebrate-title">
+          <span>OUR,</span>
+          <span>WEDDING</span>
+        </h2>
+        <p class="v3-celebrate-date">2026.11.14 1:30 PM</p>
+      </section>
+
+      <section class="v2-section v3-family" id="v3-family">
+        <div class="v3-couple-pair">
+          <figure class="v3-couple-card v3-couple-card--left">
+            <div class="v3-couple-photo">
+              <img src="assets/v3-family-soyeon.png" alt="소연" width="600" height="800" decoding="async">
+            </div>
+            <figcaption><em>Bride.</em> 소연</figcaption>
+          </figure>
+          <figure class="v3-couple-card v3-couple-card--right">
+            <div class="v3-couple-photo">
+              <img src="assets/v3-family-sangwon.png" alt="상원" width="600" height="800" decoding="async">
+            </div>
+            <figcaption><em>Groom.</em> 상원</figcaption>
+          </figure>
+        </div>
+        <div class="v3-parents-clip">
+          <div class="v2-parents v3-celebrate-parents">
+            <p>
+              <span class="v2-parent-names">지현호 · 김윤정의 아들</span>
+              <strong>지상원</strong>
+            </p>
+            <p>
+              <span class="v2-parent-names">박수근 · 이혜경의 딸</span>
+              <strong>박소연</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section class="v2-section v2-gallery" id="v3-gallery">
+        <h2 class="v2-section-title">GALLERY</h2>
+        <div class="v2-gallery-viewer">
+          <div class="v2-gallery-stage">
+            <button class="v2-gallery-main-nav" id="v3-gallery-main-prev" type="button" aria-label="이전 사진">&#10094;</button>
+            <button class="v2-gallery-main" id="v3-gallery-main" type="button" aria-label="갤러리 사진 확대">
+              <img id="v3-gallery-main-image" src="assets/v2-gallery-03.jpg" alt="웨딩 사진 3">
+            </button>
+            <button class="v2-gallery-main-nav" id="v3-gallery-main-next" type="button" aria-label="다음 사진">&#10095;</button>
+          </div>
+          <div class="v2-gallery-thumbs-wrap">
+            <div class="v2-gallery-thumbs" id="v3-gallery-thumbs" role="list">
+            <button class="v2-gallery-thumb is-active" type="button" role="listitem" data-gallery-index="0" aria-label="갤러리 사진 1" aria-current="true">
+              <img src="assets/v2-gallery-03.jpg" alt="웨딩 사진 3" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="1" aria-label="갤러리 사진 2">
+              <img src="assets/v2-gallery-04.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="2" aria-label="갤러리 사진 3">
+              <img src="assets/v2-gallery-05.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="3" aria-label="갤러리 사진 4">
+              <img src="assets/v2-gallery-06.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="4" aria-label="갤러리 사진 5">
+              <img src="assets/v2-gallery-07.jpg" alt="웨딩 사진 7" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="5" aria-label="갤러리 사진 6">
+              <img src="assets/v2-gallery-08.jpg" alt="웨딩 사진 8" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="6" aria-label="갤러리 사진 7">
+              <img src="assets/v2-gallery-09.jpg" alt="웨딩 사진 9" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="7" aria-label="갤러리 사진 8">
+              <img src="assets/v2-gallery-10.jpg" alt="웨딩 사진 10" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="8" aria-label="갤러리 사진 9">
+              <img src="assets/v2-gallery-11.jpg" alt="웨딩 사진 11" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="9" aria-label="갤러리 사진 10">
+              <img src="assets/v2-gallery-12.jpg" alt="웨딩 사진 12" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="10" aria-label="갤러리 사진 11">
+              <img src="assets/v2-gallery-13.jpg" alt="웨딩 사진 13" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="11" aria-label="갤러리 사진 12">
+              <img src="assets/v2-gallery-14.jpg" alt="웨딩 사진 14" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="12" aria-label="갤러리 사진 13">
+              <img src="assets/v2-gallery-15.jpg" alt="웨딩 사진 15" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="13" aria-label="갤러리 사진 14">
+              <img src="assets/v2-gallery-16.jpg" alt="웨딩 사진 16" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="14" aria-label="갤러리 사진 15">
+              <img src="assets/v2-gallery-18.jpg" alt="웨딩 사진 18" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="15" aria-label="갤러리 사진 16">
+              <img src="assets/v2-gallery-20.jpg" alt="웨딩 사진 20" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="16" aria-label="갤러리 사진 17">
+              <img src="assets/v2-gallery-21.jpg" alt="웨딩 사진 21" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="17" aria-label="갤러리 사진 18">
+              <img src="assets/v2-gallery-22.jpg" alt="웨딩 사진 22" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="18" aria-label="갤러리 사진 19">
+              <img src="assets/v2-gallery-23.jpg" alt="웨딩 사진 23" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="19" aria-label="갤러리 사진 20">
+              <img src="assets/v2-gallery-24.jpg" alt="웨딩 사진 24" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="20" aria-label="갤러리 사진 21">
+              <img src="assets/v2-gallery-25.jpg" alt="웨딩 사진 25" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="21" aria-label="갤러리 사진 22">
+              <img src="assets/v2-gallery-26.jpg" alt="웨딩 사진 26" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="22" aria-label="갤러리 사진 23">
+              <img src="assets/v2-gallery-27.jpg" alt="웨딩 사진 27" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="23" aria-label="갤러리 사진 24">
+              <img src="assets/v2-gallery-28.jpg" alt="웨딩 사진 28" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="24" aria-label="갤러리 사진 25">
+              <img src="assets/v2-gallery-29.jpg" alt="웨딩 사진 29" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="25" aria-label="갤러리 사진 26">
+              <img src="assets/v2-gallery-30.jpg" alt="웨딩 사진 30" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="26" aria-label="갤러리 사진 27">
+              <img src="assets/v2-gallery-31.jpg" alt="웨딩 사진 31" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="27" aria-label="갤러리 사진 28">
+              <img src="assets/v2-gallery-32.jpg" alt="웨딩 사진 32" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="28" aria-label="갤러리 사진 29">
+              <img src="assets/v2-gallery-33.jpg" alt="웨딩 사진 33" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="29" aria-label="갤러리 사진 30">
+              <img src="assets/v2-gallery-34.jpg" alt="웨딩 사진 34" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="30" aria-label="갤러리 사진 31">
+              <img src="assets/v2-gallery-35.jpg" alt="웨딩 사진 35" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="31" aria-label="갤러리 사진 32">
+              <img src="assets/v2-gallery-36.jpg" alt="웨딩 사진 36" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="32" aria-label="갤러리 사진 33">
+              <img src="assets/v2-gallery-37.jpg" alt="웨딩 사진 37" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="33" aria-label="갤러리 사진 34">
+              <img src="assets/v2-gallery-38.jpg" alt="웨딩 사진 38" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="34" aria-label="갤러리 사진 35">
+              <img src="assets/v2-gallery-39.jpg" alt="웨딩 사진 39" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="35" aria-label="갤러리 사진 36">
+              <img src="assets/v2-gallery-40.jpg" alt="웨딩 사진 40" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="36" aria-label="갤러리 사진 37">
+              <img src="assets/v2-gallery-41.jpg" alt="웨딩 사진 41" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="37" aria-label="갤러리 사진 38">
+              <img src="assets/v2-gallery-42.jpg" alt="웨딩 사진 42" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="38" aria-label="갤러리 사진 39">
+              <img src="assets/v2-gallery-43.jpg" alt="웨딩 사진 43" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="39" aria-label="갤러리 사진 40">
+              <img src="assets/v2-gallery-44.jpg" alt="웨딩 사진 44" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="40" aria-label="갤러리 사진 41">
+              <img src="assets/v2-gallery-45.jpg" alt="웨딩 사진 45" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="41" aria-label="갤러리 사진 42">
+              <img src="assets/v2-gallery-46.jpg" alt="웨딩 사진 46" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="42" aria-label="갤러리 사진 43">
+              <img src="assets/v2-gallery-47.jpg" alt="웨딩 사진 47" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="43" aria-label="갤러리 사진 44">
+              <img src="assets/v2-gallery-48.jpg" alt="웨딩 사진 48" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="44" aria-label="갤러리 사진 45">
+              <img src="assets/v2-gallery-49.jpg" alt="웨딩 사진 49" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="45" aria-label="갤러리 사진 46">
+              <img src="assets/v2-gallery-50.jpg" alt="웨딩 사진 50" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="46" aria-label="갤러리 사진 47">
+              <img src="assets/v2-gallery-51.jpg" alt="웨딩 사진 51" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="47" aria-label="갤러리 사진 48">
+              <img src="assets/v2-gallery-52.jpg" alt="웨딩 사진 52" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="48" aria-label="갤러리 사진 49">
+              <img src="assets/v2-gallery-53.jpg" alt="웨딩 사진 53" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="49" aria-label="갤러리 사진 50">
+              <img src="assets/v2-gallery-54.jpg" alt="웨딩 사진 54" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="50" aria-label="갤러리 사진 51">
+              <img src="assets/v2-gallery-55.jpg" alt="웨딩 사진 55" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="51" aria-label="갤러리 사진 52">
+              <img src="assets/v2-gallery-56.jpg" alt="웨딩 사진 56" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="52" aria-label="갤러리 사진 53">
+              <img src="assets/v2-gallery-57.jpg" alt="웨딩 사진 57" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="53" aria-label="갤러리 사진 54">
+              <img src="assets/v2-gallery-58.jpg" alt="웨딩 사진 58" loading="lazy" decoding="async">
+            </button>
+            <button class="v2-gallery-thumb" type="button" role="listitem" data-gallery-index="54" aria-label="갤러리 사진 55">
+              <img src="assets/v2-gallery-59.jpg" alt="웨딩 사진 59" loading="lazy" decoding="async">
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="v2-section v3-date" id="v3-date">
+        <h2 class="v3-date-title">DATE</h2>
+        <div class="v3-date-photo">
+          <img src="assets/v2-gallery-12.jpg" alt="상원과 소연" width="800" height="800" decoding="async">
+        </div>
+        <p class="v3-date-month">November.</p>
+        <div class="v3-date-calendar" id="v3-date-calendar" aria-label="November 2026 calendar"></div>
+        <p class="v3-date-full">Saturday, November 14, 2026</p>
+        <p class="v3-date-countdown" id="v3-date-countdown">D-DAY ♡</p>
+      </section>
+
+      <!-- Location -->
+      <section class="v2-section v2-location" id="v3-location">
+        <h2 class="v2-section-title">LOCATION</h2>
+        <h4 class="v2-venue-name">삼청각 일화당</h4>
+        <div class="v2-venue-details">
+          <div class="v2-venue-row">
+            <p class="v2-venue-address">서울특별시 성북구 대사관로3 일화당</p>
+            <button class="v2-copy-btn" type="button" data-copy="서울특별시 성북구 대사관로3 일화당" aria-label="주소 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v2-venue-row v2-venue-phone-row">
+            <svg class="v2-venue-phone-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
+            </svg>
+            <p class="v2-venue-phone">676-3456</p>
+          </div>
+        </div>
+        <img
+          class="v2-venue-illustration"
+          src="assets/v2-venue-illustration.png"
+          alt="삼청각 일화당 일러스트"
+          width="1000"
+          height="461"
+          draggable="false"
+        >
+        <button class="v2-yakdo-btn" id="v3-yakdo-open" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M20.5 3h-17A1.5 1.5 0 002 4.5v15A1.5 1.5 0 003.5 21h17a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0020.5 3zM8 19H4v-6h4v6zm6 0h-4V9h4v10zm6 0h-4V5h4v14z"/>
+          </svg>
+          약도 이미지 보기
+        </button>
+        <div class="v2-transport">
+          <div class="v2-transport-block">
+            <h4>[내비게이션]</h4>
+            <p>원하시는 앱을 선택하시면 길안내가 시작됩니다.</p>
+            <div class="v2-nav-apps">
+              <a class="v2-nav-app" href="https://map.naver.com/p/search/%EC%82%BC%EC%B2%AD%EA%B0%81" target="_blank" rel="noopener noreferrer">네이버지도</a>
+              <a class="v2-nav-app" href="https://www.tmap.co.kr/tmap2/mobile/route.jsp?name=%EC%82%BC%EC%B2%AD%EA%B0%81&lon=126.98355&lat=37.59678" target="_blank" rel="noopener noreferrer">티맵</a>
+              <a class="v2-nav-app" href="https://map.kakao.com/link/to/%EC%82%BC%EC%B2%AD%EA%B0%81,37.59678,126.98355" target="_blank" rel="noopener noreferrer">카카오내비</a>
+            </div>
+          </div>
+          <div class="v2-transport-block">
+            <h4>[셔틀버스]</h4>
+            <div class="v2-route-group">
+              <p class="v2-route-title"><span class="v2-route-dot v2-route-dot--line4" aria-hidden="true"></span>4호선</p>
+              <p>한성대입구역 6번 출구 정면 10m, 서울연극창작센터 앞</p>
+              <p>셔틀 버스 15분 간격 운행</p>
+            </div>
+            <div class="v2-route-group">
+              <p class="v2-route-title"><span class="v2-route-dot v2-route-dot--line3" aria-hidden="true"></span>3호선</p>
+              <p>안국역 5번 출구</p>
+              <p>셔틀버스 40분 간격 운행</p>
+            </div>
+            <p class="v2-transport-note">※ 첫 차량은 양 노선 모두 오전 11시부터 운행합니다.</p>
+            <p class="v2-transport-note">※ 보다 원활한 탑승을 위하여 4호선 한성대입구역 셔틀 이용을 추천드립니다.</p>
+            <button class="v2-shuttle-btn" id="v3-shuttle-open" type="button">셔틀버스 시간표 보기</button>
+          </div>
+          <div class="v2-transport-block">
+            <h4>[자가용 / 택시]</h4>
+            <div class="v2-route-group">
+              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>광화문 방면</p>
+              <p>광화문 → 안국동 → 삼청동길 → 총리공관 방향 → 삼청터널 통과 후 좌측(비보호 좌회전)</p>
+            </div>
+            <div class="v2-route-group">
+              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>한성대입구 방면</p>
+              <p>한성대입구 → 성북동 방향 → 삼청터널 방면 직진 → 삼청터널 직전 우회전</p>
+            </div>
+            <div class="v2-route-group">
+              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>혜화동 방면</p>
+              <p>혜화동 로터리 → SK주유소 옆길 → 성북동 방향 → 삼청터널 방면 → 삼청터널 직전 우회전</p>
+            </div>
+            <p class="v2-transport-note">※ 내비게이션에서 ‘삼청각’ 또는 ‘삼청각 일화당’을 검색해 주세요.</p>
+            <p class="v2-transport-note">※ 무료 주차 이용시간은 2시간입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wedding timeline -->
+      <section class="v2-section v2-timeline" id="v3-timeline">
+        <h2 class="v2-section-title">WEDDING TIMELINE</h2>
+        <ol class="v2-timeline-list">
+          <li class="v2-timeline-item">
+            <div class="v2-timeline-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 30c0-6 4.5-10 10-10s10 4 10 10"/>
+                <path d="M18 22c1.5-4 4-6 6-6s4.5 2 6 6"/>
+                <circle cx="24" cy="14" r="2.2"/>
+                <path d="M12 34h24"/>
+                <path d="M16 34v4M32 34v4"/>
+              </svg>
+            </div>
+            <div class="v2-timeline-marker" aria-hidden="true">
+              <span class="v2-timeline-heart"></span>
+            </div>
+            <div class="v2-timeline-body">
+              <p class="v2-timeline-time">12:30 PM~</p>
+              <p class="v2-timeline-label">하객 입장 &amp; 웰컴 티</p>
+            </div>
+          </li>
+
+          <li class="v2-timeline-item v2-timeline-item--ceremony">
+            <div class="v2-timeline-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="24" r="7"/>
+                <circle cx="30" cy="24" r="7"/>
+                <path d="M24 20c1.2-2.5 3.5-3.5 5-3"/>
+              </svg>
+            </div>
+            <div class="v2-timeline-marker" aria-hidden="true">
+              <span class="v2-timeline-heart"></span>
+            </div>
+            <div class="v2-timeline-body">
+              <p class="v2-timeline-time">1:30 PM</p>
+              <p class="v2-timeline-label">본식 시작 · Ceremony</p>
+              <ul class="v2-timeline-sub">
+                <li>혼주 입장</li>
+                <li>신랑 입장</li>
+                <li>신부 입장</li>
+                <li>주례</li>
+                <li>축사</li>
+                <li>축가</li>
+                <li>축도</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="v2-timeline-item">
+            <div class="v2-timeline-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="24" cy="24" r="9"/>
+                <circle cx="24" cy="24" r="4.5"/>
+                <path d="M10 18l4 3M10 30l4-3M38 18l-4 3M38 30l-4-3"/>
+                <path d="M8 24h4M36 24h4"/>
+              </svg>
+            </div>
+            <div class="v2-timeline-marker" aria-hidden="true">
+              <span class="v2-timeline-heart"></span>
+            </div>
+            <div class="v2-timeline-body">
+              <p class="v2-timeline-time">2:00 PM</p>
+              <p class="v2-timeline-label">점심 · Lunch</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Account -->
+      <section class="v2-section v2-account" id="v3-account">
+        <h2 class="v2-section-title">ACCOUNT</h2>
+        <p class="v2-account-sub">마음 전하실 곳</p>
+        <p class="v3-account-message">멀리서도 축하해주시려는<br>귀한 마음을 감사히 받겠습니다.</p>
+        <div class="v3-account-toggle" role="tablist" aria-label="계좌 구분">
+          <button class="v3-account-tab is-active" type="button" role="tab" aria-selected="true" data-account-tab="groom">신랑측</button>
+          <button class="v3-account-tab" type="button" role="tab" aria-selected="false" data-account-tab="bride">신부측</button>
+        </div>
+        <div class="v3-account-list is-active" data-account-panel="groom">
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">지현호</span>
+              <span class="v2-account-number">신한 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="지현호 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">김윤정</span>
+              <span class="v2-account-number">신한 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="김윤정 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">지상원</span>
+              <span class="v2-account-number">신한 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="지상원 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="v3-account-list" data-account-panel="bride" hidden>
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">박수근</span>
+              <span class="v2-account-number">국민 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="박수근 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">이혜경</span>
+              <span class="v2-account-number">국민 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="이혜경 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v3-account-card">
+            <div>
+              <span class="v2-account-label">박소연</span>
+              <span class="v2-account-number">국민 000-000-000000</span>
+            </div>
+            <button class="v2-copy-btn" data-copy="000-000-000000" aria-label="박소연 계좌번호 복사">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section class="v2-section v2-rsvp" id="v3-rsvp">
+        <p class="v2-rsvp-badge">R.S.V.P.</p>
+        <h2 class="v2-rsvp-title">참석 의사 전달</h2>
+        <div class="v2-rsvp-message">
+          <p>결혼식에 자리해주시는 모든 분들을</p>
+          <p>더욱 특별하게 모시고자 하오니,</p>
+          <p>참석 여부를 알려주시면 감사하겠습니다.</p>
+        </div>
+        <button class="v2-rsvp-btn js-rsvp-open" id="v3-rsvp-open" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 21V9l6-4 6 4v12"/>
+            <path d="M6 13h12"/>
+            <path d="M10 21v-4h4v4"/>
+          </svg>
+          참석의사 전달하기
+        </button>
+      </section>
+
+      <!-- Share -->
+      <section class="v2-section v2-share" id="v3-share">
+        <div class="v2-share-rule" aria-hidden="true"></div>
+        <h2 class="v2-section-title">SHARE</h2>
+        <p class="v2-share-sub">소중한 분들에게 전해주세요</p>
+        <div class="v2-share-buttons">
+          <button class="v2-share-btn" type="button">
+            <span class="v2-share-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+            </span>
+            <span>KAKAO</span>
+          </button>
+          <button class="v2-share-btn" id="v3-copy-link-btn" type="button">
+            <span class="v2-share-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+            </span>
+            <span>LINK</span>
+          </button>
+          <button class="v2-share-btn" type="button">
+            <span class="v2-share-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M16 5l-1.42 1.42-1.59-1.59V16h-2V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/></svg>
+            </span>
+            <span>MORE</span>
+          </button>
+        </div>
+      </section>
+
+      <footer class="v2-footer">
+        <p>With love, Sangwon &amp; Soyun</p>
+        <p class="v2-footer-date">2026.11.14</p>
+      </footer>
+
+      <div class="v2-rsvp-modal" id="v3-rsvp-modal" aria-hidden="true">
+        <div class="v2-rsvp-dialog v3-rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="v3-rsvp-dialog-title">
+          <button class="v2-rsvp-close" id="v3-rsvp-close" type="button" aria-label="닫기">&times;</button>
+          <h3 id="v3-rsvp-dialog-title">참석 의사 전달</h3>
+          <p class="v3-rsvp-lead">원활한 예식 진행을 위해 참석 정보를 미리 알려주시면 감사하겠습니다.</p>
+          <form class="v2-rsvp-form v3-rsvp-form" id="v3-rsvp-form">
+            <fieldset class="v2-rsvp-field">
+              <legend class="visually-hidden">참석 여부</legend>
+              <div class="v3-rsvp-attend">
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="attendance" value="가능" required>
+                  <span class="v3-rsvp-attend-card">
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 21V9l6-4 6 4v12"/>
+                      <path d="M6 13h12"/>
+                      <path d="M10 21v-4h4v4"/>
+                    </svg>
+                    가능
+                    <span class="v3-rsvp-check" aria-hidden="true"></span>
+                  </span>
+                </label>
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="attendance" value="불가">
+                  <span class="v3-rsvp-attend-card">
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                      <path d="M6 21V9l6-4 6 4v12"/>
+                      <path d="M6 13h12"/>
+                      <path d="M10 21v-4h4v4"/>
+                      <path d="M5 5l14 14"/>
+                    </svg>
+                    불가
+                    <span class="v3-rsvp-check" aria-hidden="true"></span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="v3-rsvp-name-row">
+              <label class="v2-rsvp-field">
+                <span>성함</span>
+                <input type="text" name="name" autocomplete="name" placeholder="성함을 입력해 주세요." required>
+              </label>
+              <fieldset class="v2-rsvp-field v3-rsvp-sides">
+                <legend class="visually-hidden">구분</legend>
+                <label class="v3-rsvp-side">
+                  <input type="radio" name="side" value="신랑측" required>
+                  <span>신랑측</span>
+                </label>
+                <label class="v3-rsvp-side">
+                  <input type="radio" name="side" value="신부측">
+                  <span>신부측</span>
+                </label>
+              </fieldset>
+            </div>
+
+            <label class="v2-rsvp-field">
+              <span>연락처</span>
+              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
+            </label>
+
+            <div class="v3-rsvp-row">
+              <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
+              <div class="v3-rsvp-counter">
+                <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
+                <span data-guest-count>0</span>
+                <input type="hidden" name="guests" value="0">
+                <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+              </div>
+            </div>
+
+            <fieldset class="v2-rsvp-field">
+              <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+              <div class="v3-rsvp-attend">
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="meal" value="식사함" required>
+                  <span class="v3-rsvp-attend-card">
+                    식사함
+                    <span class="v3-rsvp-check" aria-hidden="true"></span>
+                  </span>
+                </label>
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="meal" value="식사안함">
+                  <span class="v3-rsvp-attend-card">
+                    식사안함
+                    <span class="v3-rsvp-check" aria-hidden="true"></span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="v3-rsvp-consent">
+              <span class="v3-rsvp-consent-head">
+                <input type="checkbox" name="consent" value="yes" required>
+                동의합니다.
+              </span>
+              <span class="v3-rsvp-consent-copy">원활한 예식 준비와 참석 확인을 위해 성함, 연락처, 참석 여부 및 동행 인원 정보를 수집·이용합니다. 수집된 정보는 예식 종료 후 파기됩니다.</span>
+            </label>
+
+            <button class="v2-rsvp-submit v3-rsvp-submit" type="submit" disabled>신랑 &amp; 신부에게 전달하기</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="v2-shuttle-modal" id="v3-shuttle-modal" aria-hidden="true">
+        <div class="v2-shuttle-dialog" role="dialog" aria-modal="true" aria-labelledby="v3-shuttle-title">
+          <button class="v2-shuttle-close" id="v3-shuttle-close" type="button" aria-label="닫기">&times;</button>
+          <h3 id="v3-shuttle-title">삼청각 셔틀버스 시간표</h3>
+          <div class="v2-shuttle-tabs" role="tablist">
+            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">한성대입구</button>
+            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">안국</button>
+          </div>
+
+          <div class="v2-shuttle-panel is-active" id="v3-shuttle-hansung" role="tabpanel">
+            <p class="v2-shuttle-route">4호선 한성대입구역 6번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:10</td><td>—</td></tr>
+                <tr><td>11:30</td><td>11:40</td><td>11:20</td></tr>
+                <tr><td>12:00</td><td>12:10</td><td>11:50</td></tr>
+                <tr><td>12:30</td><td>12:40</td><td>12:20</td></tr>
+                <tr><td>13:00</td><td>13:10</td><td>12:50</td></tr>
+                <tr><td>13:30</td><td>13:40</td><td>13:20</td></tr>
+                <tr><td>14:00</td><td>14:10</td><td>13:50</td></tr>
+                <tr><td>14:30</td><td>14:40</td><td>14:20</td></tr>
+                <tr><td>15:00</td><td>15:10</td><td>14:50</td></tr>
+                <tr><td>15:30</td><td>15:40</td><td>15:20</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:40–16:50</td></tr>
+                <tr><td>17:00</td><td>17:10</td><td>16:50</td></tr>
+                <tr><td>17:30</td><td>17:40</td><td>17:20</td></tr>
+                <tr><td>18:00</td><td>18:10</td><td>17:50</td></tr>
+                <tr><td>18:30</td><td>18:40</td><td>18:20</td></tr>
+                <tr><td>19:00</td><td>19:10</td><td>18:50</td></tr>
+                <tr><td>19:30</td><td>19:40</td><td>19:20</td></tr>
+                <tr><td>20:00</td><td>20:10</td><td>19:50</td></tr>
+                <tr><td>20:30</td><td>20:40</td><td>20:20</td></tr>
+                <tr><td>21:00</td><td>21:10</td><td>20:50</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="v2-shuttle-panel" id="v3-shuttle-anguk" role="tabpanel" hidden>
+            <p class="v2-shuttle-route">3호선 안국역 5번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:15</td><td>10:45</td></tr>
+                <tr><td>11:40</td><td>11:55</td><td>11:25</td></tr>
+                <tr><td>12:20</td><td>12:35</td><td>12:05</td></tr>
+                <tr><td>13:00</td><td>13:15</td><td>12:45</td></tr>
+                <tr><td>13:40</td><td>13:55</td><td>13:25</td></tr>
+                <tr><td>14:20</td><td>14:35</td><td>14:05</td></tr>
+                <tr><td>15:00</td><td>15:15</td><td>14:45</td></tr>
+                <tr><td>15:40</td><td>15:55</td><td>15:25</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:55–16:25</td></tr>
+                <tr><td>16:40</td><td>16:55</td><td>16:25</td></tr>
+                <tr><td>17:20</td><td>17:35</td><td>17:05</td></tr>
+                <tr><td>18:00</td><td>18:15</td><td>17:45</td></tr>
+                <tr><td>18:40</td><td>18:55</td><td>18:25</td></tr>
+                <tr><td>19:20</td><td>19:35</td><td>19:05</td></tr>
+                <tr><td>20:00</td><td>20:15</td><td>19:45</td></tr>
+                <tr><td>20:40</td><td>20:55</td><td>20:25</td></tr>
+                <tr><td>21:20</td><td>21:35</td><td>21:05</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="v2-shuttle-note">※ 영업 및 도로사정에 따라 운행시간이 변경될 수 있습니다.</p>
+          <a class="v2-shuttle-link" href="https://www.samcheonggak.or.kr/location/" target="_blank" rel="noopener noreferrer">삼청각 오시는 길 ↗</a>
+        </div>
+      </div>
+
+      <div class="v2-map-modal" id="v3-map-modal" aria-hidden="true">
+        <button class="v2-gallery-close" id="v3-map-close" type="button" aria-label="지도 닫기">&times;</button>
+        <div class="v2-map-modal-stage">
+          <img
+            class="v2-map-modal-image"
+            src="assets/v2-samcheonggak-map.jpg?v=3"
+            alt="삼청각 일화당 안내도 확대"
+          >
+        </div>
+      </div>
+
+      <div class="v2-gallery-modal" id="v3-gallery-modal" aria-hidden="true">
+        <button class="v2-gallery-close" id="v3-gallery-close" type="button" aria-label="갤러리 닫기">&times;</button>
+        <button class="v2-gallery-nav v2-gallery-prev" id="v3-gallery-prev" type="button" aria-label="이전 사진">&#10094;</button>
+        <img class="v2-gallery-modal-image" id="v3-gallery-modal-image" src="" alt="">
+        <button class="v2-gallery-nav v2-gallery-next" id="v3-gallery-next" type="button" aria-label="다음 사진">&#10095;</button>
       </div>
     </main>
   </div>
