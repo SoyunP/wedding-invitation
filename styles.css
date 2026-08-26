@@ -1538,7 +1538,7 @@ body.is-handoff .envelope-stage {
 
 .v3-letter-inner {
   min-height: 100%;
-  padding: 5.8rem 1.5rem 9.25rem;
+  padding: 4.4rem 1.5rem 6.4rem;
   text-align: center;
   background-color: #f5f1e9;
   will-change: transform;
@@ -1654,8 +1654,8 @@ body.is-handoff .envelope-stage {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: calc(30vh * (1 - var(--reveal)));
-  min-height: calc(6.75rem * (1 - var(--reveal)));
+  height: calc(18vh * (1 - var(--reveal)));
+  min-height: calc(4.4rem * (1 - var(--reveal)));
   fill: var(--frame);
   transform: translateY(calc(var(--reveal) * 18%));
   opacity: calc(1 - var(--reveal) * 1.05);
