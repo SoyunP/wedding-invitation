@@ -12,6 +12,7 @@
   --ink-muted: #6b6560;
   --font-text: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
   --font-numeric: "Castoro Titling";
+  --bgm-color: #5f5732;
 
   --env-w: min(82vw, 980px);
   --env-ratio: 1.55;
@@ -64,6 +65,58 @@ body[data-active-version="2"] {
 
 body[data-active-version="3"] {
   background-color: #5f5732;
+}
+
+.bgm-toggle {
+  --bgm-color: #5f5732;
+  position: fixed;
+  right: max(1.15rem, env(safe-area-inset-right));
+  bottom: max(1.5rem, calc(env(safe-area-inset-bottom) + 1.15rem));
+  z-index: 1200;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--bgm-color);
+  opacity: 0.4;
+  cursor: pointer;
+  filter: drop-shadow(0 1px 1px rgba(245, 241, 233, 0.7));
+}
+
+.bgm-toggle svg {
+  display: block;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin: 0 auto;
+  transform-origin: center;
+}
+
+.bgm-toggle.is-playing {
+  opacity: 1;
+}
+
+.bgm-toggle.is-playing svg {
+  animation: bgm-pulse 1.45s ease-in-out infinite;
+}
+
+@keyframes bgm-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+}
+
+@media (max-width: 640px) {
+  .bgm-toggle {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1.75rem, calc(env(safe-area-inset-bottom) + 1.35rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgm-toggle.is-playing svg {
+    animation: none;
+  }
 }
 
 /* ============================================================
@@ -1357,6 +1410,10 @@ body.is-handoff .envelope-stage {
   opacity: 1;
 }
 
+#v3-location .v2-venue-name {
+  font-size: clamp(1.22rem, 3.6vw, 1.5rem);
+}
+
 #v3-location .v2-venue-illustration {
   width: min(68%, 300px);
   margin: 1.35rem auto 0.4rem;
@@ -1745,8 +1802,24 @@ body.is-handoff .envelope-stage {
 
 .v3-couple-card {
   margin: 0;
-  will-change: transform;
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.45s ease;
+}
+
+.v3-couple-card--left {
+  transform: translateX(-110%);
+}
+
+.v3-couple-card--right {
+  transform: translateX(110%);
+  transition-delay: 0.22s;
+}
+
+.v3-couple-pair.is-in .v3-couple-card--left,
+.v3-couple-pair.is-in .v3-couple-card--right {
+  opacity: 1;
+  transform: none;
 }
 
 .v3-couple-photo {
@@ -1793,14 +1866,6 @@ body.is-handoff .envelope-stage {
   margin-right: 0.2em;
 }
 
-.v3-couple-card--left {
-  transform: translateX(-70%);
-}
-
-.v3-couple-card--right {
-  transform: translateX(70%);
-}
-
 .v3-parents-clip {
   overflow: hidden;
   width: 100%;
@@ -1841,7 +1906,9 @@ body.is-handoff .envelope-stage {
 
   .v3-couple-card--left,
   .v3-couple-card--right {
+    opacity: 1;
     transform: none;
+    transition-delay: 0s;
   }
 
   .v3-celebrate-parents {
@@ -1907,6 +1974,11 @@ body.is-handoff .envelope-stage {
   color: #2d2b29;
   background-color: #f5f1e9;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  touch-action: manipulation;
+}
+
+#v3-gallery .v2-gallery-main {
+  cursor: default;
 }
 
 #v3-gallery .v2-section-title {
@@ -2024,8 +2096,58 @@ body.is-handoff .envelope-stage {
 }
 
 .v3-date-calendar .is-wedding {
+  position: relative;
+  border-radius: 50%;
+}
+
+.v3-date-calendar .is-wedding::after {
+  content: "";
+  position: absolute;
+  inset: 0.08rem;
   border: 1px solid #f0ebe3;
   border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.62);
+  pointer-events: none;
+}
+
+#v3-date.is-in .v3-date-calendar .is-wedding::after {
+  animation:
+    v3-date-ring-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards,
+    v3-date-ring-pulse 2.6s ease-in-out 1.15s infinite;
+}
+
+@keyframes v3-date-ring-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.62);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes v3-date-ring-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.78;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-date-calendar .is-wedding::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  #v3-date.is-in .v3-date-calendar .is-wedding::after {
+    animation: none;
+  }
 }
 
 .v3-date-calendar .is-empty {
@@ -2569,6 +2691,59 @@ body.v2-shuttle-modal-open {
   color: #f5f1e9;
 }
 
+#v3-shuttle-modal {
+  z-index: 1400;
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #f5f1e9;
+}
+
+#v3-shuttle-modal .v2-shuttle-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  box-shadow: none;
+  padding: max(3.4rem, calc(env(safe-area-inset-top) + 2.6rem)) 1.35rem max(1.6rem, env(safe-area-inset-bottom));
+}
+
+#v3-shuttle-modal .v2-shuttle-close {
+  position: sticky;
+  top: 0;
+  display: block;
+  width: fit-content;
+  margin: -2.2rem 0 0.4rem auto;
+  padding: 0.35rem 0.45rem;
+  z-index: 2;
+  background: #f5f1e9;
+}
+
+#v3-shuttle-modal .v2-shuttle-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.v3-line-dot {
+  display: inline-block;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.v3-line-dot--4 {
+  background: #00a5de;
+}
+
+.v3-line-dot--3 {
+  background: #ef7c1c;
+}
+
 .v2-shuttle-route {
   font-size: 0.82rem;
   color: #6b6560;
@@ -2754,6 +2929,54 @@ body.v2-shuttle-modal-open {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+#v3-timeline .v2-section-title,
+#v3-timeline .v2-timeline-item,
+#v3-timeline .v2-timeline-sub li {
+  opacity: 0;
+  transform: translateY(-1.15rem);
+}
+
+#v3-timeline .v2-section-title {
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#v3-timeline .v2-timeline-item {
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#v3-timeline .v2-timeline-sub li {
+  transform: translateY(-0.7rem);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#v3-timeline.is-in .v2-section-title,
+#v3-timeline.is-in .v2-timeline-item,
+#v3-timeline.is-in .v2-timeline-sub li {
+  opacity: 1;
+  transform: none;
+}
+
+#v3-timeline.is-in .v2-timeline-item:nth-child(1) { transition-delay: 0.1s; }
+#v3-timeline.is-in .v2-timeline-item:nth-child(2) { transition-delay: 0.26s; }
+#v3-timeline.is-in .v2-timeline-item:nth-child(3) { transition-delay: 0.72s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(1) { transition-delay: 0.38s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(2) { transition-delay: 0.44s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(3) { transition-delay: 0.5s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(4) { transition-delay: 0.56s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(5) { transition-delay: 0.62s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(6) { transition-delay: 0.68s; }
+#v3-timeline.is-in .v2-timeline-sub li:nth-child(7) { transition-delay: 0.74s; }
+
+@media (prefers-reduced-motion: reduce) {
+  #v3-timeline .v2-section-title,
+  #v3-timeline .v2-timeline-item,
+  #v3-timeline .v2-timeline-sub li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .v2-account {
@@ -3143,6 +3366,37 @@ body.v2-rsvp-modal-open {
   background: #faf7f0;
   padding: 1.7rem 1.25rem 1.25rem;
   text-align: left;
+}
+
+#v3-rsvp-modal {
+  z-index: 1400;
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #faf7f0;
+}
+
+#v3-rsvp-modal .v3-rsvp-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  box-shadow: none;
+  padding: max(3.4rem, calc(env(safe-area-inset-top) + 2.6rem)) 1.35rem max(1.6rem, env(safe-area-inset-bottom));
+}
+
+#v3-rsvp-modal .v2-rsvp-close {
+  position: sticky;
+  top: 0;
+  display: block;
+  width: fit-content;
+  margin: -2.2rem 0 0.4rem auto;
+  padding: 0.35rem 0.45rem;
+  z-index: 2;
+  background: #faf7f0;
 }
 
 .v3-rsvp-dialog h3 {

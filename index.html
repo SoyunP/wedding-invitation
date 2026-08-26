@@ -604,7 +604,7 @@
             <svg class="v2-venue-phone-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
               <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
             </svg>
-            <p class="v2-venue-phone">676-3456</p>
+            <p class="v2-venue-phone">02-765-3000</p>
           </div>
         </div>
         <button class="v2-map-preview" id="v2-map-open" type="button" aria-label="삼청각 안내도 확대">
@@ -1101,9 +1101,9 @@
         <div class="v2-gallery-viewer">
           <div class="v2-gallery-stage">
             <button class="v2-gallery-main-nav" id="v3-gallery-main-prev" type="button" aria-label="이전 사진">&#10094;</button>
-            <button class="v2-gallery-main" id="v3-gallery-main" type="button" aria-label="갤러리 사진 확대">
+            <div class="v2-gallery-main" id="v3-gallery-main">
               <img id="v3-gallery-main-image" src="assets/v2-gallery-03.jpg" alt="웨딩 사진 3">
-            </button>
+            </div>
             <button class="v2-gallery-main-nav" id="v3-gallery-main-next" type="button" aria-label="다음 사진">&#10095;</button>
           </div>
           <div class="v2-gallery-thumbs-wrap">
@@ -1303,7 +1303,7 @@
             <svg class="v2-venue-phone-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
               <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
             </svg>
-            <p class="v2-venue-phone">676-3456</p>
+            <p class="v2-venue-phone">02-765-3000</p>
           </div>
         </div>
         <img
@@ -1663,8 +1663,14 @@
           <button class="v2-shuttle-close" id="v3-shuttle-close" type="button" aria-label="닫기">&times;</button>
           <h3 id="v3-shuttle-title">삼청각 셔틀버스 시간표</h3>
           <div class="v2-shuttle-tabs" role="tablist">
-            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">한성대입구</button>
-            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">안국</button>
+            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">
+              <span class="v3-line-dot v3-line-dot--4" aria-hidden="true"></span>
+              한성대입구
+            </button>
+            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">
+              <span class="v3-line-dot v3-line-dot--3" aria-hidden="true"></span>
+              안국
+            </button>
           </div>
 
           <div class="v2-shuttle-panel is-active" id="v3-shuttle-hansung" role="tabpanel">
@@ -1760,6 +1766,15 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <audio id="bgm" loop preload="auto">
+    <source src="assets/wedding-song.mp3" type="audio/mpeg">
+  </audio>
+  <button class="bgm-toggle" id="bgm-toggle" type="button" aria-label="음악 재생/정지">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M9 3v10.55A3.5 3.5 0 1 0 11 17V7h5V3H9z"/>
+    </svg>
+  </button>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
