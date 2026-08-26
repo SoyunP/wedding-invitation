@@ -2402,6 +2402,13 @@ body.v2-gallery-modal-open {
   font-size: 0.95rem;
 }
 
+.v2-venue-phone a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
 .v2-map-preview {
   display: block;
   margin: 2rem auto 2.2rem;
@@ -2446,7 +2453,7 @@ body.v2-gallery-modal-open {
   width: auto;
   max-width: none;
   min-height: 2.6rem;
-  margin: 0.35rem auto 1.6rem;
+  margin: 0.35rem auto 2.65rem;
   padding: 0.45rem 0.95rem;
   gap: 0.35rem;
   border: 1px solid var(--v2-paper-line);
