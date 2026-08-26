@@ -282,7 +282,7 @@
       }, 1100);
     }
 
-    if (envelope && (join || save)) {
+    if (envelope) {
       prepareHeroWords();
       envelope.setAttribute('role', 'button');
       envelope.setAttribute('tabindex', '0');
