@@ -2009,7 +2009,15 @@ body.is-handoff .envelope-stage {
 }
 
 #v3-gallery .v2-gallery-main {
-  cursor: default;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: rgba(95, 87, 50, 0.18);
+  touch-action: manipulation;
+}
+
+#v3-gallery .v2-gallery-main img {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 #v3-gallery .v2-section-title {
@@ -2286,7 +2294,7 @@ body.is-handoff .envelope-stage {
 .v2-gallery-modal {
   position: fixed;
   inset: 0;
-  z-index: 1200;
+  z-index: 1300;
   background: rgba(14, 18, 13, 0.88);
   display: flex;
   align-items: center;
@@ -2308,11 +2316,14 @@ body.v2-gallery-modal-open {
 }
 
 .v2-gallery-modal-image {
-  width: min(88vw, 860px);
-  max-height: 82vh;
+  width: min(94vw, 860px);
+  max-height: min(86vh, 86dvh);
   object-fit: contain;
   border-radius: 6px;
   box-shadow: 0 20px 56px rgba(0, 0, 0, 0.4);
+  touch-action: pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .v2-gallery-close,
@@ -2630,10 +2641,17 @@ body.v2-map-modal-open {
 
 .v2-route-dot {
   display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.35em;
+  height: 0.35em;
   border-radius: 50%;
   flex-shrink: 0;
+  background: currentColor;
+}
+
+.v2-route-dot--line4,
+.v2-route-dot--line3 {
+  width: 0.55rem;
+  height: 0.55rem;
 }
 
 .v2-route-dot--line4 {
@@ -2642,11 +2660,6 @@ body.v2-map-modal-open {
 
 .v2-route-dot--line3 {
   background: #ef7c1b;
-}
-
-.v2-route-arrow {
-  font-size: 0.62rem;
-  color: var(--v2-paper-ink);
 }
 
 .v2-shuttle-btn {

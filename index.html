@@ -4,27 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
-  <title>Sangwon & Soyun — Wedding Invitation</title>
+  <title>Sangwon &amp; Soyun — Wedding Invitation</title>
+  <meta name="description" content="2026.11.14 1:30 PM · 삼청각 일화당">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="상원 ♥ 소연 결혼식에 초대합니다">
+  <meta property="og:description" content="2026.11.14 1:30 PM · 삼청각 일화당">
+  <meta property="og:image" content="assets/v3-celebrate-photo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="상원 ♥ 소연 결혼식에 초대합니다">
+  <meta name="twitter:description" content="2026.11.14 1:30 PM · 삼청각 일화당">
+  <meta name="twitter:image" content="assets/v3-celebrate-photo.png">
+  <link rel="image_src" href="assets/v3-celebrate-photo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var origin = window.location.href.replace(/[#?].*$/, '').replace(/[^/]+$/, '');
+      var image = origin + 'assets/v3-celebrate-photo.png';
+      var page = window.location.href.replace(/[#?].*$/, '');
+      document.querySelectorAll('meta[property="og:image"], meta[name="twitter:image"]').forEach(function (el) {
+        el.setAttribute('content', image);
+      });
+      document.querySelectorAll('link[rel="image_src"]').forEach(function (el) {
+        el.setAttribute('href', image);
+      });
+      var ogUrl = document.querySelector('meta[property="og:url"]');
+      if (!ogUrl) {
+        ogUrl = document.createElement('meta');
+        ogUrl.setAttribute('property', 'og:url');
+        document.head.appendChild(ogUrl);
+      }
+      ogUrl.setAttribute('content', page);
+    })();
+  </script>
 </head>
-<body>
+<body data-active-version="3">
   <!-- Version switcher (design exploration) -->
   <div class="version-switcher" id="version-switcher">
     <label for="version-select">Design</label>
     <select id="version-select" aria-label="Select invitation version">
-      <option value="1" selected>Version 1</option>
+      <option value="1">Version 1</option>
       <option value="2">Version 2</option>
-      <option value="3">Version 3</option>
+      <option value="3" selected>Version 3</option>
     </select>
   </div>
 
   <!-- ═══════════════════════════════════════════
        VERSION 1 — current invitation
        ═══════════════════════════════════════════ -->
-  <div class="version-panel is-active" id="version-1" data-version="1">
+  <div class="version-panel" id="version-1" data-version="1" hidden>
   <!-- ═══════════════════════════════════════════
        ENVELOPE SEQUENCE (pinned stage)
        ═══════════════════════════════════════════ -->
@@ -982,7 +1014,7 @@
     </main>
   </div>
 
-  <div class="version-panel" id="version-3" data-version="3" hidden>
+  <div class="version-panel is-active" id="version-3" data-version="3">
     <header class="v2-header" id="v3-header">
       <span class="v2-header-label">The Wedding of</span>
       <button class="v2-menu-btn" id="v3-menu-btn" aria-label="Open menu">
@@ -1090,9 +1122,9 @@
         <div class="v2-gallery-viewer">
           <div class="v2-gallery-stage">
             <button class="v2-gallery-main-nav" id="v3-gallery-main-prev" type="button" aria-label="이전 사진">&#10094;</button>
-            <div class="v2-gallery-main" id="v3-gallery-main">
+            <button class="v2-gallery-main" id="v3-gallery-main" type="button" aria-label="갤러리 사진 확대">
               <img id="v3-gallery-main-image" src="assets/v2-gallery-03.jpg" alt="웨딩 사진 3">
-            </div>
+            </button>
             <button class="v2-gallery-main-nav" id="v3-gallery-main-next" type="button" aria-label="다음 사진">&#10095;</button>
           </div>
           <div class="v2-gallery-thumbs-wrap">
@@ -1342,19 +1374,19 @@
           <div class="v2-transport-block">
             <h4>[자가용 / 택시]</h4>
             <div class="v2-route-group">
-              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>광화문 방면</p>
+              <p class="v2-route-title"><span class="v2-route-dot" aria-hidden="true"></span>광화문 방면</p>
               <ul class="v2-route-points">
                 <li>광화문 → 안국동 → 삼청동길 → 총리공관 방향 → 삼청터널 통과 후 좌측(비보호 좌회전)</li>
               </ul>
             </div>
             <div class="v2-route-group">
-              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>한성대입구 방면</p>
+              <p class="v2-route-title"><span class="v2-route-dot" aria-hidden="true"></span>한성대입구 방면</p>
               <ul class="v2-route-points">
                 <li>한성대입구 → 성북동 방향 → 삼청터널 방면 직진 → 삼청터널 직전 우회전</li>
               </ul>
             </div>
             <div class="v2-route-group">
-              <p class="v2-route-title"><span class="v2-route-arrow" aria-hidden="true">▶</span>혜화동 방면</p>
+              <p class="v2-route-title"><span class="v2-route-dot" aria-hidden="true"></span>혜화동 방면</p>
               <ul class="v2-route-points">
                 <li>혜화동 로터리 → SK주유소 옆길 → 성북동 방향 → 삼청터널 방면 → 삼청터널 직전 우회전</li>
               </ul>

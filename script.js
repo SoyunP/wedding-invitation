@@ -18,7 +18,7 @@
   const versionSelect = document.getElementById('version-select');
   const versionPanels = document.querySelectorAll('.version-panel');
   const storedVersion = sessionStorage.getItem('invitation-version');
-  let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '1';
+  let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '3';
 
   if (versionSelect) versionSelect.value = activeVersion;
   document.body.dataset.activeVersion = activeVersion;
@@ -748,7 +748,7 @@
     galleryThumbs.forEach((btn, i) => {
       btn.addEventListener('click', () => renderGallery(i));
     });
-    if (galleryMain && versionKey !== '3') {
+    if (galleryMain) {
       galleryMain.addEventListener('click', () => openGallery(galleryIndex));
     }
 
