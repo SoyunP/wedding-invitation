@@ -82,7 +82,7 @@ body[data-active-version="3"] {
   color: var(--bgm-color);
   opacity: 0.4;
   cursor: pointer;
-  filter: drop-shadow(0 1px 1px rgba(245, 241, 233, 0.7));
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.85)) drop-shadow(0 1px 3px rgba(255, 255, 255, 0.7));
 }
 
 .bgm-toggle svg {
@@ -98,12 +98,12 @@ body[data-active-version="3"] {
 }
 
 .bgm-toggle.is-playing svg {
-  animation: bgm-pulse 1.45s ease-in-out infinite;
+  animation: bgm-pulse 2.2s ease-in-out infinite;
 }
 
 @keyframes bgm-pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.14); }
+  50% { transform: scale(1.05); }
 }
 
 @media (max-width: 640px) {
@@ -1087,6 +1087,11 @@ body.is-handoff .envelope-stage {
 
 #version-3 .v2-envelope {
   background-image: none;
+  background-color: #1c261f;
+}
+
+#v3-envelope .v2-envelope-hero {
+  object-position: center top;
 }
 
 #v3-nav {
@@ -1414,6 +1419,15 @@ body.is-handoff .envelope-stage {
   font-size: clamp(1.22rem, 3.6vw, 1.5rem);
 }
 
+#v3-location .v2-venue-details .v2-copy-btn {
+  padding: 0.22rem;
+}
+
+#v3-location .v2-venue-details .v2-copy-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
 #v3-location .v2-venue-illustration {
   width: min(68%, 300px);
   margin: 1.35rem auto 0.4rem;
@@ -1479,7 +1493,7 @@ body.is-handoff .envelope-stage {
 
 #v3-invitation.v3-letter-scene {
   --reveal: 0;
-  --frame: #4a4528;
+  --frame: #1c261f;
   height: 240vh;
   min-height: 240vh;
   max-width: none;
@@ -1513,7 +1527,7 @@ body.is-handoff .envelope-stage {
 }
 
 .v3-letter-kicker {
-  margin: 0 0 0.35rem;
+  margin: 0 0 1.15rem;
   font-size: 0.68rem;
   letter-spacing: 0.28em;
   color: var(--v2-paper-muted);
@@ -1550,7 +1564,7 @@ body.is-handoff .envelope-stage {
 }
 
 .v3-letter-date {
-  margin: 0 0 1.5rem;
+  margin: 0 0 2.25rem;
   font-size: 1.08rem;
   letter-spacing: 0.06em;
   color: #6b6560;
@@ -2568,6 +2582,17 @@ body.v2-map-modal-open {
 
 .v2-route-group p {
   margin: 0;
+}
+
+.v2-route-points {
+  margin: 0.15rem 0 0;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+
+.v2-route-points li {
+  margin: 0;
+  line-height: 1.7;
 }
 
 .v2-route-title {
