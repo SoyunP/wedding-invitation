@@ -141,9 +141,14 @@ body[data-active-version="3"] {
   font-family: var(--font-numeric), var(--font-text);
 }
 
-body[data-active-version="2"] .version-switcher,
-body[data-active-version="3"] .version-switcher {
+body[data-active-version="2"] .version-switcher {
   background: rgba(95, 87, 50, 0.92);
+  border-color: rgba(240, 235, 225, 0.18);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+body[data-active-version="3"] .version-switcher {
+  background: rgba(28, 38, 31, 0.92);
   border-color: rgba(240, 235, 225, 0.18);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
@@ -1007,6 +1012,15 @@ body.is-handoff .envelope-stage {
   opacity: 1;
 }
 
+#version-3 .v2-header {
+  background: linear-gradient(
+    to bottom,
+    rgba(28, 38, 31, 0.42) 0%,
+    rgba(28, 38, 31, 0.18) 38%,
+    rgba(28, 38, 31, 0) 70%
+  );
+}
+
 .v2-header-label,
 .v2-menu-btn {
   pointer-events: auto;
@@ -1090,15 +1104,6 @@ body.is-handoff .envelope-stage {
   background-size: 320px auto;
   padding: 0;
   cursor: pointer;
-}
-
-#version-3 .v2-envelope {
-  background-image: none;
-  background-color: #1c261f;
-}
-
-#v3-envelope .v2-envelope-hero {
-  object-position: center top;
 }
 
 #v3-nav {
@@ -1442,7 +1447,7 @@ body.is-handoff .envelope-stage {
 
 #v3-location .v2-venue-illustration {
   width: min(68%, 300px);
-  margin: 1.35rem auto 0.4rem;
+  margin: 1.35rem auto 2.2rem;
 }
 
 .v2-parents {
@@ -1532,7 +1537,7 @@ body.is-handoff .envelope-stage {
 
 .v3-letter-inner {
   min-height: 100%;
-  padding: 4.6rem 1.5rem 9.25rem;
+  padding: 5.8rem 1.5rem 9.25rem;
   text-align: center;
   background-color: #f5f1e9;
   will-change: transform;

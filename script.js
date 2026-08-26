@@ -347,6 +347,9 @@
       };
       window.addEventListener('scroll', syncHeader, { passive: true });
       syncHeader();
+    } else if (header && versionKey === '3') {
+      header.classList.add('is-visible');
+      header.setAttribute('aria-hidden', 'false');
     }
 
     if (versionKey === '3') {
