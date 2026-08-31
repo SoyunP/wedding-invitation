@@ -41,7 +41,7 @@
     sessionStorage.setItem('invitation-version', value);
     applyVersionVisibility(value);
 
-    if (value === '2' || value === '3') {
+    if (value === '2' || value === '3' || value === '4') {
       document.body.classList.remove('is-handoff');
       ScrollTrigger.getAll().forEach((st) => st.disable(false));
       window.scrollTo(0, 0);
@@ -49,7 +49,7 @@
     }
 
     /* Returning to Version 1 — hard reset keeps envelope pin healthy */
-    if ((previous === '2' || previous === '3') && value === '1') {
+    if ((previous === '2' || previous === '3' || previous === '4') && value === '1') {
       window.location.reload();
       return;
     }
@@ -347,27 +347,29 @@
       };
       window.addEventListener('scroll', syncHeader, { passive: true });
       syncHeader();
-    } else if (header && versionKey === '3') {
+    } else if (header && (versionKey === '3' || versionKey === '4')) {
       header.classList.add('is-visible');
       header.setAttribute('aria-hidden', 'false');
     }
 
-    if (versionKey === '3') {
-      const letterScene = document.getElementById('v3-invitation');
+    if (versionKey === '3' || versionKey === '4') {
+      const letterScene = id('invitation');
       const letterInner = letterScene && letterScene.querySelector('.v3-letter-inner');
       const letterSticky = letterScene && letterScene.querySelector('.v3-letter-sticky');
+      const envelopeFlaps = letterScene && letterScene.querySelector('.envelope-flaps');
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      const couplePair = document.querySelector('#v3-family .v3-couple-pair');
-      const parentsEl = document.querySelector('#v3-family .v3-celebrate-parents');
-      const parentsClip = document.querySelector('#v3-family .v3-parents-clip');
+      const family = id('family');
+      const couplePair = family && family.querySelector('.v3-couple-pair');
+      const parentsEl = family && family.querySelector('.v3-celebrate-parents');
+      const parentsClip = family && family.querySelector('.v3-parents-clip');
 
       function coupleHasSlidIn() {
         return !!(couplePair && couplePair.classList.contains('is-in'));
       }
 
       function syncParentsReveal() {
-        if (!parentsEl || !parentsClip || document.body.dataset.activeVersion !== '3') return;
+        if (!parentsEl || !parentsClip || document.body.dataset.activeVersion !== String(versionKey)) return;
         if (reduceMotion.matches) {
           parentsEl.style.transform = 'none';
           parentsEl.style.opacity = '1';
@@ -389,10 +391,11 @@
       }
 
       function syncLetterReveal() {
-        if (!letterScene || document.body.dataset.activeVersion !== '3') return;
+        if (!letterScene || document.body.dataset.activeVersion !== String(versionKey)) return;
         if (reduceMotion.matches) {
           letterScene.style.setProperty('--reveal', '1');
           if (letterInner) letterInner.style.transform = '';
+          if (envelopeFlaps) envelopeFlaps.style.setProperty('--env-t', '1');
           return;
         }
         const max = Math.max(1, letterScene.offsetHeight - window.innerHeight);
@@ -402,6 +405,15 @@
         if (letterInner && letterSticky) {
           const extra = Math.max(0, letterInner.scrollHeight - letterSticky.clientHeight + 48);
           letterInner.style.transform = 'translateY(' + (-extra * reveal) + 'px)';
+        }
+        if (envelopeFlaps) {
+          let envT = 0;
+          if (progress >= 0.55) envT = 1;
+          else if (progress > 0.15) {
+            const u = (progress - 0.15) / 0.4;
+            envT = u * u * (3 - 2 * u);
+          }
+          envelopeFlaps.style.setProperty('--env-t', envT.toFixed(4));
         }
       }
 
@@ -421,7 +433,7 @@
         } else {
           const coupleObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-              if (!entry.isIntersecting || document.body.dataset.activeVersion !== '3') return;
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
               coupleObserver.disconnect();
               window.requestAnimationFrame(() => {
                 window.requestAnimationFrame(() => {
@@ -435,14 +447,14 @@
         }
       }
 
-      const timelineSection = document.getElementById('v3-timeline');
+      const timelineSection = id('timeline');
       if (timelineSection) {
         if (reduceMotion.matches) {
           timelineSection.classList.add('is-in');
         } else {
           const timelineObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-              if (!entry.isIntersecting || document.body.dataset.activeVersion !== '3') return;
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
               timelineSection.classList.add('is-in');
               timelineObserver.disconnect();
             });
@@ -451,14 +463,14 @@
         }
       }
 
-      const dateSection = document.getElementById('v3-date');
+      const dateSection = id('date');
       if (dateSection) {
         if (reduceMotion.matches) {
           dateSection.classList.add('is-in');
         } else {
           const dateObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-              if (!entry.isIntersecting || document.body.dataset.activeVersion !== '3') return;
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
               dateSection.classList.add('is-in');
               dateObserver.disconnect();
             });
@@ -690,19 +702,108 @@
     const galleryMain = id('gallery-main');
     const galleryMainImage = id('gallery-main-image');
     const galleryThumbs = Array.from(root.querySelectorAll('.v2-gallery-thumb'));
-    const gallerySources = galleryThumbs.map((btn) => {
+    const gallerySlides = Array.from(root.querySelectorAll('.v3-gallery-slide'));
+    const galleryItems = gallerySlides.length ? gallerySlides : galleryThumbs;
+    const gallerySources = galleryItems.map((btn) => {
       const img = btn.querySelector('img');
       return img
         ? { src: img.getAttribute('src') || '', alt: img.getAttribute('alt') || 'Gallery image' }
         : { src: '', alt: 'Gallery image' };
     }).filter((item) => item.src);
+    const galleryTrack = id('gallery-track');
+    const galleryGrid = id('gallery-grid');
+    const galleryGridInner = id('gallery-grid-inner');
+    const galleryGridClose = id('gallery-grid-close');
     let galleryIndex = 0;
     let touchStartX = null;
+    let gridBuilt = false;
+    let galleryAutoTimer = null;
+    let galleryInView = true;
+    let galleryUserPause = false;
+    let galleryAnimating = false;
 
-    function renderGallery(index) {
+    function syncGalleryLock() {
+      const gridOpen = galleryGrid && galleryGrid.classList.contains('is-open');
+      const lightboxOpen = galleryModal && galleryModal.classList.contains('is-open');
+      document.body.classList.toggle('v2-gallery-modal-open', Boolean(gridOpen || lightboxOpen));
+    }
+
+    function buildGalleryGrid() {
+      if (!galleryGridInner || gridBuilt) return;
+      gallerySources.forEach((item, i) => {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'v3-gallery-grid-cell';
+        cell.setAttribute('aria-label', item.alt || ('갤러리 사진 ' + (i + 1)));
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        cell.appendChild(img);
+        cell.addEventListener('click', () => openGallery(i));
+        galleryGridInner.appendChild(cell);
+      });
+      gridBuilt = true;
+    }
+
+    function openGrid() {
+      if (!galleryGrid || !gallerySources.length) return;
+      buildGalleryGrid();
+      galleryGrid.classList.add('is-open');
+      galleryGrid.setAttribute('aria-hidden', 'false');
+      syncGalleryLock();
+    }
+
+    function closeGrid() {
+      if (!galleryGrid) return;
+      closeGallery();
+      galleryGrid.classList.remove('is-open');
+      galleryGrid.setAttribute('aria-hidden', 'true');
+      syncGalleryLock();
+    }
+
+    function gallerySlideLeft(index) {
+      const slide = gallerySlides[index];
+      if (!galleryTrack || !slide) return 0;
+      return slide.offsetLeft - (galleryTrack.clientWidth - slide.offsetWidth) / 2;
+    }
+
+    function scrollGalleryTrack(index, behavior) {
+      if (!galleryTrack || !gallerySlides[index]) return;
+      const left = gallerySlideLeft(index);
+      const wrapping = Math.abs(index - galleryIndex) > 1 && (index === 0 || galleryIndex === 0);
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const instant = behavior === 'auto' || wrapping || reduced || typeof gsap === 'undefined';
+      if (typeof gsap !== 'undefined') gsap.killTweensOf(galleryTrack);
+      galleryTrack.classList.remove('is-animating');
+      if (instant) {
+        galleryAnimating = false;
+        galleryTrack.scrollTo({ left, behavior: 'auto' });
+        return;
+      }
+      galleryAnimating = true;
+      galleryTrack.classList.add('is-animating');
+      gsap.to(galleryTrack, {
+        scrollLeft: left,
+        duration: 0.95,
+        ease: 'power2.inOut',
+        overwrite: true,
+        onComplete: () => {
+          galleryAnimating = false;
+          galleryTrack.classList.remove('is-animating');
+        },
+      });
+    }
+
+    function renderGallery(index, behavior) {
       if (!gallerySources.length) return;
       const count = gallerySources.length;
-      galleryIndex = (index + count) % count;
+      const nextIndex = (index + count) % count;
+      if (galleryTrack && gallerySlides[nextIndex]) {
+        scrollGalleryTrack(nextIndex, behavior);
+      }
+      galleryIndex = nextIndex;
       const current = gallerySources[galleryIndex];
       if (galleryModalImage) {
         galleryModalImage.src = current.src;
@@ -728,29 +829,67 @@
 
     function openGallery(index) {
       if (!galleryModal || !gallerySources.length) return;
-      renderGallery(index);
+      pauseGalleryAuto();
+      renderGallery(index, 'auto');
       galleryModal.classList.add('is-open');
       galleryModal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('v2-gallery-modal-open');
+      syncGalleryLock();
     }
 
     function closeGallery() {
       if (!galleryModal) return;
       galleryModal.classList.remove('is-open');
       galleryModal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('v2-gallery-modal-open');
+      syncGalleryLock();
     }
 
     function moveGallery(step) {
       renderGallery(galleryIndex + step);
     }
 
+    function galleryLightboxOpen() {
+      return Boolean(galleryModal && galleryModal.classList.contains('is-open'));
+    }
+
+    function stopGalleryAuto() {
+      if (galleryAutoTimer) {
+        window.clearInterval(galleryAutoTimer);
+        galleryAutoTimer = null;
+      }
+    }
+
+    function startGalleryAuto() {
+      stopGalleryAuto();
+      if ((versionKey !== '3' && versionKey !== '4') || !galleryTrack || gallerySources.length < 2) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      galleryAutoTimer = window.setInterval(() => {
+        if (!galleryInView || galleryUserPause || galleryAnimating || document.hidden || galleryLightboxOpen()) return;
+        renderGallery(galleryIndex + 1);
+      }, 2000);
+    }
+
+    function pauseGalleryAuto() {
+      galleryUserPause = true;
+      if (galleryTrack && typeof gsap !== 'undefined') gsap.killTweensOf(galleryTrack);
+      galleryAnimating = false;
+      if (galleryTrack) galleryTrack.classList.remove('is-animating');
+      window.clearTimeout(pauseGalleryAuto.resumeTimer);
+      pauseGalleryAuto.resumeTimer = window.setTimeout(() => {
+        galleryUserPause = false;
+      }, 5000);
+    }
+
     galleryThumbs.forEach((btn, i) => {
-      btn.addEventListener('click', () => renderGallery(i));
+      btn.addEventListener('click', () => {
+        renderGallery(i);
+      });
     });
     if (galleryMain) {
-      galleryMain.addEventListener('click', () => openGallery(galleryIndex));
+      galleryMain.addEventListener('click', () => {
+        openGallery(galleryIndex);
+      });
     }
+    if (galleryGridClose) galleryGridClose.addEventListener('click', closeGrid);
 
     const galleryMainPrev = id('gallery-main-prev');
     const galleryMainNext = id('gallery-main-next');
@@ -829,6 +968,157 @@
       }, true);
     }
 
+    if (galleryTrack) {
+      let dragPointer = null;
+      let dragStartX = 0;
+      let dragStartScroll = 0;
+      let pressX = 0;
+      let pressY = 0;
+      let pressSlide = null;
+      let didDrag = false;
+      let openedOnPointerUp = false;
+
+      function nearestSlideIndex() {
+        const center = galleryTrack.scrollLeft + galleryTrack.clientWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        gallerySlides.forEach((slide, i) => {
+          const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+          const dist = Math.abs(slideCenter - center);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        return best;
+      }
+
+      function slideFromEvent(event) {
+        const node = event.target && event.target.closest
+          ? event.target.closest('.v3-gallery-slide')
+          : null;
+        return node && galleryTrack.contains(node) ? node : null;
+      }
+
+      function openSlide(slide) {
+        const i = gallerySlides.indexOf(slide);
+        if (i < 0) return;
+        openGallery(i);
+      }
+
+      galleryTrack.addEventListener('scroll', () => {
+        galleryIndex = nearestSlideIndex();
+      }, { passive: true });
+
+      galleryTrack.addEventListener('pointerdown', (event) => {
+        pressSlide = slideFromEvent(event);
+        pressX = event.clientX;
+        pressY = event.clientY;
+        dragStartX = event.clientX;
+        dragStartScroll = galleryTrack.scrollLeft;
+        didDrag = false;
+        openedOnPointerUp = false;
+        pauseGalleryAuto();
+        if (event.pointerType === 'touch') {
+          dragPointer = null;
+          return;
+        }
+        dragPointer = event.pointerId;
+      });
+
+      galleryTrack.addEventListener('pointermove', (event) => {
+        if (dragPointer == null || event.pointerId !== dragPointer) return;
+        const deltaX = event.clientX - dragStartX;
+        const deltaY = event.clientY - pressY;
+        if (!didDrag && Math.hypot(deltaX, deltaY) > 8) {
+          didDrag = true;
+          galleryTrack.classList.add('is-dragging');
+          if (galleryTrack.setPointerCapture) galleryTrack.setPointerCapture(event.pointerId);
+        }
+        if (!didDrag) return;
+        galleryTrack.scrollLeft = dragStartScroll - deltaX;
+      });
+
+      function endTrackPointer(event) {
+        const slide = pressSlide;
+        const startScroll = dragStartScroll;
+        if (event.pointerType === 'touch') {
+          pressSlide = null;
+          dragPointer = null;
+          if (event.type === 'pointercancel') return;
+          const scrolled = Math.abs(galleryTrack.scrollLeft - startScroll);
+          if (scrolled < 10 && slide) {
+            openedOnPointerUp = true;
+            openSlide(slide);
+          }
+          return;
+        }
+        if (dragPointer == null || (event && event.pointerId !== dragPointer)) return;
+        const dragged = didDrag;
+        dragPointer = null;
+        pressSlide = null;
+        galleryTrack.classList.remove('is-dragging');
+        if (event.type === 'pointercancel') {
+          didDrag = false;
+          return;
+        }
+        if (dragged) {
+          galleryIndex = nearestSlideIndex();
+          renderGallery(galleryIndex, 'smooth');
+          didDrag = false;
+          return;
+        }
+        if (slide) {
+          openedOnPointerUp = true;
+          openSlide(slide);
+        }
+      }
+
+      galleryTrack.addEventListener('pointerup', endTrackPointer);
+      galleryTrack.addEventListener('pointercancel', endTrackPointer);
+
+      galleryTrack.addEventListener('click', (event) => {
+        const slide = slideFromEvent(event);
+        if (openedOnPointerUp || didDrag || !slide) {
+          if (openedOnPointerUp || didDrag) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          openedOnPointerUp = false;
+          didDrag = false;
+          return;
+        }
+        event.preventDefault();
+        openSlide(slide);
+      }, true);
+
+      root.querySelectorAll('[data-gallery-tab]').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          root.querySelectorAll('[data-gallery-tab]').forEach((btn) => {
+            const active = btn === tab;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-selected', String(active));
+          });
+          pauseGalleryAuto();
+          renderGallery(0, 'auto');
+        });
+      });
+
+      const gallerySection = id('gallery');
+      if ('IntersectionObserver' in window && gallerySection) {
+        const observer = new IntersectionObserver((entries) => {
+          galleryInView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.28);
+        }, { threshold: [0, 0.28, 0.6] });
+        observer.observe(gallerySection);
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) startGalleryAuto();
+      });
+
+      startGalleryAuto();
+    }
+
     if (galleryClose) galleryClose.addEventListener('click', closeGallery);
     if (galleryPrev) galleryPrev.addEventListener('click', () => moveGallery(-1));
     if (galleryNext) galleryNext.addEventListener('click', () => moveGallery(1));
@@ -850,8 +1140,15 @@
     }
 
     document.addEventListener('keydown', (event) => {
-      if (!galleryModal || !galleryModal.classList.contains('is-open')) return;
-      if (event.key === 'Escape') closeGallery();
+      const lightboxOpen = galleryModal && galleryModal.classList.contains('is-open');
+      const gridOpen = galleryGrid && galleryGrid.classList.contains('is-open');
+      if (!lightboxOpen && !gridOpen) return;
+      if (event.key === 'Escape') {
+        if (lightboxOpen) closeGallery();
+        else closeGrid();
+        return;
+      }
+      if (!lightboxOpen) return;
       if (event.key === 'ArrowLeft') moveGallery(-1);
       if (event.key === 'ArrowRight') moveGallery(1);
     });
@@ -859,36 +1156,43 @@
 
   initScrollInvitation('v2', '2');
   initScrollInvitation('v3', '3');
+  initScrollInvitation('v4', '4');
 
-  const v3DateCalendar = document.getElementById('v3-date-calendar');
-  if (v3DateCalendar) {
+  function fillDateCalendar(calendar) {
+    if (!calendar) return;
     const firstWeekday = new Date(2026, 10, 1).getDay();
     const daysInMonth = 30;
     for (let i = 0; i < firstWeekday; i += 1) {
       const empty = document.createElement('span');
       empty.className = 'is-empty';
       empty.textContent = '0';
-      v3DateCalendar.appendChild(empty);
+      calendar.appendChild(empty);
     }
     for (let day = 1; day <= daysInMonth; day += 1) {
       const cell = document.createElement('span');
       cell.textContent = String(day);
       if (day === 14) cell.className = 'is-wedding';
-      v3DateCalendar.appendChild(cell);
+      calendar.appendChild(cell);
     }
   }
 
-  const v3Countdown = document.getElementById('v3-date-countdown');
-  if (v3Countdown) {
+  fillDateCalendar(document.getElementById('v3-date-calendar'));
+  fillDateCalendar(document.getElementById('v4-date-calendar'));
+
+  function fillCountdown(el) {
+    if (!el) return;
     const wedding = new Date(2026, 10, 14);
     const today = new Date();
     wedding.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
     const days = Math.round((wedding.getTime() - today.getTime()) / 86400000);
-    if (days > 0) v3Countdown.textContent = 'D-' + days + '일 ♡';
-    else if (days === 0) v3Countdown.textContent = 'D-DAY ♡';
-    else v3Countdown.textContent = 'D+' + Math.abs(days) + '일 ♡';
+    if (days > 0) el.textContent = 'D-' + days + '일 ♡';
+    else if (days === 0) el.textContent = 'D-DAY ♡';
+    else el.textContent = 'D+' + Math.abs(days) + '일 ♡';
   }
+
+  fillCountdown(document.getElementById('v3-date-countdown'));
+  fillCountdown(document.getElementById('v4-date-countdown'));
 
   /* Calendar (Version 1) */
   const calendarGrid = document.getElementById('calendar-grid');
