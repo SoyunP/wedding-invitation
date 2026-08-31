@@ -700,7 +700,6 @@
     const galleryGridInner = id('gallery-grid-inner');
     const galleryGridClose = id('gallery-grid-close');
     let galleryIndex = 0;
-    let touchStartX = null;
     let gridBuilt = false;
     let galleryAutoTimer = null;
     let galleryInView = true;
@@ -1108,20 +1107,12 @@
     if (galleryPrev) galleryPrev.addEventListener('click', () => moveGallery(-1));
     if (galleryNext) galleryNext.addEventListener('click', () => moveGallery(1));
     if (galleryModal) {
-      galleryModal.addEventListener('click', (event) => {
-        if (event.target === galleryModal) closeGallery();
+      galleryModal.addEventListener('dblclick', (event) => {
+        event.preventDefault();
       });
-      galleryModal.addEventListener('touchstart', (event) => {
-        const touch = event.changedTouches && event.changedTouches[0];
-        touchStartX = touch ? touch.clientX : null;
-      }, { passive: true });
-      galleryModal.addEventListener('touchend', (event) => {
-        const touch = event.changedTouches && event.changedTouches[0];
-        if (touchStartX == null || !touch) return;
-        const deltaX = touch.clientX - touchStartX;
-        if (Math.abs(deltaX) > 40) moveGallery(deltaX > 0 ? -1 : 1);
-        touchStartX = null;
-      }, { passive: true });
+      ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
+        galleryModal.addEventListener(type, (event) => event.preventDefault());
+      });
     }
 
     document.addEventListener('keydown', (event) => {

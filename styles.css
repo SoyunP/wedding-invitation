@@ -1046,13 +1046,7 @@ body.is-handoff .envelope-stage {
 }
 
 #version-3 .v2-header {
-  justify-content: flex-end;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(255, 255, 255, 0.4) 42%,
-    rgba(255, 255, 255, 0) 78%
-  );
+  display: none;
 }
 
 .v2-header-label,
@@ -2600,6 +2594,7 @@ body.is-handoff .envelope-stage {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  touch-action: none;
 }
 
 body.v2-gallery-modal-open {
@@ -2612,18 +2607,23 @@ body.v2-gallery-modal-open {
   object-fit: contain;
   border-radius: 6px;
   box-shadow: 0 20px 56px rgba(0, 0, 0, 0.4);
-  touch-action: pinch-zoom;
+  pointer-events: none;
+  touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-user-drag: none;
 }
 
 .v2-gallery-close,
 .v2-gallery-nav {
   position: absolute;
+  z-index: 2;
   border: 0;
   background: rgba(245, 241, 233, 0.16);
   color: #f5f1e9;
   cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
   backdrop-filter: blur(2px);
 }
 
