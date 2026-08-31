@@ -17,8 +17,9 @@
   /* ── Version switcher ── */
   const versionSelect = document.getElementById('version-select');
   const versionPanels = document.querySelectorAll('.version-panel');
+  const versionMigrate = { 1: '1', 2: '1', 3: '2', 4: '3' };
   const storedVersion = sessionStorage.getItem('invitation-version');
-  let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '3';
+  let activeVersion = versionMigrate[storedVersion] || (versionSelect && versionSelect.value) || '3';
 
   if (versionSelect) versionSelect.value = activeVersion;
   document.body.dataset.activeVersion = activeVersion;
@@ -36,26 +37,10 @@
 
   function setActiveVersion(version) {
     const value = String(version);
-    const previous = activeVersion;
     activeVersion = value;
     sessionStorage.setItem('invitation-version', value);
     applyVersionVisibility(value);
-
-    if (value === '2' || value === '3' || value === '4') {
-      document.body.classList.remove('is-handoff');
-      ScrollTrigger.getAll().forEach((st) => st.disable(false));
       window.scrollTo(0, 0);
-      return;
-    }
-
-    /* Returning to Version 1 — hard reset keeps envelope pin healthy */
-    if ((previous === '2' || previous === '3' || previous === '4') && value === '1') {
-      window.location.reload();
-      return;
-    }
-
-    window.scrollTo(0, 0);
-    requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 
   if (versionSelect) {
@@ -185,15 +170,15 @@
     function prepareHeroWords() {
       if (join) {
         join.querySelectorAll('.v2-name, .v2-amp').forEach((el) => {
-          if (el.dataset.wordsWrapped === '1') return;
-          const text = el.textContent;
-          el.textContent = '';
-          const span = document.createElement('span');
-          span.className = 'v2-word';
-          span.textContent = text;
-          el.appendChild(span);
-          el.dataset.wordsWrapped = '1';
-        });
+        if (el.dataset.wordsWrapped === '1') return;
+        const text = el.textContent;
+        el.textContent = '';
+        const span = document.createElement('span');
+        span.className = 'v2-word';
+        span.textContent = text;
+        el.appendChild(span);
+        el.dataset.wordsWrapped = '1';
+      });
         wrapWords(join.querySelector('.v2-datetime'));
       }
       if (save) {
@@ -209,45 +194,45 @@
       heroRevealed = true;
       prepareHeroWords();
 
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         join.classList.add('is-letter-in', 'is-copy-in');
         join.querySelectorAll('.v2-word').forEach((word) => {
+        word.style.opacity = '1';
+        word.style.transform = 'translateY(0)';
+      });
+      return;
+    }
+
+    requestAnimationFrame(() => {
+        join.classList.add('is-letter-in');
+    });
+
+    window.setTimeout(() => {
+        join.classList.add('is-copy-in');
+        const joinWords = join.querySelectorAll('.v2-word');
+      joinWords.forEach((word, i) => {
+        word.style.transition = `opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1) ${0.12 + i * 0.12}s, transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) ${0.12 + i * 0.12}s`;
+        requestAnimationFrame(() => {
           word.style.opacity = '1';
           word.style.transform = 'translateY(0)';
         });
-        return;
-      }
-
-      requestAnimationFrame(() => {
-        join.classList.add('is-letter-in');
       });
-
-      window.setTimeout(() => {
-        join.classList.add('is-copy-in');
-        const joinWords = join.querySelectorAll('.v2-word');
-        joinWords.forEach((word, i) => {
-          word.style.transition = `opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1) ${0.12 + i * 0.12}s, transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) ${0.12 + i * 0.12}s`;
-          requestAnimationFrame(() => {
-            word.style.opacity = '1';
-            word.style.transform = 'translateY(0)';
-          });
-        });
-      }, 900);
-    }
+    }, 900);
+  }
 
     function revealSaveWords() {
       if (!save || save.dataset.revealed === '1') return;
       save.dataset.revealed = '1';
       prepareHeroWords();
       const words = save.querySelectorAll('.v2-word');
-      words.forEach((word, i) => {
-        word.style.transition = `opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.14}s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.14}s`;
-        requestAnimationFrame(() => {
-          word.style.opacity = '1';
-          word.style.transform = 'translateY(0)';
-        });
+    words.forEach((word, i) => {
+      word.style.transition = `opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.14}s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.14}s`;
+      requestAnimationFrame(() => {
+        word.style.opacity = '1';
+        word.style.transform = 'translateY(0)';
       });
-    }
+    });
+  }
 
     function scrollToY(top, duration) {
       const startY = window.scrollY;
@@ -265,33 +250,33 @@
 
     function openInvitation() {
       const target = root.querySelector('.v2-main > .v2-section') || join || save;
-      if (!target) return;
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!target) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (reduceMotion) {
-        target.scrollIntoView({ behavior: 'auto' });
+    if (reduceMotion) {
+      target.scrollIntoView({ behavior: 'auto' });
         if (target === join) revealJoinSequence();
-        return;
-      }
+      return;
+    }
 
-      const top = target.getBoundingClientRect().top + window.scrollY;
+    const top = target.getBoundingClientRect().top + window.scrollY;
       scrollToY(top, 2200);
 
       if (target !== join) return;
 
-      let started = false;
-      const tryStart = () => {
+    let started = false;
+    const tryStart = () => {
         if (started || !join) return;
         const rect = join.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.72) {
-          started = true;
-          window.removeEventListener('scroll', tryStart);
-          revealJoinSequence();
-        }
-      };
-      window.addEventListener('scroll', tryStart, { passive: true });
-      window.setTimeout(() => {
+      if (rect.top < window.innerHeight * 0.72) {
+        started = true;
         window.removeEventListener('scroll', tryStart);
+          revealJoinSequence();
+      }
+    };
+    window.addEventListener('scroll', tryStart, { passive: true });
+    window.setTimeout(() => {
+      window.removeEventListener('scroll', tryStart);
         revealJoinSequence();
       }, 2300);
     }
@@ -304,37 +289,37 @@
 
       envelope.addEventListener('click', openInvitation);
       envelope.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
           openInvitation();
-        }
-      });
+      }
+    });
 
       if (join) {
-        const joinObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.intersectionRatio > 0.22) {
+      const joinObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.22) {
                 revealJoinSequence();
-              }
-            });
-          },
-          { threshold: [0.22, 0.35] }
-        );
+            }
+          });
+        },
+        { threshold: [0.22, 0.35] }
+      );
         joinObserver.observe(join);
-      }
+    }
 
       if (save) {
-        const saveObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+      const saveObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
                 revealSaveWords();
-              }
-            });
-          },
-          { threshold: [0.35] }
-        );
+            }
+          });
+        },
+        { threshold: [0.35] }
+      );
         saveObserver.observe(save);
       }
     }
@@ -347,13 +332,13 @@
       };
       window.addEventListener('scroll', syncHeader, { passive: true });
       syncHeader();
-    } else if (header && (versionKey === '3' || versionKey === '4')) {
+    } else if (header && (prefix === 'v3' || prefix === 'v4')) {
       header.classList.add('is-visible');
       header.setAttribute('aria-hidden', 'false');
     }
 
-    if (versionKey === '3' || versionKey === '4') {
-      const letterScene = id('invitation');
+    if (prefix === 'v3' || prefix === 'v4') {
+      const letterScene = prefix === 'v3' ? id('invitation') : null;
       const letterInner = letterScene && letterScene.querySelector('.v3-letter-inner');
       const letterSticky = letterScene && letterScene.querySelector('.v3-letter-sticky');
       const envelopeFlaps = letterScene && letterScene.querySelector('.envelope-flaps');
@@ -705,11 +690,11 @@
     const gallerySlides = Array.from(root.querySelectorAll('.v3-gallery-slide'));
     const galleryItems = gallerySlides.length ? gallerySlides : galleryThumbs;
     const gallerySources = galleryItems.map((btn) => {
-      const img = btn.querySelector('img');
-      return img
-        ? { src: img.getAttribute('src') || '', alt: img.getAttribute('alt') || 'Gallery image' }
-        : { src: '', alt: 'Gallery image' };
-    }).filter((item) => item.src);
+    const img = btn.querySelector('img');
+    return img
+      ? { src: img.getAttribute('src') || '', alt: img.getAttribute('alt') || 'Gallery image' }
+      : { src: '', alt: 'Gallery image' };
+  }).filter((item) => item.src);
     const galleryTrack = id('gallery-track');
     const galleryGrid = id('gallery-grid');
     const galleryGridInner = id('gallery-grid-inner');
@@ -860,12 +845,12 @@
 
     function startGalleryAuto() {
       stopGalleryAuto();
-      if ((versionKey !== '3' && versionKey !== '4') || !galleryTrack || gallerySources.length < 2) return;
+      if ((prefix !== 'v3' && prefix !== 'v4') || !galleryTrack || gallerySources.length < 2) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       galleryAutoTimer = window.setInterval(() => {
         if (!galleryInView || galleryUserPause || galleryAnimating || document.hidden || galleryLightboxOpen()) return;
         renderGallery(galleryIndex + 1);
-      }, 2000);
+      }, 3000);
     }
 
     function pauseGalleryAuto() {
@@ -1154,9 +1139,9 @@
     });
   }
 
-  initScrollInvitation('v2', '2');
-  initScrollInvitation('v3', '3');
-  initScrollInvitation('v4', '4');
+  initScrollInvitation('v2', '1');
+  initScrollInvitation('v3', '2');
+  initScrollInvitation('v4', '3');
 
   function fillDateCalendar(calendar) {
     if (!calendar) return;
@@ -1254,211 +1239,4 @@
     });
   }
 
-  if (activeVersion !== '1') return;
-
-  /* ============================================================
-     Version 1 — Envelope sequence
-     ============================================================ */
-  const sequence = document.getElementById('envelope-sequence');
-  const stage = document.getElementById('envelope-stage');
-  const stageInner = stage && stage.querySelector('.stage-inner');
-  const envelope = document.getElementById('envelope');
-  const flap = document.getElementById('flap');
-  const seal = document.getElementById('wax-seal');
-  const copy = document.getElementById('envelope-copy');
-  const letter = document.getElementById('letter');
-  const letterWindow = document.getElementById('letter-window');
-  const openHint = document.getElementById('open-hint');
-  const scrollIndicator = document.getElementById('scroll-indicator');
-  const siteHeader = document.getElementById('site-header');
-
-  if (!sequence || !stage || !envelope || !flap || !letter || !letterWindow) return;
-
-  let handoffDone = false;
-  let letterEscaped = false;
-
-  function letterHiddenY() {
-    const winH = letterWindow.offsetHeight || 1;
-    return winH * 1.05;
-  }
-
-  function escapeLetterToStage() {
-    if (letterEscaped || !stageInner) return;
-    letterEscaped = true;
-    const rect = letterWindow.getBoundingClientRect();
-    const stageRect = stage.getBoundingClientRect();
-    stageInner.appendChild(letterWindow);
-    gsap.set(letterWindow, {
-      position: 'absolute',
-      left: rect.left - stageRect.left,
-      top: rect.top - stageRect.top,
-      width: rect.width,
-      height: rect.height,
-      x: 0,
-      xPercent: 0,
-      zIndex: 80,
-      borderRadius: 0,
-      overflow: 'hidden',
-    });
-  }
-
-  gsap.set(flap, { rotateX: 0, transformOrigin: '50% 0%' });
-  gsap.set(seal, { opacity: 1, y: 0, scale: 1, rotation: 0 });
-  gsap.set(copy, { opacity: 1 });
-  gsap.set(openHint, { opacity: 1 });
-  gsap.set(scrollIndicator, { opacity: 1 });
-  gsap.set(envelope, { y: 0, opacity: 1 });
-  gsap.set(letter, { y: letterHiddenY(), scale: 1 });
-
-  const tl = gsap.timeline({ paused: true });
-
-  tl.to(seal, {
-    y: -8,
-    scale: 1.08,
-    rotation: 6,
-    duration: 0.15,
-    ease: 'power1.out',
-  }, 0.20);
-
-  tl.to(seal, {
-    opacity: 0,
-    y: -16,
-    scale: 0.9,
-    duration: 0.08,
-    ease: 'power1.in',
-  }, 0.35);
-
-  tl.to(flap, {
-    rotateX: -168,
-    duration: 0.20,
-    ease: 'power2.inOut',
-  }, 0.35);
-
-  tl.to(copy, { opacity: 0, duration: 0.10 }, 0.35);
-  tl.to(openHint, { opacity: 0, duration: 0.08 }, 0.38);
-
-  tl.to(letter, {
-    y: () => letterHiddenY() * 0.72,
-    duration: 0.05,
-    ease: 'power1.out',
-  }, 0.55);
-
-  tl.to(letter, {
-    y: () => letterHiddenY() * 0.08,
-    duration: 0.22,
-    ease: 'power2.out',
-  }, 0.60);
-
-  tl.to(letter, {
-    y: () => -letterHiddenY() * 0.02,
-    scale: 1.1,
-    duration: 0.13,
-    ease: 'power1.inOut',
-  }, 0.82);
-
-  tl.to(envelope, {
-    y: () => window.innerHeight * 0.22,
-    duration: 0.13,
-    ease: 'power2.in',
-  }, 0.82);
-
-  tl.to(scrollIndicator, { opacity: 0, duration: 0.06 }, 0.82);
-
-  tl.to(letterWindow, {
-    width: '70%',
-    height: '75%',
-    top: '10%',
-    duration: 0.13,
-    ease: 'power1.inOut',
-  }, 0.82);
-
-  tl.to(envelope, {
-    y: () => window.innerHeight * 0.6,
-    opacity: 0,
-    duration: 0.05,
-    ease: 'power2.in',
-  }, 0.95);
-
-  tl.to(letterWindow, {
-    left: 0,
-    top: 0,
-    width: '100%',
-    height: '100%',
-    duration: 0.05,
-    ease: 'power2.inOut',
-  }, 0.95);
-
-  tl.to(letter, {
-    y: 0,
-    scale: 1,
-    duration: 0.05,
-    ease: 'power2.out',
-  }, 0.95);
-
-  tl.to(stage, {
-    backgroundColor: '#f5f1e9',
-    duration: 0.05,
-  }, 0.95);
-
-  function doHandoff() {
-    if (handoffDone) return;
-    handoffDone = true;
-
-    document.body.classList.add('is-handoff');
-
-    const st = ScrollTrigger.getById('envelope-pin');
-    if (st) st.kill(true);
-
-    gsap.set([letterWindow, letter, flap, seal, copy, envelope], { clearProps: 'all' });
-
-    const hero = document.getElementById('save-the-date');
-    if (hero) {
-      const top = hero.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo(0, Math.max(0, top));
-    }
-
-    ScrollTrigger.refresh();
-  }
-
-  ScrollTrigger.create({
-    id: 'envelope-pin',
-    trigger: sequence,
-    start: 'top top',
-    end: '+=320%',
-    scrub: 0.55,
-    pin: stage,
-    pinSpacing: true,
-    anticipatePin: 1,
-    animation: tl,
-    onLeave: doHandoff,
-    onUpdate: (self) => {
-      if (self.progress >= 0.945) escapeLetterToStage();
-      if (self.progress > 0.94) {
-        stage.style.backgroundColor = '#f5f1e9';
-      } else if (!handoffDone) {
-        stage.style.backgroundColor = '';
-      }
-    },
-  });
-
-  ScrollTrigger.create({
-    trigger: '#message',
-    start: 'top 70%',
-    onEnter: () => {
-      if (!handoffDone || !siteHeader) return;
-      siteHeader.classList.add('is-visible');
-      siteHeader.setAttribute('aria-hidden', 'false');
-    },
-    onLeaveBack: () => {
-      if (!siteHeader) return;
-      siteHeader.classList.remove('is-visible');
-      siteHeader.setAttribute('aria-hidden', 'true');
-    },
-  });
-
-  window.addEventListener('resize', () => {
-    if (handoffDone) return;
-    gsap.set(letter, { y: letterHiddenY() });
-    ScrollTrigger.refresh();
-  });
 })();

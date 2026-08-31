@@ -50,261 +50,13 @@
       <option value="1">Version 1</option>
       <option value="2">Version 2</option>
       <option value="3" selected>Version 3</option>
-      <option value="4">Version 4</option>
     </select>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       VERSION 1 — current invitation
+       VERSION 1
        ═══════════════════════════════════════════ -->
   <div class="version-panel" id="version-1" data-version="1" hidden>
-  <!-- ═══════════════════════════════════════════
-       ENVELOPE SEQUENCE (pinned stage)
-       ═══════════════════════════════════════════ -->
-  <section class="envelope-sequence" id="envelope-sequence" aria-label="Opening love letter">
-    <div class="envelope-stage" id="envelope-stage">
-      <div class="stage-inner">
-
-        <div class="envelope" id="envelope">
-          <div class="envelope-back"></div>
-
-          <!-- Letter lives between back and front pocket -->
-          <div class="letter-window" id="letter-window">
-            <article class="letter" id="letter">
-              <div class="letter-hero">
-                <p class="eyebrow">SAVE THE DATE</p>
-                <h2 class="hero-names">
-                  <span class="name">Sangwon</span>
-                  <span class="amp">&amp;</span>
-                  <span class="name">Soyun</span>
-                </h2>
-                <p class="hero-datetime">2026.11.14 오후 1시 30분</p>
-                <p class="hero-venue">삼청각 일화당</p>
-                <div class="hero-photo">
-                  <div class="photo-placeholder"><span>Your Photo</span></div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="envelope-front">
-            <div class="pocket-base"></div>
-            <div class="pocket-left"></div>
-            <div class="pocket-right"></div>
-          </div>
-
-          <!-- ONE flap image: triangle + lace -->
-          <div class="flap" id="flap">
-            <img class="flap__img" src="assets/flap-with-lace.png" alt="" width="1400" height="659" draggable="false">
-          </div>
-
-          <div class="wax-seal" id="wax-seal">
-            <img src="assets/wax-seal.png" alt="" width="676" height="667" class="wax-seal__img" draggable="false">
-          </div>
-
-          <div class="envelope-copy" id="envelope-copy">
-            <p class="envelope-label">A LOVE LETTER FROM</p>
-            <h1 class="envelope-names">Sangwon &amp; Soyun</h1>
-          </div>
-        </div>
-
-        <p class="open-hint" id="open-hint">OPEN THE INVITATION</p>
-        <div class="scroll-indicator" id="scroll-indicator" aria-hidden="true">
-          <span class="scroll-line"></span>
-          <span>Scroll</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       MAIN INVITATION (document flow)
-       Visually matches letter hero for seamless handoff
-       ═══════════════════════════════════════════ -->
-  <main class="invitation-main" id="invitation-main">
-    <section class="letter-hero save-the-date" id="save-the-date">
-      <p class="eyebrow">SAVE THE DATE</p>
-      <h2 class="hero-names">
-        <span class="name">Sangwon</span>
-        <span class="amp">&amp;</span>
-        <span class="name">Soyun</span>
-      </h2>
-      <p class="hero-datetime">2026.11.14 오후 1시 30분</p>
-      <p class="hero-venue">삼청각 일화당</p>
-      <div class="hero-photo">
-        <div class="photo-placeholder"><span>Your Photo</span></div>
-      </div>
-    </section>
-
-    <div class="wedding-details">
-      <section class="section" id="message">
-        <h2 class="section-title">INVITATION</h2>
-        <div class="message-body">
-          <p>서로 다른 길을 걸어온 두 사람이</p>
-          <p>이제 같은 방향을 바라보며</p>
-          <p>한 걸음씩 함께 걸어가려 합니다.</p>
-          <p>저희의 새로운 시작을 축복해 주세요.</p>
-        </div>
-      </section>
-
-      <section class="section join" id="couple">
-        <h2 class="join-title">Join us<br>for our wedding</h2>
-        <div class="parents">
-          <p><span class="parent-names">지현호 · 김윤정</span> 의 아들 <strong>지상원</strong></p>
-          <p><span class="parent-names">박수근 · 이혜경</span> 의 딸 <strong>박소연</strong></p>
-        </div>
-      </section>
-
-      <section class="section invitation-message">
-        <p class="big-date">2026.11.14</p>
-        <p class="day-time">토요일 오후 1시 30분</p>
-        <div class="calendar" aria-label="November 2026 calendar">
-          <div class="calendar-header">
-            <span class="sun">S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span class="sun">S</span>
-          </div>
-          <div class="calendar-grid" id="calendar-grid"></div>
-        </div>
-      </section>
-
-      <section class="section location" id="location">
-        <h2 class="section-title">LOCATION</h2>
-        <h3 class="venue-name">삼청각 일화당</h3>
-        <p class="venue-address">예식장 주소 층/홀 정보</p>
-        <p class="venue-phone">02-000-0000</p>
-        <div class="map-preview">
-          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
-            <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          <span>MAP PREVIEW</span>
-        </div>
-        <div class="map-buttons">
-          <a href="#" class="map-btn">네이버 지도 ↗</a>
-          <a href="#" class="map-btn">카카오맵 ↗</a>
-          <a href="#" class="map-btn">티맵 ↗</a>
-        </div>
-        <div class="transport-info">
-          <h4>[주차 안내]</h4>
-          <p>주차 공간 및 이용 안내</p>
-          <h4>[지하철]</h4>
-          <p>지하철 이용 안내</p>
-        </div>
-      </section>
-
-      <section class="section gallery" id="gallery">
-        <h2 class="section-title">GALLERY</h2>
-        <div class="gallery-grid">
-          <div class="gallery-item"><span>Preview</span></div>
-          <div class="gallery-item"><span>Preview</span></div>
-          <div class="gallery-item"><span>Preview</span></div>
-          <div class="gallery-item"><span>Preview</span></div>
-          <div class="gallery-item"><span>Preview</span></div>
-          <div class="gallery-item more"><span>+ 1 MORE</span></div>
-        </div>
-      </section>
-
-      <section class="section story" id="story">
-        <h2 class="section-title story-title">Our Story</h2>
-        <div class="story-parents-photo">
-          <div class="photo-placeholder parents"><span>Parents Photo</span></div>
-        </div>
-        <div class="qa-list">
-          <div class="qa-item">
-            <h3>우리의 첫 만남은?</h3>
-            <p>학교에서 처음 만났어요</p>
-          </div>
-          <div class="qa-item">
-            <h3>서로의 첫인상은?</h3>
-            <p>조용하다</p>
-          </div>
-          <div class="qa-item">
-            <h3>함께 꿈꾸는 미래는?</h3>
-            <p>앞으로 함께 걸어갈 행복한 미래에 대한 다짐을 적어보세요.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section account" id="account">
-        <h2 class="section-title">ACCOUNT</h2>
-        <p class="account-sub">마음 전하실 곳</p>
-        <div class="accordion">
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="true">
-              <span>신랑측 계좌번호</span>
-              <svg class="chevron" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
-            </button>
-            <div class="accordion-panel open">
-              <div class="account-row">
-                <div>
-                  <span class="account-label">예금주</span>
-                  <span class="account-number">신한 000-000-000000</span>
-                </div>
-                <button class="copy-btn" data-copy="000-000-000000" aria-label="Copy account number">
-                  <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span>신부측 계좌번호</span>
-              <svg class="chevron" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
-            </button>
-            <div class="accordion-panel">
-              <div class="account-row">
-                <div>
-                  <span class="account-label">예금주</span>
-                  <span class="account-number">국민 000-000-000000</span>
-                </div>
-                <button class="copy-btn" data-copy="000-000-000000" aria-label="Copy account number">
-                  <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section share">
-        <h2 class="section-title">SHARE</h2>
-        <p class="share-sub">소중한 분들에게 전해주세요</p>
-        <div class="share-buttons">
-          <button class="share-btn"><span class="share-icon">💬</span><span>KAKAO</span></button>
-          <button class="share-btn" id="copy-link-btn"><span class="share-icon">🔗</span><span>LINK</span></button>
-          <button class="share-btn"><span class="share-icon">↗</span><span>MORE</span></button>
-        </div>
-      </section>
-
-      <footer class="site-footer">
-        <p>With love, Sangwon &amp; Soyun</p>
-        <p class="footer-date">2026.11.14</p>
-      </footer>
-    </div>
-  </main>
-
-  <!-- Header hidden until past invitation hero -->
-  <header class="site-header" id="site-header" aria-hidden="true">
-    <span class="header-label">The Wedding of</span>
-    <button class="menu-btn" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
-    <button class="nav-close" aria-label="Close menu">&times;</button>
-    <a href="#save-the-date">Save the Date</a>
-    <a href="#message">Message</a>
-    <a href="#couple">Couple</a>
-    <a href="#location">Location</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#account">Account</a>
-  </nav>
-
-  </div><!-- /#version-1 -->
-
-  <!-- ═══════════════════════════════════════════
-       VERSION 2 — simple full-page scroll
-       ═══════════════════════════════════════════ -->
-  <div class="version-panel" id="version-2" data-version="2" hidden>
     <header class="v2-header" id="v2-header">
       <span class="v2-header-label">The Wedding of</span>
       <button class="v2-menu-btn" id="v2-menu-btn" aria-label="Open menu">
@@ -1015,7 +767,10 @@
     </main>
   </div>
 
-  <div class="version-panel is-active" id="version-3" data-version="3">
+  <!-- ═══════════════════════════════════════════
+       VERSION 2
+       ═══════════════════════════════════════════ -->
+  <div class="version-panel" id="version-2" data-version="2" hidden>
     <header class="v2-header" id="v3-header">
       <button class="v2-menu-btn" id="v3-menu-btn" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1044,7 +799,9 @@
               <span class="v3-celebrate-star" aria-hidden="true">✦</span>
               <p class="v3-letter-kicker">WITH LOVE</p>
               <figure class="v3-polaroid">
-                <img src="assets/v3-letter-polaroid.jpg" alt="상원과 소연" width="800" height="800" decoding="async">
+                <span class="v3-polaroid-photo">
+                  <img src="assets/v3-gallery-27.jpg" alt="상원과 소연" width="800" height="800" decoding="async">
+                </span>
                 <figcaption>상원 ♥ 소연</figcaption>
               </figure>
               <p class="v3-letter-venue">삼청각 일화당</p>
@@ -1153,19 +910,19 @@
         </div>
         <div class="v3-gallery-track" id="v3-gallery-track" tabindex="0" aria-label="웨딩 갤러리">
             <button class="v3-gallery-slide" type="button" data-gallery-index="0" aria-label="갤러리 사진 1">
-              <img src="assets/v3-gallery-01.jpg" alt="웨딩 사진 1" decoding="async">
+              <img src="assets/v3-gallery-05.jpg" alt="웨딩 사진 1" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="1" aria-label="갤러리 사진 2">
-              <img src="assets/v3-gallery-02.jpg" alt="웨딩 사진 2" decoding="async">
+              <img src="assets/v3-gallery-01.jpg" alt="웨딩 사진 2" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="2" aria-label="갤러리 사진 3">
-              <img src="assets/v3-gallery-03.jpg" alt="웨딩 사진 3" decoding="async">
+              <img src="assets/v3-gallery-02.jpg" alt="웨딩 사진 3" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="3" aria-label="갤러리 사진 4">
-              <img src="assets/v3-gallery-04.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
+              <img src="assets/v3-gallery-03.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="4" aria-label="갤러리 사진 5">
-              <img src="assets/v3-gallery-05.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
+              <img src="assets/v3-gallery-04.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="5" aria-label="갤러리 사진 6">
               <img src="assets/v3-gallery-06.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async">
@@ -1750,7 +1507,10 @@
     </main>
   </div>
 
-  <div class="version-panel" id="version-4" data-version="4" hidden>
+  <!-- ═══════════════════════════════════════════
+       VERSION 3
+       ═══════════════════════════════════════════ -->
+  <div class="version-panel is-active" id="version-3" data-version="3">
     <header class="v2-header" id="v4-header">
       <button class="v2-menu-btn" id="v4-menu-btn" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1771,69 +1531,18 @@
     </nav>
 
     <main class="v2-main">
-      <!-- Invitation message -->
-      <section class="v2-section v2-invitation v3-letter-scene" id="v4-invitation">
-        <div class="v3-letter-sticky">
-          <div class="v3-letter-card">
-            <div class="v3-letter-inner">
-              <span class="v3-celebrate-star" aria-hidden="true">✦</span>
-              <p class="v3-letter-kicker">WITH LOVE</p>
-              <figure class="v3-polaroid">
-                <img src="assets/v3-letter-polaroid.jpg" alt="상원과 소연" width="800" height="800" decoding="async">
-                <figcaption>상원 ♥ 소연</figcaption>
-              </figure>
-              <p class="v3-letter-venue">삼청각 일화당</p>
-              <p class="v3-letter-date">2026.11.14 1:30 PM</p>
-              <p class="v2-section-title v3-letter-section-title">INVITATION</p>
-              <h3 class="v3-invite-heading">초대합니다</h3>
-              <div class="v2-message">
-                <p>늘 곁에 있던 사람이</p>
-                <p>평생 곁에 있고 싶은 사람이 되었습니다.</p>
-                <p>서로의 기쁨을 함께하고</p>
-                <p>힘든 날에는 가장 가까이 머물며</p>
-                <p>어느새 가장 고마운 사람이 되었습니다.</p>
-                <p>이제 서로의 곁에서</p>
-                <p>앞으로의 모든 날을 함께하려 합니다.</p>
-                <p>그 첫날을</p>
-                <p>소중한 분들과 함께하고 싶습니다.</p>
-              </div>
-              <button class="v2-rsvp-btn js-rsvp-open v3-letter-rsvp" type="button">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 21V9l6-4 6 4v12"/>
-                  <path d="M6 13h12"/>
-                  <path d="M10 21v-4h4v4"/>
-                </svg>
-                참석의사 전달하기
-              </button>
-            </div>
-          </div>
-          <div class="envelope-flaps" aria-hidden="true">
-            <div class="left-flap"></div>
-            <div class="right-flap"></div>
-            <svg
-              class="front-flap"
-              viewBox="0 0 1000 400"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="
-                  M 0 400
-                  L 0 240
-                  L 430 70
-                  Q 500 28 570 70
-                  L 1000 240
-                  L 1000 400
-                  Z
-                "
-                fill="#1E2620"
-              />
-            </svg>
-          </div>
-          <div class="v3-letter-frame" aria-hidden="true">
-            <div class="v3-letter-bar">INVITED</div>
-            <div class="v3-letter-side v3-letter-side--left"></div>
-            <div class="v3-letter-side v3-letter-side--right"></div>
-          </div>
+      <section class="v2-section v4-cover" id="v4-invitation">
+        <div class="v4-cover-hero">
+          <img src="assets/v4-cover-hero.jpg" alt="상원과 소연" width="1200" height="1600" decoding="async">
+        </div>
+        <div class="v4-cover-meta">
+          <span>2026.11.14</span>
+          <span>WITH LOVE</span>
+          <span>SAT 1:30PM</span>
+        </div>
+        <div class="v4-cover-celebrate">
+          <span class="v3-celebrate-star" aria-hidden="true">✦</span>
+          <p class="v4-cover-celebrate-label">CELEBRATE!</p>
         </div>
       </section>
 
@@ -1851,6 +1560,12 @@
       </section>
 
       <section class="v2-section v3-family" id="v4-family">
+        <div class="v4-family-message">
+          <p>서로에게 행복을 주는 사람을 만났습니다.</p>
+          <p>웃는 모습이 너무나 예쁜 그 사람을 만났습니다.</p>
+          <p>저희의 하나 됨을 지켜보아 주시고 격려해 주시면</p>
+          <p>더 없는 기쁨으로 평생 간직하겠습니다.</p>
+        </div>
         <div class="v3-couple-pair">
           <figure class="v3-couple-card v3-couple-card--left">
             <div class="v3-couple-photo">
@@ -1888,19 +1603,19 @@
         </div>
         <div class="v3-gallery-track" id="v4-gallery-track" tabindex="0" aria-label="웨딩 갤러리">
             <button class="v3-gallery-slide" type="button" data-gallery-index="0" aria-label="갤러리 사진 1">
-              <img src="assets/v3-gallery-01.jpg" alt="웨딩 사진 1" decoding="async">
+              <img src="assets/v3-gallery-05.jpg" alt="웨딩 사진 1" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="1" aria-label="갤러리 사진 2">
-              <img src="assets/v3-gallery-02.jpg" alt="웨딩 사진 2" decoding="async">
+              <img src="assets/v3-gallery-01.jpg" alt="웨딩 사진 2" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="2" aria-label="갤러리 사진 3">
-              <img src="assets/v3-gallery-03.jpg" alt="웨딩 사진 3" decoding="async">
+              <img src="assets/v3-gallery-02.jpg" alt="웨딩 사진 3" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="3" aria-label="갤러리 사진 4">
-              <img src="assets/v3-gallery-04.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
+              <img src="assets/v3-gallery-03.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="4" aria-label="갤러리 사진 5">
-              <img src="assets/v3-gallery-05.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
+              <img src="assets/v3-gallery-04.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async">
             </button>
             <button class="v3-gallery-slide" type="button" data-gallery-index="5" aria-label="갤러리 사진 6">
               <img src="assets/v3-gallery-06.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async">
