@@ -19,7 +19,7 @@
   <link rel="image_src" href="assets/v3-celebrate-photo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     (function () {
@@ -42,14 +42,15 @@
     })();
   </script>
 </head>
-<body data-active-version="3">
+<body data-active-version="4">
   <!-- Version switcher (design exploration) -->
   <div class="version-switcher" id="version-switcher">
     <label for="version-select">Design</label>
     <select id="version-select" aria-label="Select invitation version">
       <option value="1">Version 1</option>
       <option value="2">Version 2</option>
-      <option value="3" selected>Version 3</option>
+      <option value="3">Version 3</option>
+      <option value="4" selected>Version 4</option>
     </select>
   </div>
 
@@ -1342,40 +1343,47 @@
               </fieldset>
             </div>
 
-            <label class="v2-rsvp-field">
-              <span>연락처</span>
-              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
-            </label>
+            <div class="v3-rsvp-attending-only">
+              <label class="v2-rsvp-field">
+                <span>연락처</span>
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
+              </label>
 
-            <div class="v3-rsvp-row">
-              <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
-              <div class="v3-rsvp-counter">
-                <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
-                <span data-guest-count>0</span>
-                <input type="hidden" name="guests" value="0">
-                <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+              <div class="v3-rsvp-row">
+                <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
+                <div class="v3-rsvp-counter">
+                  <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
+                  <span data-guest-count>0</span>
+                  <input type="hidden" name="guests" value="0">
+                  <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+                </div>
               </div>
+
+              <fieldset class="v2-rsvp-field">
+                <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+                <div class="v3-rsvp-attend">
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사함" required>
+                    <span class="v3-rsvp-attend-card">
+                      식사함
+                      <span class="v3-rsvp-check" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사안함">
+                    <span class="v3-rsvp-attend-card">
+                      식사안함
+                      <span class="v3-rsvp-check" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
             </div>
 
-            <fieldset class="v2-rsvp-field">
-              <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
-              <div class="v3-rsvp-attend">
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="meal" value="식사함" required>
-                  <span class="v3-rsvp-attend-card">
-                    식사함
-                    <span class="v3-rsvp-check" aria-hidden="true"></span>
-                  </span>
-                </label>
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="meal" value="식사안함">
-                  <span class="v3-rsvp-attend-card">
-                    식사안함
-                    <span class="v3-rsvp-check" aria-hidden="true"></span>
-                  </span>
-                </label>
-              </div>
-            </fieldset>
+            <label class="v2-rsvp-field v3-rsvp-decline-only" hidden>
+              <span>메시지</span>
+              <textarea name="message" rows="3" maxlength="400" placeholder="전하고 싶은 말씀을 남겨 주세요."></textarea>
+            </label>
 
             <label class="v3-rsvp-consent">
               <span class="v3-rsvp-consent-head">
@@ -1507,7 +1515,7 @@
   <!-- ═══════════════════════════════════════════
        VERSION 3
        ═══════════════════════════════════════════ -->
-  <div class="version-panel is-active" id="version-3" data-version="3">
+  <div class="version-panel" id="version-3" data-version="3" hidden>
     <header class="v2-header" id="v4-header">
       <button class="v2-menu-btn" id="v4-menu-btn" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1530,7 +1538,7 @@
     <main class="v2-main">
       <section class="v2-section v4-cover" id="v4-invitation">
         <div class="v4-cover-hero">
-          <img src="assets/v4-cover-hero.jpg" alt="상원과 소연" width="1200" height="1600" decoding="async">
+          <img src="assets/v3-gallery-05.jpg" alt="상원과 소연" width="1200" height="1600" decoding="async">
         </div>
         <div class="v4-cover-meta">
           <span>2026.11.14</span>
@@ -2035,40 +2043,47 @@
               </fieldset>
             </div>
 
-            <label class="v2-rsvp-field">
-              <span>연락처</span>
-              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
-            </label>
+            <div class="v3-rsvp-attending-only">
+              <label class="v2-rsvp-field">
+                <span>연락처</span>
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
+              </label>
 
-            <div class="v3-rsvp-row">
-              <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
-              <div class="v3-rsvp-counter">
-                <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
-                <span data-guest-count>0</span>
-                <input type="hidden" name="guests" value="0">
-                <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+              <div class="v3-rsvp-row">
+                <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
+                <div class="v3-rsvp-counter">
+                  <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
+                  <span data-guest-count>0</span>
+                  <input type="hidden" name="guests" value="0">
+                  <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+                </div>
               </div>
+
+              <fieldset class="v2-rsvp-field">
+                <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+                <div class="v3-rsvp-attend">
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사함" required>
+                    <span class="v3-rsvp-attend-card">
+                      식사함
+                      <span class="v3-rsvp-check" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사안함">
+                    <span class="v3-rsvp-attend-card">
+                      식사안함
+                      <span class="v3-rsvp-check" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
             </div>
 
-            <fieldset class="v2-rsvp-field">
-              <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
-              <div class="v3-rsvp-attend">
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="meal" value="식사함" required>
-                  <span class="v3-rsvp-attend-card">
-                    식사함
-                    <span class="v3-rsvp-check" aria-hidden="true"></span>
-                  </span>
-                </label>
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="meal" value="식사안함">
-                  <span class="v3-rsvp-attend-card">
-                    식사안함
-                    <span class="v3-rsvp-check" aria-hidden="true"></span>
-                  </span>
-                </label>
-              </div>
-            </fieldset>
+            <label class="v2-rsvp-field v3-rsvp-decline-only" hidden>
+              <span>메시지</span>
+              <textarea name="message" rows="3" maxlength="400" placeholder="전하고 싶은 말씀을 남겨 주세요."></textarea>
+            </label>
 
             <label class="v3-rsvp-consent">
               <span class="v3-rsvp-consent-head">
@@ -2197,10 +2212,522 @@
     </main>
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       VERSION 4
+       ═══════════════════════════════════════════ -->
+  <div class="version-panel is-active" id="version-4" data-version="4">
+    <header class="v5-header" id="v5-header">
+      <button class="v2-menu-btn" id="v5-menu-btn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <nav class="v2-nav v5-nav" id="v5-nav" aria-hidden="true">
+      <button class="v2-nav-close" aria-label="Close menu">&times;</button>
+      <a href="#v5-invitation">Invitation</a>
+      <a href="#v5-family">Family</a>
+      <a href="#v5-gallery">Gallery</a>
+      <a href="#v5-location">Location</a>
+      <a href="#v5-timeline">Timeline</a>
+      <a href="#v5-account">Account</a>
+      <a href="#v5-rsvp">RSVP</a>
+    </nav>
+
+    <main class="v5-main">
+      <section class="v5-hero" id="v5-invitation">
+        <img src="assets/v5-hero.jpg" alt="상원과 소연" width="731" height="1024" decoding="async">
+      </section>
+
+      <section class="v5-announce">
+        <h1 class="visually-hidden">We are getting married — 지상원 &amp; 박소연 — 2026년 11월 14일 오후 1시 30분 — 삼청각 일화당</h1>
+        <img src="assets/v5-announce.png?v=4" alt="We are getting married. 지상원 &amp; 박소연. 2026년 11월 14일 오후 1시 30분. 삼청각 일화당." width="991" height="760" decoding="async">
+      </section>
+
+      <section class="v5-mail" aria-hidden="true">
+        <div class="v5-hearts v5-hearts--cream">
+          <span class="v5-letter-heart"><b>S</b></span>
+          <span class="v5-letter-heart"><b>A</b></span>
+          <span class="v5-letter-heart"><b>N</b></span>
+          <span class="v5-letter-heart"><b>G</b></span>
+          <span class="v5-letter-heart"><b>W</b></span>
+          <span class="v5-letter-heart"><b>O</b></span>
+          <span class="v5-letter-heart"><b>N</b></span>
+        </div>
+
+        <div class="v5-mail-stage">
+          <div class="v5-photostrip">
+            <img src="assets/v5-photostrip.png" alt="We're getting Married!!!" width="1024" height="830" decoding="async">
+          </div>
+          <img class="v5-envelope" src="assets/v5-envelope.png" alt="" width="752" height="782" decoding="async">
+        </div>
+
+        <div class="v5-hearts v5-hearts--lilac">
+          <span class="v5-letter-heart"><b>S</b></span>
+          <span class="v5-letter-heart"><b>O</b></span>
+          <span class="v5-letter-heart"><b>Y</b></span>
+          <span class="v5-letter-heart"><b>U</b></span>
+          <span class="v5-letter-heart"><b>N</b></span>
+        </div>
+      </section>
+
+      <section class="v5-message">
+        <h2 class="visually-hidden">참 많은 계절을 함께 지나왔습니다. 서로의 가장 좋은 날을 축하하고 힘든 날에는 가장 가까운 곳에 머물며, 그렇게 천천히 서로의 삶에 스며들었습니다. 오래도록 그래왔듯 앞으로의 모든 계절도 함께하려 합니다.</h2>
+        <img src="assets/v5-message.png" alt="참 많은 계절을 함께 지나왔습니다. 서로의 가장 좋은 날을 축하하고 힘든 날에는 가장 가까운 곳에 머물며, 그렇게 천천히 서로의 삶에 스며들었습니다. 오래도록 그래왔듯 앞으로의 모든 계절도 함께하려 합니다." width="843" height="519" decoding="async">
+      </section>
+
+      <section class="v5-stamp-wrap">
+        <h2 class="visually-hidden">You're invited to our wedding — 2026.11.14 1:30 pm — 삼청각 일화당</h2>
+        <img class="v5-stamp" src="assets/v5-stamp.png?v=3" alt="YOU’re INVITED TO OUR WEDDING. 2026. 11. 14 (sat) 1:30 pm. 삼청각 일화당." width="971" height="830" decoding="async">
+      </section>
+
+      <section class="v5-people" id="v5-family">
+        <article class="v5-person">
+          <figure class="v5-polaroid">
+            <span class="v5-polaroid-frame">
+              <img class="v5-polaroid-photo" src="assets/v3-family-sangwon.png" alt="상원 어릴 적 사진" width="800" height="1000" decoding="async">
+              <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
+            </span>
+          </figure>
+          <div class="v5-bubble v5-bubble--img">
+            <img class="v5-bubble-img" src="assets/v5-bubble-sangwon.png?v=2" alt="지현호 · 김윤정의 아들 지상원. 취미 : 소연이랑 같이 있기. 특기 : 소연이 웃게 하기. 언제든지 기댈 수 있는 듬직한 남편이 되겠습니다." width="999" height="464" decoding="async">
+          </div>
+        </article>
+
+        <article class="v5-person">
+          <figure class="v5-polaroid">
+            <span class="v5-polaroid-frame">
+              <img class="v5-polaroid-photo" src="assets/v3-family-soyeon.png" alt="소연 어릴 적 사진" width="800" height="1000" decoding="async">
+              <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
+            </span>
+          </figure>
+          <div class="v5-bubble v5-bubble--img">
+            <img class="v5-bubble-img" src="assets/v5-bubble-soyeon.png" alt="박수근 · 이혜경의 딸 박소연. 취미 : 상원이랑 맛있는 거 먹기. 특기 : 상원 챙겨주기. 언제든지 기댈 수 있는 따뜻한 아내가 되겠습니다." width="978" height="489" decoding="async">
+          </div>
+        </article>
+      </section>
+
+      <section class="v5-portraits" aria-label="상원과 소연">
+        <figure class="v5-portrait">
+          <img src="assets/v5-portrait-casual.jpg" alt="흰 배경에서 걸어오는 상원과 웃고 있는 소연" width="1428" height="2000" decoding="async">
+          <img class="v5-portrait-note" src="assets/v5-portrait-note.png?v=5" alt="너랑 만나고 지금까지 오는 동안 항상 내 편이 되어줘서 참 고마웠어. 우리 지금처럼 서로 잘 챙겨주면서 살자." width="957" height="412" decoding="async">
+        </figure>
+        <figure class="v5-portrait">
+          <img src="assets/v5-portrait-formal.jpg" alt="검은 정장과 웨딩드레스를 입은 상원과 소연" width="1428" height="2000" loading="lazy" decoding="async">
+          <img class="v5-portrait-note v5-portrait-note--right" src="assets/v5-portrait-note-formal.png" alt="너를 만나고 좋은 순간들이 참 많이 생겼어. 생각해보면 그때마다 늘 네가 옆에 있었네. 앞으로도 힘들 때 편하게 기댈 수 있는 사람이 될게." width="957" height="370" loading="lazy" decoding="async">
+        </figure>
+      </section>
+
+      <section class="v2-section v2-gallery" id="v5-gallery">
+        <h2 class="v2-section-title">WEDDING GALLERY</h2>
+        <div class="v3-gallery-track" id="v5-gallery-track" tabindex="0" aria-label="웨딩 갤러리">
+          <button class="v3-gallery-slide" type="button" data-gallery-index="0" aria-label="갤러리 사진 1"><img src="assets/v5-gallery-15.jpg" alt="웨딩 사진 1" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="1" aria-label="갤러리 사진 2"><img src="assets/v5-gallery-12.jpg" alt="웨딩 사진 2" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="2" aria-label="갤러리 사진 3"><img src="assets/v5-gallery-13.jpg" alt="웨딩 사진 3" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="3" aria-label="갤러리 사진 4"><img src="assets/v5-gallery-14.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="4" aria-label="갤러리 사진 5"><img src="assets/v5-gallery-16.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="5" aria-label="갤러리 사진 6"><img src="assets/v5-gallery-17.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="6" aria-label="갤러리 사진 7"><img src="assets/v5-gallery-02.jpg" alt="웨딩 사진 7" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="7" aria-label="갤러리 사진 8"><img src="assets/v5-gallery-04.jpg" alt="웨딩 사진 8" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="8" aria-label="갤러리 사진 9"><img src="assets/v5-gallery-05.jpg" alt="웨딩 사진 9" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="9" aria-label="갤러리 사진 10"><img src="assets/v5-gallery-06.jpg" alt="웨딩 사진 10" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="10" aria-label="갤러리 사진 11"><img src="assets/v5-gallery-07.jpg" alt="웨딩 사진 11" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="11" aria-label="갤러리 사진 12"><img src="assets/v5-gallery-08.jpg" alt="웨딩 사진 12" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="12" aria-label="갤러리 사진 13"><img src="assets/v5-gallery-09.jpg" alt="웨딩 사진 13" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="13" aria-label="갤러리 사진 14"><img src="assets/v5-gallery-10.jpg" alt="웨딩 사진 14" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="14" aria-label="갤러리 사진 15"><img src="assets/v5-gallery-11.jpg" alt="웨딩 사진 15" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="15" aria-label="갤러리 사진 16"><img src="assets/v5-gallery-18.jpg" alt="웨딩 사진 16" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="16" aria-label="갤러리 사진 17"><img src="assets/v5-gallery-19.jpg" alt="웨딩 사진 17" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="17" aria-label="갤러리 사진 18"><img src="assets/v5-gallery-20.jpg" alt="웨딩 사진 18" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="18" aria-label="갤러리 사진 19"><img src="assets/v5-gallery-21.jpg" alt="웨딩 사진 19" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="19" aria-label="갤러리 사진 20"><img src="assets/v5-gallery-22.jpg" alt="웨딩 사진 20" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="20" aria-label="갤러리 사진 21"><img src="assets/v5-gallery-23.jpg" alt="웨딩 사진 21" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="21" aria-label="갤러리 사진 22"><img src="assets/v5-gallery-24.jpg" alt="웨딩 사진 22" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="22" aria-label="갤러리 사진 23"><img src="assets/v5-gallery-25.jpg" alt="웨딩 사진 23" loading="lazy" decoding="async"></button>
+        </div>
+      </section>
+
+      <div class="v5-light">
+      <section class="v5-location" id="v5-location">
+        <p class="v5-section-badge">LOCATION</p>
+        <h2>오시는 길</h2>
+        <p class="v5-venue">삼청각 일화당</p>
+        <div class="v5-venue-details">
+          <div class="v5-venue-row">
+            <p class="v5-address">서울특별시 성북구 대사관로3 일화당</p>
+            <button class="v5-icon-copy v2-copy-btn" type="button" data-copy="서울특별시 성북구 대사관로3 일화당" aria-label="주소 복사">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+          <div class="v5-venue-row">
+            <svg class="v5-phone-icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
+            </svg>
+            <p class="v5-phone"><a href="tel:027653000">02-765-3000</a></p>
+          </div>
+        </div>
+        <button class="v5-yakdo-btn" id="v5-yakdo-open" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M20.5 3h-17A1.5 1.5 0 002 4.5v15A1.5 1.5 0 003.5 21h17a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0020.5 3zM8 19H4v-6h4v6zm6 0h-4V9h4v10zm6 0h-4V5h4v14z"/>
+          </svg>
+          약도 이미지 보기
+        </button>
+
+        <div class="v5-transport">
+          <div class="v5-transport-block">
+            <h3>[내비게이션]</h3>
+            <p>원하시는 앱을 선택하시면 길안내가 시작됩니다.</p>
+            <div class="v5-nav-apps">
+              <a href="https://map.naver.com/p/search/%EC%82%BC%EC%B2%AD%EA%B0%81" target="_blank" rel="noopener noreferrer">네이버지도</a>
+              <a href="https://www.tmap.co.kr/tmap2/mobile/route.jsp?name=%EC%82%BC%EC%B2%AD%EA%B0%81&lon=126.98355&lat=37.59678" target="_blank" rel="noopener noreferrer">티맵</a>
+              <a href="https://map.kakao.com/link/to/%EC%82%BC%EC%B2%AD%EA%B0%81,37.59678,126.98355" target="_blank" rel="noopener noreferrer">카카오내비</a>
+            </div>
+          </div>
+
+          <div class="v5-transport-block">
+            <h3>[셔틀버스]</h3>
+            <div class="v5-route">
+              <p class="v5-route-title"><span class="v5-route-dot v5-route-dot--line4" aria-hidden="true"></span>4호선 · 한성대입구역</p>
+              <ul>
+                <li>6번 출구 정면 10m · 서울연극창작센터 앞</li>
+                <li>약 15분 간격 운행</li>
+              </ul>
+            </div>
+            <div class="v5-route">
+              <p class="v5-route-title"><span class="v5-route-dot v5-route-dot--line3" aria-hidden="true"></span>3호선 · 안국역</p>
+              <ul>
+                <li>5번 출구</li>
+                <li>약 40분 간격 운행</li>
+              </ul>
+            </div>
+            <div class="v5-route">
+              <p class="v5-route-title">첫차</p>
+              <p>양 노선 모두 오전 11시부터 운행</p>
+            </div>
+            <div class="v5-route">
+              <p class="v5-route-title">추천 탑승</p>
+              <p>보다 원활한 탑승을 위해<br>한성대입구역 셔틀 이용을 추천드립니다.</p>
+            </div>
+            <button class="v5-shuttle-btn" id="v5-shuttle-open" type="button">셔틀버스 시간표 보기</button>
+          </div>
+
+          <div class="v5-transport-block">
+            <h3>[자가용 / 택시]</h3>
+            <div class="v5-route">
+              <p class="v5-route-title"><span class="v5-route-dot" aria-hidden="true"></span>광화문에서</p>
+              <ul>
+                <li>광화문 → 안국동 → 삼청동길 → 총리공관 → 삼청터널 통과 후 좌측 비보호 좌회전</li>
+              </ul>
+            </div>
+            <div class="v5-route">
+              <p class="v5-route-title"><span class="v5-route-dot" aria-hidden="true"></span>한성대입구에서</p>
+              <ul>
+                <li>한성대입구 → 성북동 → 삼청터널 방면 직진 → 터널 직전 우회전</li>
+              </ul>
+            </div>
+            <div class="v5-route">
+              <p class="v5-route-title"><span class="v5-route-dot" aria-hidden="true"></span>혜화동에서</p>
+              <ul>
+                <li>혜화동 로터리 → SK주유소 옆길 → 성북동 → 삼청터널 방면 → 터널 직전 우회전</li>
+              </ul>
+            </div>
+            <p class="v5-transport-note">※ 내비게이션에서 ‘삼청각’ 또는 <strong>‘삼청각 일화당’</strong>을 검색해 주세요.</p>
+            <p class="v5-transport-note">※ 무료 주차 이용시간은 2시간입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="v5-timeline" id="v5-timeline">
+        <p class="v5-section-badge">WEDDING TIMELINE</p>
+        <h2>예식 순서</h2>
+        <ol class="v5-timeline-list">
+          <li class="v5-timeline-item">
+            <p class="v5-timeline-time">12:30 PM~</p>
+            <p class="v5-timeline-label">하객 입장 &amp; 웰컴 티</p>
+          </li>
+          <li class="v5-timeline-item">
+            <p class="v5-timeline-time">1:30 PM</p>
+            <p class="v5-timeline-label">본식 시작 · Ceremony</p>
+            <ul class="v5-timeline-sub">
+              <li>혼주 입장</li>
+              <li>신랑 입장</li>
+              <li>신부 입장</li>
+              <li>주례</li>
+              <li>축사</li>
+              <li>축가</li>
+              <li>축도</li>
+            </ul>
+          </li>
+          <li class="v5-timeline-item">
+            <p class="v5-timeline-time">2:00 PM</p>
+            <p class="v5-timeline-label">점심 · Lunch</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="v5-account" id="v5-account">
+        <p class="v5-section-badge">WEDDING GIFT</p>
+        <h2>마음 전하실 곳</h2>
+        <p class="v5-account-message">저희의 새로운 시작을 축복해 주시는<br>따뜻한 마음, 감사히 간직하겠습니다.</p>
+        <div class="v5-account-toggle" role="tablist" aria-label="계좌 구분">
+          <button class="v5-account-tab is-active" type="button" role="tab" aria-selected="true" data-account-tab="groom">신랑측</button>
+          <button class="v5-account-tab" type="button" role="tab" aria-selected="false" data-account-tab="bride">신부측</button>
+        </div>
+        <div class="v5-account-list is-active" data-account-panel="groom">
+          <button class="v5-account-card" type="button" data-copy="42991009927907" aria-label="지현호 계좌번호 복사">
+            <div>
+              <span>지현호</span>
+              <span>하나 429-910099-27907</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+          <button class="v5-account-card" type="button" data-copy="06033810702001" aria-label="김윤정 계좌번호 복사">
+            <div>
+              <span>김윤정</span>
+              <span>우리 060-338107-02-001</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+          <button class="v5-account-card" type="button" data-copy="42991011915407" aria-label="지상원 계좌번호 복사">
+            <div>
+              <span>지상원</span>
+              <span>하나 429-910-11915407</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+        </div>
+        <div class="v5-account-list" data-account-panel="bride" hidden>
+          <button class="v5-account-card" type="button" data-copy="061211105738" aria-label="박수근 계좌번호 복사">
+            <div>
+              <span>박수근</span>
+              <span>국민 061-21-1105-738</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+          <button class="v5-account-card" type="button" data-copy="63802045681" aria-label="이혜경 계좌번호 복사">
+            <div>
+              <span>이혜경</span>
+              <span>신한 638-02-045681</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+          <button class="v5-account-card" type="button" data-copy="110140711387" aria-label="박소연 계좌번호 복사">
+            <div>
+              <span>박소연</span>
+              <span>신한 110-140-711387</span>
+            </div>
+            <span class="v5-account-copy">복사</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="v5-rsvp" id="v5-rsvp">
+        <p class="v5-section-badge">R.S.V.P.</p>
+        <h2>참석 의사 전달</h2>
+        <div class="v5-rsvp-message">
+          <p>소중한 날, 함께해 주실 분들을 위해</p>
+          <p>정성껏 자리를 준비하고 있습니다.</p>
+          <p>참석 여부를 알려주시면 감사하겠습니다. 🤍</p>
+        </div>
+        <div class="v5-rsvp-actions">
+          <button class="v5-rsvp-btn js-rsvp-open" id="v5-rsvp-open" type="button">참석의사 전달하기</button>
+          <button class="v5-copy" id="v5-copy-link-btn" type="button">청첩장 링크 복사</button>
+        </div>
+      </section>
+
+      <footer class="v5-footer">
+        <p>With love, Sangwon &amp; Soyun</p>
+        <p>2026.11.14</p>
+      </footer>
+      </div>
+
+      <div class="v2-rsvp-modal" id="v5-rsvp-modal" aria-hidden="true">
+        <div class="v2-rsvp-dialog v3-rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="v5-rsvp-dialog-title">
+          <button class="v2-rsvp-close" id="v5-rsvp-close" type="button" aria-label="닫기">&times;</button>
+          <h3 id="v5-rsvp-dialog-title">참석 의사 전달</h3>
+          <p class="v3-rsvp-lead">원활한 예식 진행을 위해 참석 정보를 미리 알려주시면 감사하겠습니다.</p>
+          <form class="v2-rsvp-form v3-rsvp-form" id="v5-rsvp-form">
+            <fieldset class="v2-rsvp-field">
+              <legend class="visually-hidden">참석 여부</legend>
+              <div class="v3-rsvp-attend">
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="attendance" value="가능" required>
+                  <span class="v3-rsvp-attend-card">가능<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                </label>
+                <label class="v3-rsvp-attend-choice">
+                  <input type="radio" name="attendance" value="불가">
+                  <span class="v3-rsvp-attend-card">불가<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="v3-rsvp-name-row">
+              <label class="v2-rsvp-field">
+                <span>성함</span>
+                <input type="text" name="name" autocomplete="name" placeholder="성함을 입력해 주세요." required>
+              </label>
+              <fieldset class="v2-rsvp-field v3-rsvp-sides">
+                <legend class="visually-hidden">구분</legend>
+                <label class="v3-rsvp-side">
+                  <input type="radio" name="side" value="신랑측" required>
+                  <span>신랑측</span>
+                </label>
+                <label class="v3-rsvp-side">
+                  <input type="radio" name="side" value="신부측">
+                  <span>신부측</span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="v3-rsvp-attending-only">
+              <label class="v2-rsvp-field">
+                <span>연락처</span>
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="참석자 대표 연락처를 입력해 주세요." required>
+              </label>
+              <div class="v3-rsvp-row">
+                <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
+                <div class="v3-rsvp-counter">
+                  <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
+                  <span data-guest-count>0</span>
+                  <input type="hidden" name="guests" value="0">
+                  <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+                </div>
+              </div>
+              <fieldset class="v2-rsvp-field">
+                <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+                <div class="v3-rsvp-attend">
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사함" required>
+                    <span class="v3-rsvp-attend-card">식사함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                  </label>
+                  <label class="v3-rsvp-attend-choice">
+                    <input type="radio" name="meal" value="식사안함">
+                    <span class="v3-rsvp-attend-card">식사안함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <label class="v2-rsvp-field v3-rsvp-decline-only" hidden>
+              <span>메시지</span>
+              <textarea name="message" rows="3" maxlength="400" placeholder="전하고 싶은 말씀을 남겨 주세요."></textarea>
+            </label>
+            <label class="v3-rsvp-consent">
+              <span class="v3-rsvp-consent-head">
+                <input type="checkbox" name="consent" value="yes" required>
+                동의합니다.
+              </span>
+              <span class="v3-rsvp-consent-copy">원활한 예식 준비와 참석 확인을 위해 성함, 연락처, 참석 여부 및 동행 인원 정보를 수집·이용합니다. 수집된 정보는 예식 종료 후 파기됩니다.</span>
+            </label>
+            <button class="v2-rsvp-submit v3-rsvp-submit" type="submit" disabled>신랑 &amp; 신부에게 전달하기</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="v2-shuttle-modal" id="v5-shuttle-modal" aria-hidden="true">
+        <div class="v2-shuttle-dialog" role="dialog" aria-modal="true" aria-labelledby="v5-shuttle-title">
+          <button class="v2-shuttle-close" id="v5-shuttle-close" type="button" aria-label="닫기">&times;</button>
+          <h3 id="v5-shuttle-title">삼청각 셔틀버스 시간표</h3>
+          <div class="v2-shuttle-tabs" role="tablist">
+            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">
+              <span class="v3-line-dot v3-line-dot--4" aria-hidden="true"></span>
+              한성대입구
+            </button>
+            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">
+              <span class="v3-line-dot v3-line-dot--3" aria-hidden="true"></span>
+              안국
+            </button>
+          </div>
+          <div class="v2-shuttle-panel is-active" id="v5-shuttle-hansung" role="tabpanel">
+            <p class="v2-shuttle-route">4호선 한성대입구역 6번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:10</td><td>—</td></tr>
+                <tr><td>11:30</td><td>11:40</td><td>11:20</td></tr>
+                <tr><td>12:00</td><td>12:10</td><td>11:50</td></tr>
+                <tr><td>12:30</td><td>12:40</td><td>12:20</td></tr>
+                <tr><td>13:00</td><td>13:10</td><td>12:50</td></tr>
+                <tr><td>13:30</td><td>13:40</td><td>13:20</td></tr>
+                <tr><td>14:00</td><td>14:10</td><td>13:50</td></tr>
+                <tr><td>14:30</td><td>14:40</td><td>14:20</td></tr>
+                <tr><td>15:00</td><td>15:10</td><td>14:50</td></tr>
+                <tr><td>15:30</td><td>15:40</td><td>15:20</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:40–16:50</td></tr>
+                <tr><td>17:00</td><td>17:10</td><td>16:50</td></tr>
+                <tr><td>17:30</td><td>17:40</td><td>17:20</td></tr>
+                <tr><td>18:00</td><td>18:10</td><td>17:50</td></tr>
+                <tr><td>18:30</td><td>18:40</td><td>18:20</td></tr>
+                <tr><td>19:00</td><td>19:10</td><td>18:50</td></tr>
+                <tr><td>19:30</td><td>19:40</td><td>19:20</td></tr>
+                <tr><td>20:00</td><td>20:10</td><td>19:50</td></tr>
+                <tr><td>20:30</td><td>20:40</td><td>20:20</td></tr>
+                <tr><td>21:00</td><td>21:10</td><td>20:50</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="v2-shuttle-panel" id="v5-shuttle-anguk" role="tabpanel" hidden>
+            <p class="v2-shuttle-route">3호선 안국역 5번 출구</p>
+            <table class="v2-shuttle-table">
+              <thead>
+                <tr>
+                  <th>역 출발</th>
+                  <th>삼청각 도착</th>
+                  <th>삼청각 출발</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>11:00</td><td>11:15</td><td>10:45</td></tr>
+                <tr><td>11:40</td><td>11:55</td><td>11:25</td></tr>
+                <tr><td>12:20</td><td>12:35</td><td>12:05</td></tr>
+                <tr><td>13:00</td><td>13:15</td><td>12:45</td></tr>
+                <tr><td>13:40</td><td>13:55</td><td>13:25</td></tr>
+                <tr><td>14:20</td><td>14:35</td><td>14:05</td></tr>
+                <tr><td>15:00</td><td>15:15</td><td>14:45</td></tr>
+                <tr><td>15:40</td><td>15:55</td><td>15:25</td></tr>
+                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:55–16:25</td></tr>
+                <tr><td>16:40</td><td>16:55</td><td>16:25</td></tr>
+                <tr><td>17:20</td><td>17:35</td><td>17:05</td></tr>
+                <tr><td>18:00</td><td>18:15</td><td>17:45</td></tr>
+                <tr><td>18:40</td><td>18:55</td><td>18:25</td></tr>
+                <tr><td>19:20</td><td>19:35</td><td>19:05</td></tr>
+                <tr><td>20:00</td><td>20:15</td><td>19:45</td></tr>
+                <tr><td>20:40</td><td>20:55</td><td>20:25</td></tr>
+                <tr><td>21:20</td><td>21:35</td><td>21:05</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="v2-shuttle-note">※ 영업 및 도로사정에 따라 운행시간이 변경될 수 있습니다.</p>
+          <a class="v2-shuttle-link" href="https://www.samcheonggak.or.kr/location/" target="_blank" rel="noopener noreferrer">삼청각 오시는 길 ↗</a>
+        </div>
+      </div>
+
+      <div class="v2-map-modal" id="v5-map-modal" aria-hidden="true">
+        <button class="v2-gallery-close" id="v5-map-close" type="button" aria-label="지도 닫기">&times;</button>
+        <div class="v2-map-modal-stage">
+          <img
+            class="v2-map-modal-image"
+            src="assets/v2-samcheonggak-map.jpg?v=3"
+            alt="삼청각 일화당 안내도 확대"
+          >
+        </div>
+      </div>
+
+      <div class="v2-gallery-modal" id="v5-gallery-modal" aria-hidden="true">
+        <button class="v2-gallery-close" id="v5-gallery-close" type="button" aria-label="갤러리 닫기">&times;</button>
+        <button class="v2-gallery-nav v2-gallery-prev" id="v5-gallery-prev" type="button" aria-label="이전 사진">&#10094;</button>
+        <img class="v2-gallery-modal-image" id="v5-gallery-modal-image" src="" alt="">
+        <button class="v2-gallery-nav v2-gallery-next" id="v5-gallery-next" type="button" aria-label="다음 사진">&#10095;</button>
+      </div>
+    </main>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <audio id="bgm" loop preload="auto">
-    <source src="assets/wedding-song.mp3" type="audio/mpeg">
+    <source src="assets/v5-bgm.mp3" type="audio/mpeg">
   </audio>
   <button class="bgm-toggle" id="bgm-toggle" type="button" aria-label="음악 재생/정지">
     <svg viewBox="0 0 24 24" aria-hidden="true">

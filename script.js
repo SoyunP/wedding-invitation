@@ -17,9 +17,8 @@
   /* ── Version switcher ── */
   const versionSelect = document.getElementById('version-select');
   const versionPanels = document.querySelectorAll('.version-panel');
-  const versionMigrate = { 1: '1', 2: '1', 3: '2', 4: '3' };
   const storedVersion = sessionStorage.getItem('invitation-version');
-  let activeVersion = versionMigrate[storedVersion] || (versionSelect && versionSelect.value) || '3';
+  let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '4';
 
   if (versionSelect) versionSelect.value = activeVersion;
   document.body.dataset.activeVersion = activeVersion;
@@ -40,6 +39,7 @@
     activeVersion = value;
     sessionStorage.setItem('invitation-version', value);
     applyVersionVisibility(value);
+    syncBgmSource(value);
       window.scrollTo(0, 0);
   }
 
@@ -61,10 +61,10 @@
     });
   }
 
-  function bindCopyButtons(selector) {
+  function bindCopyButtons(selector, message) {
     document.querySelectorAll(selector).forEach((btn) => {
       btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(btn.dataset.copy || '').then(() => showToast('Copied!'));
+        navigator.clipboard.writeText(btn.dataset.copy || '').then(() => showToast(message || 'Copied!'));
       });
     });
   }
@@ -96,6 +96,7 @@
   bindAccordion('.v2-accordion-trigger');
   bindCopyButtons('.copy-btn');
   bindCopyButtons('.v2-copy-btn');
+  bindCopyButtons('.v5-account-card', '계좌번호가 복사되었습니다.');
 
   const copyLinkBtn = document.getElementById('copy-link-btn');
   if (copyLinkBtn) {
@@ -465,6 +466,42 @@
       }
     }
 
+    if (prefix === 'v5') {
+      const reducePolaroidMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const people = Array.from(root.querySelectorAll('.v5-person'));
+      function revealPolaroid(person) {
+        const polaroid = person.querySelector('.v5-polaroid');
+        if (polaroid) polaroid.classList.add('is-in');
+      }
+      const mailStage = root.querySelector('.v5-mail-stage');
+      const photostrip = root.querySelector('.v5-photostrip');
+      if (reducePolaroidMotion.matches) {
+        people.forEach(revealPolaroid);
+        if (photostrip) photostrip.classList.add('is-in');
+      } else {
+        people.forEach((person) => {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              revealPolaroid(person);
+              observer.disconnect();
+            });
+          }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+          observer.observe(person);
+        });
+        if (mailStage && photostrip) {
+          const mailObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              photostrip.classList.add('is-in');
+              mailObserver.disconnect();
+            });
+          }, { threshold: 0.28, rootMargin: '0px 0px -8% 0px' });
+          mailObserver.observe(mailStage);
+        }
+      }
+    }
+
     if (join && save && (join.compareDocumentPosition(save) & Node.DOCUMENT_POSITION_FOLLOWING)) {
       join.addEventListener('click', () => {
         save.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -534,32 +571,46 @@
           data.get('name') &&
           data.get('side') &&
           data.get('attendance') &&
-          data.get('phone') &&
+          (!attending || data.get('phone')) &&
           (!attending || data.get('meal')) &&
           data.get('consent') === 'yes'
         );
       }
 
-      function syncMealVisibility() {
+      function syncAttendingFields() {
         if (!isV3Form) return;
-        const mealField = rsvpForm.querySelector('input[name="meal"]')?.closest('fieldset');
-        if (!mealField) return;
+        const attendingFields = rsvpForm.querySelector('.v3-rsvp-attending-only');
         const attendance = rsvpForm.querySelector('input[name="attendance"]:checked');
         const hide = Boolean(attendance && attendance.value === '불가');
-        mealField.hidden = hide;
+        if (attendingFields) attendingFields.hidden = hide;
+
+        const phoneInput = rsvpForm.querySelector('input[name="phone"]');
+        if (phoneInput) {
+          phoneInput.required = !hide;
+          if (hide) phoneInput.value = '';
+        }
+
         rsvpForm.querySelectorAll('input[name="meal"]').forEach((input) => {
           input.required = !hide;
           if (hide) input.checked = false;
         });
+
+        if (hide) setGuestCount(0);
+
+        const declineFields = rsvpForm.querySelector('.v3-rsvp-decline-only');
+        if (declineFields) declineFields.hidden = !hide;
+
+        const messageInput = rsvpForm.querySelector('textarea[name="message"]');
+        if (messageInput && !hide) messageInput.value = '';
       }
 
       if (isV3Form) {
         rsvpForm.addEventListener('input', updateRsvpSubmit);
         rsvpForm.addEventListener('change', () => {
-          syncMealVisibility();
+          syncAttendingFields();
           updateRsvpSubmit();
         });
-        syncMealVisibility();
+        syncAttendingFields();
         updateRsvpSubmit();
       }
 
@@ -572,7 +623,7 @@
         rsvpForm.reset();
         if (isV3Form) {
           setGuestCount(0);
-          syncMealVisibility();
+          syncAttendingFields();
           updateRsvpSubmit();
         }
         closeRsvp();
@@ -844,7 +895,7 @@
 
     function startGalleryAuto() {
       stopGalleryAuto();
-      if ((prefix !== 'v3' && prefix !== 'v4') || !galleryTrack || gallerySources.length < 2) return;
+      if ((prefix !== 'v3' && prefix !== 'v4' && prefix !== 'v5') || !galleryTrack || gallerySources.length < 2) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       galleryAutoTimer = window.setInterval(() => {
         if (!galleryInView || galleryUserPause || galleryAnimating || document.hidden || galleryLightboxOpen()) return;
@@ -866,6 +917,7 @@
     galleryThumbs.forEach((btn, i) => {
       btn.addEventListener('click', () => {
         renderGallery(i);
+        if (!galleryMain && !galleryTrack) openGallery(i);
       });
     });
     if (galleryMain) {
@@ -1133,6 +1185,7 @@
   initScrollInvitation('v2', '1');
   initScrollInvitation('v3', '2');
   initScrollInvitation('v4', '3');
+  initScrollInvitation('v5', '4');
 
   function fillDateCalendar(calendar) {
     if (!calendar) return;
@@ -1196,6 +1249,23 @@
   /* Skip envelope setup when Version 2 is active */
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
+  const bgmByVersion = {
+    4: 'assets/v5-bgm.mp3',
+  };
+  const defaultBgm = 'assets/wedding-song.mp3';
+
+  function syncBgmSource(version) {
+    if (!bgm) return;
+    const next = bgmByVersion[String(version)] || defaultBgm;
+    const source = bgm.querySelector('source');
+    const current = (source && source.getAttribute('src')) || bgm.getAttribute('src') || '';
+    if (current === next) return;
+    const wasPlaying = !bgm.paused && bgm.currentTime > 0;
+    if (source) source.setAttribute('src', next);
+    bgm.src = next;
+    bgm.load();
+    if (wasPlaying) bgm.play().catch(() => {});
+  }
 
   function syncBgmButton() {
     if (!bgmToggle || !bgm) return;
@@ -1213,6 +1283,7 @@
     bgm.addEventListener('pause', syncBgmButton);
     syncBgmButton();
 
+    syncBgmSource(activeVersion);
     bgm.play().catch(() => {});
 
     document.addEventListener('click', unlockBgm);
