@@ -4366,9 +4366,7 @@ body[data-active-version="4"] .bgm-toggle {
 .v5-hero img {
   display: block;
   width: 100%;
-  height: min(78vh, 720px);
-  object-fit: cover;
-  object-position: center 28%;
+  height: auto;
 }
 
 .v5-announce {
