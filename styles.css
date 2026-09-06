@@ -4531,18 +4531,12 @@ body[data-active-version="4"] .bgm-toggle {
 
 .v5-portrait img.v5-portrait-note {
   position: absolute;
-  left: 50%;
+  left: 0.55rem;
   bottom: 1.15rem;
   width: min(68%, 350px);
   height: auto;
-  transform: translateX(calc(-50% - 1.6rem));
-  pointer-events: none;
-}
-
-.v5-portrait img.v5-portrait-note--right {
-  left: auto;
-  right: 1.15rem;
   transform: none;
+  pointer-events: none;
 }
 
 .v5-polaroid {
