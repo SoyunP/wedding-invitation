@@ -1,5 +1,5 @@
 /* ============================================================
-   Wedding invitation — Version 1 (envelope) + Version 2 (scroll)
+   Wedding invitation — Version 3 + Version 4
    ============================================================ */
 (function () {
   'use strict';
@@ -17,8 +17,10 @@
   /* ── Version switcher ── */
   const versionSelect = document.getElementById('version-select');
   const versionPanels = document.querySelectorAll('.version-panel');
+  const allowedVersions = new Set(['3', '4']);
   const storedVersion = sessionStorage.getItem('invitation-version');
   let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '4';
+  if (!allowedVersions.has(activeVersion)) activeVersion = '4';
 
   if (versionSelect) versionSelect.value = activeVersion;
   document.body.dataset.activeVersion = activeVersion;
@@ -1245,8 +1247,6 @@
     });
   }
 
-  initScrollInvitation('v2', '1');
-  initScrollInvitation('v3', '2');
   initScrollInvitation('v4', '3');
   initScrollInvitation('v5', '4');
 
@@ -1286,30 +1286,6 @@
   fillCountdown(document.getElementById('v3-date-countdown'));
   fillCountdown(document.getElementById('v4-date-countdown'));
 
-  /* Calendar (Version 1) */
-  const calendarGrid = document.getElementById('calendar-grid');
-  if (calendarGrid) {
-    const nov2026 = [
-      1, 2, 3, 4, 5, 6, 7,
-      8, 9, 10, 11, 12, 13, 14,
-      15, 16, 17, 18, 19, 20, 21,
-      22, 23, 24, 25, 26, 27, 28,
-      29, 30, '', '', '', '', '',
-    ];
-    nov2026.forEach((day) => {
-      const span = document.createElement('span');
-      if (day === '') {
-        span.className = 'empty';
-        span.textContent = '0';
-      } else {
-        span.textContent = String(day);
-        if (day === 14) span.className = 'today';
-      }
-      calendarGrid.appendChild(span);
-    });
-  }
-
-  /* Skip envelope setup when Version 2 is active */
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {

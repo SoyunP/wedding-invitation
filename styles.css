@@ -151,16 +151,7 @@ body[data-active-version="4"] {
   font-family: var(--font-numeric), var(--font-text);
 }
 
-body[data-active-version="1"] .version-switcher {
-  background: rgba(95, 87, 50, 0.92);
-  border-color: rgba(240, 235, 225, 0.18);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
-}
-
-body[data-active-version="2"] .version-switcher ,
-
-body[data-active-version="3"] .version-switcher ,
-
+body[data-active-version="3"] .version-switcher,
 body[data-active-version="4"] .version-switcher {
   background: rgba(28, 38, 31, 0.92);
   border-color: rgba(240, 235, 225, 0.18);
@@ -168,15 +159,11 @@ body[data-active-version="4"] .version-switcher {
   font-family: var(--font-en);
 }
 
-body[data-active-version="1"] .version-switcher label,
-body[data-active-version="2"] .version-switcher label ,
 body[data-active-version="3"] .version-switcher label,
 body[data-active-version="4"] .version-switcher label {
   color: rgba(232, 228, 220, 0.55);
 }
 
-body[data-active-version="1"] .version-switcher select,
-body[data-active-version="2"] .version-switcher select ,
 body[data-active-version="3"] .version-switcher select,
 body[data-active-version="4"] .version-switcher select {
   color: #e8e4dc;
@@ -979,13 +966,11 @@ body.is-handoff .envelope-stage {
 }
 
 /* ============================================================
-   VERSION 2 — simple full-page scroll
+   VERSION 3 — simple full-page scroll
    ============================================================ */
-#version-1,
-#version-2 ,
 #version-3 {
-  --v2-bg: #5f5732;
-  --v2-bg-deep: #4f4929;
+  --v2-bg: #ffffff;
+  --v2-bg-deep: #f4f4f4;
   --v2-text: #f0ebe1;
   --v2-muted: #c9c2b2;
   --v2-line: rgba(240, 235, 225, 0.2);
@@ -993,34 +978,12 @@ body.is-handoff .envelope-stage {
   --v2-paper-alt: #ddd9d1;
   --v2-more: #4a4528;
   --v2-olive-texture: url("assets/v2-olive-texture.png");
-  background-color: var(--v2-bg);
-  color: var(--v2-text);
-  font-family: var(--font-numeric), var(--font-text);
-  min-height: 100vh;
-}
-
-#version-1 {
-  background-image: var(--v2-olive-texture);
-  background-repeat: repeat;
-  background-size: 320px auto;
-}
-
-#version-2 {
-  --v2-bg: #1c261f;
-  --v2-bg-deep: #15201a;
   --font-en: "Zen Antique Soft", "Noto Serif KR", serif;
-  font-family: var(--font-en);
-  background-color: #1c261f;
-  background-image: none;
-}
-
-#version-3 {
-  --v2-bg: #ffffff;
-  --v2-bg-deep: #f4f4f4;
-  --font-en: "Zen Antique Soft", "Noto Serif KR", serif;
-  font-family: var(--font-en);
   background-color: #ffffff;
   background-image: none;
+  color: var(--v2-text);
+  font-family: var(--font-en);
+  min-height: 100vh;
 }
 
 .v2-header {
@@ -1041,16 +1004,6 @@ body.is-handoff .envelope-stage {
 
 .v2-header.is-visible {
   opacity: 1;
-}
-
-#version-2 .v2-header {
-  justify-content: flex-end;
-  background: linear-gradient(
-    to bottom,
-    rgba(28, 38, 31, 0.42) 0%,
-    rgba(28, 38, 31, 0.18) 38%,
-    rgba(28, 38, 31, 0) 70%
-  );
 }
 
 #version-3 .v2-header {
@@ -1178,11 +1131,6 @@ body.is-handoff .envelope-stage {
   background-image: var(--v2-olive-texture);
   background-repeat: repeat;
   background-size: 320px auto;
-}
-
-#version-2 .v2-main {
-  background-color: #1c261f;
-  background-image: none;
 }
 
 #version-3 .v2-main {
@@ -2262,8 +2210,6 @@ body.is-handoff .envelope-stage {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
 }
 
-#version-2 .v2-section-title ,
-
 #version-3 .v2-section-title {
   font-family: var(--font-en);
   font-size: 0.92rem;
@@ -2775,8 +2721,6 @@ body.v2-gallery-modal-open {
   background: rgba(45, 43, 41, 0.04);
   cursor: zoom-in;
 }
-
-#version-2 .v2-map-preview ,
 
 #version-3 .v2-map-preview {
   margin-bottom: 0.85rem;
@@ -3838,8 +3782,6 @@ body.v2-rsvp-modal-open {
   border: 1px solid var(--v2-paper-line);
   color: var(--v2-paper-ink);
 }
-
-#version-2 .v2-rsvp-btn-secondary ,
 
 #version-3 .v2-rsvp-btn-secondary {
   border-radius: 999px;
