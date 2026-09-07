@@ -1,5 +1,5 @@
 /* ============================================================
-   Wedding invitation — Version 3 + Version 4
+   Wedding invitation
    ============================================================ */
 (function () {
   'use strict';
@@ -14,42 +14,13 @@
     setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
-  /* ── Version switcher ── */
-  const versionSelect = document.getElementById('version-select');
-  const versionPanels = document.querySelectorAll('.version-panel');
-  const allowedVersions = new Set(['3', '4']);
-  const storedVersion = sessionStorage.getItem('invitation-version');
-  let activeVersion = storedVersion || (versionSelect && versionSelect.value) || '4';
-  if (!allowedVersions.has(activeVersion)) activeVersion = '4';
-
-  if (versionSelect) versionSelect.value = activeVersion;
+  const activeVersion = '4';
   document.body.dataset.activeVersion = activeVersion;
-
-  function applyVersionVisibility(value) {
-    versionPanels.forEach((panel) => {
-      const active = panel.dataset.version === value;
-      panel.classList.toggle('is-active', active);
-      panel.hidden = !active;
-    });
-    document.body.dataset.activeVersion = value;
-  }
-
-  applyVersionVisibility(activeVersion);
-
-  function setActiveVersion(version) {
-    const value = String(version);
-    activeVersion = value;
-    sessionStorage.setItem('invitation-version', value);
-    applyVersionVisibility(value);
-    syncBgmSource(value);
-      window.scrollTo(0, 0);
-  }
-
-  if (versionSelect) {
-    versionSelect.addEventListener('change', () => {
-      setActiveVersion(versionSelect.value);
-    });
-  }
+  document.querySelectorAll('.version-panel').forEach((panel) => {
+    const active = panel.dataset.version === activeVersion;
+    panel.classList.toggle('is-active', active);
+    panel.hidden = !active;
+  });
 
   /* ── Shared UI helpers ── */
   function bindAccordion(selector) {
@@ -797,6 +768,7 @@
 
     const galleryModal = id('gallery-modal');
     const galleryModalImage = id('gallery-modal-image');
+    const galleryCount = id('gallery-count');
     const galleryClose = id('gallery-close');
     const galleryPrev = id('gallery-prev');
     const galleryNext = id('gallery-next');
@@ -821,6 +793,7 @@
     let galleryInView = true;
     let galleryUserPause = false;
     let galleryAnimating = false;
+    let galleryAnimFrame = null;
 
     function syncGalleryLock() {
       const gridOpen = galleryGrid && galleryGrid.classList.contains('is-open');
@@ -869,31 +842,49 @@
       return slide.offsetLeft - (galleryTrack.clientWidth - slide.offsetWidth) / 2;
     }
 
+    function stopGalleryScrollAnim() {
+      if (galleryAnimFrame) {
+        cancelAnimationFrame(galleryAnimFrame);
+        galleryAnimFrame = null;
+      }
+      if (typeof gsap !== 'undefined' && galleryTrack) gsap.killTweensOf(galleryTrack);
+      galleryAnimating = false;
+      if (galleryTrack) galleryTrack.classList.remove('is-animating');
+    }
+
     function scrollGalleryTrack(index, behavior) {
       if (!galleryTrack || !gallerySlides[index]) return;
       const left = gallerySlideLeft(index);
       const wrapping = Math.abs(index - galleryIndex) > 1 && (index === 0 || galleryIndex === 0);
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const instant = behavior === 'auto' || wrapping || reduced || typeof gsap === 'undefined';
-      if (typeof gsap !== 'undefined') gsap.killTweensOf(galleryTrack);
-      galleryTrack.classList.remove('is-animating');
+      const instant = behavior === 'auto' || wrapping || reduced;
+      stopGalleryScrollAnim();
+      galleryTrack.classList.add('is-animating');
+      void galleryTrack.offsetWidth;
       if (instant) {
-        galleryAnimating = false;
-        galleryTrack.scrollTo({ left, behavior: 'auto' });
+        galleryTrack.scrollLeft = left;
+        galleryTrack.classList.remove('is-animating');
         return;
       }
       galleryAnimating = true;
-      galleryTrack.classList.add('is-animating');
-      gsap.to(galleryTrack, {
-        scrollLeft: left,
-        duration: 0.95,
-        ease: 'power2.inOut',
-        overwrite: true,
-        onComplete: () => {
-          galleryAnimating = false;
-          galleryTrack.classList.remove('is-animating');
-        },
-      });
+      const start = galleryTrack.scrollLeft;
+      const delta = left - start;
+      const duration = 850;
+      const startTime = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - startTime) / duration);
+        const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        galleryTrack.scrollLeft = start + delta * eased;
+        if (t < 1) {
+          galleryAnimFrame = requestAnimationFrame(tick);
+          return;
+        }
+        galleryTrack.scrollLeft = left;
+        galleryAnimFrame = null;
+        galleryAnimating = false;
+        galleryTrack.classList.remove('is-animating');
+      }
+      galleryAnimFrame = requestAnimationFrame(tick);
     }
 
     function renderGallery(index, behavior) {
@@ -905,6 +896,9 @@
       }
       galleryIndex = nextIndex;
       const current = gallerySources[galleryIndex];
+      if (galleryCount) {
+        galleryCount.textContent = (galleryIndex + 1) + ' / ' + count;
+      }
       if (galleryModalImage) {
         galleryModalImage.src = current.src;
         galleryModalImage.alt = current.alt;
@@ -961,18 +955,15 @@
     function startGalleryAuto() {
       stopGalleryAuto();
       if ((prefix !== 'v3' && prefix !== 'v4' && prefix !== 'v5') || !galleryTrack || gallerySources.length < 2) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       galleryAutoTimer = window.setInterval(() => {
         if (!galleryInView || galleryUserPause || galleryAnimating || document.hidden || galleryLightboxOpen()) return;
         renderGallery(galleryIndex + 1);
-      }, 3000);
+      }, 2500);
     }
 
     function pauseGalleryAuto() {
       galleryUserPause = true;
-      if (galleryTrack && typeof gsap !== 'undefined') gsap.killTweensOf(galleryTrack);
-      galleryAnimating = false;
-      if (galleryTrack) galleryTrack.classList.remove('is-animating');
+      stopGalleryScrollAnim();
       window.clearTimeout(pauseGalleryAuto.resumeTimer);
       pauseGalleryAuto.resumeTimer = window.setTimeout(() => {
         galleryUserPause = false;
@@ -1208,8 +1199,8 @@
       const gallerySection = id('gallery');
       if ('IntersectionObserver' in window && gallerySection) {
         const observer = new IntersectionObserver((entries) => {
-          galleryInView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.28);
-        }, { threshold: [0, 0.28, 0.6] });
+          galleryInView = entries.some((entry) => entry.isIntersecting);
+        }, { threshold: [0, 0.08, 0.2, 0.4] });
         observer.observe(gallerySection);
       }
 
@@ -1230,6 +1221,57 @@
       ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
         galleryModal.addEventListener(type, (event) => event.preventDefault());
       });
+
+      let swipeStartX = null;
+      let swipeStartY = null;
+      let swipeHandled = false;
+
+      function swipeTargetIsChrome(target) {
+        return Boolean(target && target.closest && target.closest('.v2-gallery-close, .v2-gallery-nav'));
+      }
+
+      function onSwipeStart(x, y, target) {
+        if (!galleryLightboxOpen() || swipeTargetIsChrome(target)) {
+          swipeStartX = null;
+          return;
+        }
+        swipeStartX = x;
+        swipeStartY = y;
+        swipeHandled = false;
+      }
+
+      function onSwipeEnd(x, y) {
+        if (swipeStartX == null) return;
+        const dx = x - swipeStartX;
+        const dy = y - swipeStartY;
+        swipeStartX = null;
+        swipeStartY = null;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.1) return;
+        swipeHandled = true;
+        moveGallery(dx < 0 ? 1 : -1);
+      }
+
+      galleryModal.addEventListener('touchstart', (event) => {
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        onSwipeStart(touch.clientX, touch.clientY, event.target);
+      }, { passive: true });
+
+      galleryModal.addEventListener('touchend', (event) => {
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        onSwipeEnd(touch.clientX, touch.clientY);
+      }, { passive: true });
+
+      galleryModal.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') return;
+        onSwipeStart(event.clientX, event.clientY, event.target);
+      });
+
+      galleryModal.addEventListener('pointerup', (event) => {
+        if (event.pointerType === 'touch') return;
+        onSwipeEnd(event.clientX, event.clientY);
+      });
     }
 
     document.addEventListener('keydown', (event) => {
@@ -1247,7 +1289,6 @@
     });
   }
 
-  initScrollInvitation('v4', '3');
   initScrollInvitation('v5', '4');
 
   function fillDateCalendar(calendar) {
