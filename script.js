@@ -754,6 +754,23 @@
         openMap('assets/v2-samcheonggak-yakdo.png', '삼청각 약도');
       });
     }
+    const photostripOpen = id('photostrip-open');
+    if (photostripOpen) {
+      photostripOpen.addEventListener('click', () => {
+        const photo = photostripOpen.querySelector('img');
+        openMap(
+          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.png',
+          (photo && photo.getAttribute('alt')) || '포토스트립'
+        );
+      });
+    }
+    root.querySelectorAll('.v5-polaroid-open').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const photo = btn.querySelector('.v5-polaroid-photo');
+        if (!photo) return;
+        openMap(photo.getAttribute('src'), photo.getAttribute('alt') || '사진');
+      });
+    });
     if (mapClose) mapClose.addEventListener('click', closeMap);
     if (mapModal) {
       mapModal.addEventListener('click', (event) => {

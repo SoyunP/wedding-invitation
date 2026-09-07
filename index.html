@@ -78,11 +78,11 @@
         <p class="v5-save-venue">삼청각 일화당</p>
       </section>
 
-      <section class="v5-mail" aria-hidden="true">
+      <section class="v5-mail">
         <div class="v5-mail-stage">
-          <div class="v5-photostrip">
+          <button class="v5-photostrip" type="button" id="v5-photostrip-open" aria-label="포토스트립 크게 보기">
             <img src="assets/v5-photostrip.png" alt="We're getting Married!!!" width="1024" height="830" decoding="async">
-          </div>
+          </button>
           <img class="v5-envelope" src="assets/v5-envelope.png" alt="" width="752" height="782" decoding="async">
         </div>
       </section>
@@ -104,10 +104,12 @@
       <section class="v5-people" id="v5-family">
         <article class="v5-person">
           <figure class="v5-polaroid">
-            <span class="v5-polaroid-frame">
-              <img class="v5-polaroid-photo" src="assets/v3-family-sangwon.png" alt="상원 어릴 적 사진" width="800" height="1000" decoding="async">
-              <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
-            </span>
+            <button class="v5-polaroid-open" type="button" aria-label="상원 어릴 적 사진 크게 보기">
+              <span class="v5-polaroid-frame">
+                <img class="v5-polaroid-photo" src="assets/v3-family-sangwon.png" alt="상원 어릴 적 사진" width="800" height="1000" decoding="async">
+                <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
+              </span>
+            </button>
           </figure>
           <div class="v5-bubble v5-bubble--img">
             <img class="v5-bubble-img" src="assets/v5-bubble-sangwon.png?v=5" alt="지현호 · 김윤정의 아들 지상원" width="1024" height="272" decoding="async">
@@ -116,10 +118,12 @@
 
         <article class="v5-person">
           <figure class="v5-polaroid">
-            <span class="v5-polaroid-frame">
-              <img class="v5-polaroid-photo" src="assets/v5-family-soyeon.jpg" alt="소연 어릴 적 사진" width="1024" height="768" decoding="async">
-              <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
-            </span>
+            <button class="v5-polaroid-open" type="button" aria-label="소연 어릴 적 사진 크게 보기">
+              <span class="v5-polaroid-frame">
+                <img class="v5-polaroid-photo" src="assets/v5-family-soyeon.jpg" alt="소연 어릴 적 사진" width="1024" height="768" decoding="async">
+                <img class="v5-polaroid-border" src="assets/v5-polaroid-frame.png" alt="" width="970" height="687" decoding="async">
+              </span>
+            </button>
           </figure>
           <div class="v5-bubble v5-bubble--img">
             <img class="v5-bubble-img" src="assets/v5-bubble-soyeon.png?v=4" alt="박수근 · 이혜경의 딸 박소연" width="1024" height="261" decoding="async">
@@ -137,32 +141,29 @@
       <section class="v2-section v2-gallery" id="v5-gallery" aria-label="웨딩 갤러리">
         <h2 class="v2-section-title">Wedding Photos</h2>
         <div class="v3-gallery-track" id="v5-gallery-track" tabindex="0" aria-label="웨딩 갤러리">
-          <button class="v3-gallery-slide" type="button" data-gallery-index="1" aria-label="갤러리 사진 2"><img src="assets/v5-gallery-03.jpg" alt="웨딩 사진 2" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="2" aria-label="갤러리 사진 3"><img src="assets/v5-gallery-04.jpg" alt="웨딩 사진 3" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="3" aria-label="갤러리 사진 4"><img src="assets/v5-gallery-05.jpg" alt="웨딩 사진 4" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="4" aria-label="갤러리 사진 5"><img src="assets/v5-gallery-06.jpg" alt="웨딩 사진 5" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="5" aria-label="갤러리 사진 6"><img src="assets/v5-gallery-07.jpg" alt="웨딩 사진 6" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="6" aria-label="갤러리 사진 7"><img src="assets/v5-gallery-08.jpg" alt="웨딩 사진 7" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="7" aria-label="갤러리 사진 8"><img src="assets/v5-gallery-09.jpg" alt="웨딩 사진 8" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="8" aria-label="갤러리 사진 9"><img src="assets/v5-gallery-10.jpg" alt="웨딩 사진 9" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="9" aria-label="갤러리 사진 10"><img src="assets/v5-gallery-11.jpg" alt="웨딩 사진 10" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="10" aria-label="갤러리 사진 11"><img src="assets/v5-gallery-12.jpg" alt="웨딩 사진 11" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="11" aria-label="갤러리 사진 12"><img src="assets/v5-gallery-13.jpg" alt="웨딩 사진 12" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="12" aria-label="갤러리 사진 13"><img src="assets/v5-gallery-14.jpg" alt="웨딩 사진 13" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="13" aria-label="갤러리 사진 14"><img src="assets/v5-gallery-15.jpg" alt="웨딩 사진 14" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="14" aria-label="갤러리 사진 15"><img src="assets/v5-gallery-16.jpg" alt="웨딩 사진 15" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="15" aria-label="갤러리 사진 16"><img src="assets/v5-gallery-17.jpg" alt="웨딩 사진 16" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="16" aria-label="갤러리 사진 17"><img src="assets/v5-gallery-18.jpg" alt="웨딩 사진 17" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="17" aria-label="갤러리 사진 18"><img src="assets/v5-gallery-19.jpg" alt="웨딩 사진 18" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="18" aria-label="갤러리 사진 19"><img src="assets/v5-gallery-20.jpg" alt="웨딩 사진 19" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="19" aria-label="갤러리 사진 20"><img src="assets/v5-gallery-21.jpg" alt="웨딩 사진 20" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="20" aria-label="갤러리 사진 21"><img src="assets/v5-gallery-22.jpg" alt="웨딩 사진 21" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="21" aria-label="갤러리 사진 22"><img src="assets/v5-gallery-23.jpg" alt="웨딩 사진 22" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="22" aria-label="갤러리 사진 23"><img src="assets/v5-gallery-25.jpg" alt="웨딩 사진 23" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="23" aria-label="갤러리 사진 24"><img src="assets/v5-gallery-26.jpg" alt="웨딩 사진 24" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="24" aria-label="갤러리 사진 25"><img src="assets/v5-gallery-29.jpg" alt="웨딩 사진 25" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="25" aria-label="갤러리 사진 26"><img src="assets/v5-gallery-30.jpg" alt="웨딩 사진 26" loading="lazy" decoding="async"></button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="26" aria-label="갤러리 사진 27"><img src="assets/v5-gallery-31.jpg" alt="웨딩 사진 27" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="1" aria-label="갤러리 사진 1"><img src="assets/v5-gallery-01.jpg?v=film" alt="웨딩 사진 1" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="2" aria-label="갤러리 사진 2"><img src="assets/v5-gallery-02.jpg?v=film" alt="웨딩 사진 2" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="3" aria-label="갤러리 사진 3"><img src="assets/v5-gallery-03.jpg?v=film" alt="웨딩 사진 3" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="4" aria-label="갤러리 사진 4"><img src="assets/v5-gallery-04.jpg?v=film" alt="웨딩 사진 4" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="5" aria-label="갤러리 사진 5"><img src="assets/v5-gallery-05.jpg?v=film" alt="웨딩 사진 5" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="6" aria-label="갤러리 사진 6"><img src="assets/v5-gallery-06.jpg?v=film" alt="웨딩 사진 6" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="7" aria-label="갤러리 사진 7"><img src="assets/v5-gallery-07.jpg?v=film" alt="웨딩 사진 7" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="8" aria-label="갤러리 사진 8"><img src="assets/v5-gallery-08.jpg?v=film" alt="웨딩 사진 8" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="9" aria-label="갤러리 사진 9"><img src="assets/v5-gallery-09.jpg?v=film" alt="웨딩 사진 9" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="10" aria-label="갤러리 사진 10"><img src="assets/v5-gallery-10.jpg?v=film" alt="웨딩 사진 10" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="11" aria-label="갤러리 사진 11"><img src="assets/v5-gallery-11.jpg?v=film" alt="웨딩 사진 11" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="12" aria-label="갤러리 사진 12"><img src="assets/v5-gallery-12.jpg?v=film" alt="웨딩 사진 12" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="13" aria-label="갤러리 사진 13"><img src="assets/v5-gallery-13.jpg?v=film" alt="웨딩 사진 13" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="14" aria-label="갤러리 사진 14"><img src="assets/v5-gallery-14.jpg?v=film" alt="웨딩 사진 14" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="15" aria-label="갤러리 사진 15"><img src="assets/v5-gallery-15.jpg?v=film" alt="웨딩 사진 15" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="16" aria-label="갤러리 사진 16"><img src="assets/v5-gallery-16.jpg?v=film" alt="웨딩 사진 16" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="17" aria-label="갤러리 사진 17"><img src="assets/v5-gallery-17.jpg?v=film" alt="웨딩 사진 17" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="18" aria-label="갤러리 사진 18"><img src="assets/v5-gallery-18.jpg?v=film" alt="웨딩 사진 18" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="19" aria-label="갤러리 사진 19"><img src="assets/v5-gallery-19.jpg?v=film" alt="웨딩 사진 19" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="20" aria-label="갤러리 사진 20"><img src="assets/v5-gallery-20.jpg?v=film" alt="웨딩 사진 20" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="21" aria-label="갤러리 사진 21"><img src="assets/v5-gallery-21.jpg?v=film" alt="웨딩 사진 21" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="22" aria-label="갤러리 사진 22"><img src="assets/v5-gallery-22.jpg?v=film" alt="웨딩 사진 22" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="23" aria-label="갤러리 사진 23"><img src="assets/v5-gallery-23.jpg?v=film" alt="웨딩 사진 23" loading="lazy" decoding="async"></button>
         </div>
       </section>
 

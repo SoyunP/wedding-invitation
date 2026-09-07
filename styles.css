@@ -4363,9 +4363,12 @@ body[data-active-version="4"] .bgm-toggle {
   top: 12%;
   z-index: 1;
   width: 68%;
+  margin: 0;
   padding: 0;
+  border: 0;
   background: transparent;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
   transform: translateX(-50%) translateY(72%);
   transition: transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4493,6 +4496,16 @@ body[data-active-version="4"] .bgm-toggle {
   }
 }
 
+.v5-polaroid-open {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
 .v5-polaroid-frame {
   display: block;
   position: relative;
@@ -4514,7 +4527,7 @@ body[data-active-version="4"] .bgm-toggle {
 
 .v5-person:nth-child(2) .v5-polaroid-photo {
   object-position: center 64%;
-  transform: scale(1.55);
+  transform: scale(1.72);
   transform-origin: center 58%;
 }
 
