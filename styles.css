@@ -3527,6 +3527,18 @@ body.v2-shuttle-modal-open {
   text-align: left;
 }
 
+#v4-account .v3-account-card {
+  width: 100%;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+#v4-account .v3-account-card:active {
+  background: #f3efe6;
+}
+
 #v3-account .v2-account-label ,
 
 #v4-account .v2-account-label {
@@ -3545,10 +3557,12 @@ body.v2-shuttle-modal-open {
 
 #v3-account .v2-copy-btn ,
 
-#v4-account .v2-copy-btn {
+#v4-account .v3-account-copy-icon {
   border: 0;
   background: transparent;
   padding: 0.25rem;
+  display: flex;
+  color: inherit;
 }
 
 .v2-rsvp {

@@ -97,6 +97,7 @@
   bindCopyButtons('.copy-btn');
   bindCopyButtons('.v2-copy-btn');
   bindCopyButtons('.v5-account-card', '계좌번호가 복사되었습니다.');
+  bindCopyButtons('#v4-account .v3-account-card', '계좌번호가 복사되었습니다.');
 
   const copyLinkBtn = document.getElementById('copy-link-btn');
   if (copyLinkBtn) {
@@ -614,20 +615,82 @@
         updateRsvpSubmit();
       }
 
+      let rsvpSending = false;
+      const rsvpSheetUrl = 'https://script.google.com/macros/s/AKfycbw3mVLf00yM7S5GU2ubBdnmT1hBa7h10QvbZvNruW3m3r50_QMVogTvyVXQ_Bsovpjt/exec';
+
       rsvpForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        const data = Object.fromEntries(new FormData(rsvpForm).entries());
-        const replies = JSON.parse(localStorage.getItem('wedding-rsvp') || '[]');
-        replies.push({ ...data, submittedAt: new Date().toISOString(), version: versionKey });
-        localStorage.setItem('wedding-rsvp', JSON.stringify(replies));
-        rsvpForm.reset();
-        if (isV3Form) {
-          setGuestCount(0);
-          syncAttendingFields();
-          updateRsvpSubmit();
+        if (rsvpSending) return;
+
+        const formData = new FormData(rsvpForm);
+        const attendanceRaw = String(formData.get('attendance') || '');
+        const attending = attendanceRaw !== '불가';
+        const name = String(formData.get('name') || '').trim();
+        const side = String(formData.get('side') || '');
+        const contact = String(formData.get('phone') || '').trim();
+        const meal = String(formData.get('meal') || '');
+        const additionalGuests = guestCount();
+        const consent = formData.get('consent');
+
+        const valid = Boolean(
+          name &&
+          side &&
+          attendanceRaw &&
+          consent === 'yes' &&
+          (!attending || contact) &&
+          (!attending || meal)
+        );
+        if (!valid) return;
+
+        const data = Object.fromEntries(formData.entries());
+
+        if (prefix !== 'v5') {
+          const replies = JSON.parse(localStorage.getItem('wedding-rsvp') || '[]');
+          replies.push({ ...data, submittedAt: new Date().toISOString(), version: versionKey });
+          localStorage.setItem('wedding-rsvp', JSON.stringify(replies));
+          rsvpForm.reset();
+          if (isV3Form) {
+            setGuestCount(0);
+            syncAttendingFields();
+            updateRsvpSubmit();
+          }
+          closeRsvp();
+          showToast('참석 여부가 전달되었습니다.');
+          return;
         }
-        closeRsvp();
-        showToast('참석 여부가 전달되었습니다.');
+
+        rsvpSending = true;
+        if (rsvpSubmit) rsvpSubmit.disabled = true;
+
+        fetch(rsvpSheetUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            attendance: attendanceRaw === '불가' ? '참석 불가' : '참석 가능',
+            name,
+            side,
+            contact: attending ? contact : '',
+            additionalGuests,
+            meal: attending ? meal : '',
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error('rsvp-failed');
+          })
+          .then(() => {
+            rsvpForm.reset();
+            setGuestCount(0);
+            syncAttendingFields();
+            updateRsvpSubmit();
+            closeRsvp();
+            showToast('참석 의사가 전달되었습니다.');
+          })
+          .catch(() => {
+            showToast('전송 중 문제가 발생했습니다. 다시 시도해주세요.');
+            updateRsvpSubmit();
+          })
+          .finally(() => {
+            rsvpSending = false;
+          });
       });
     }
 
