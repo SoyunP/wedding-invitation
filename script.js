@@ -807,7 +807,7 @@
     let galleryIndex = 0;
     let gridBuilt = false;
     let galleryAutoTimer = null;
-    let galleryInView = true;
+    let galleryInView = false;
     let galleryUserPause = false;
     let galleryAnimating = false;
     let galleryAnimFrame = null;
@@ -1216,16 +1216,20 @@
       const gallerySection = id('gallery');
       if ('IntersectionObserver' in window && gallerySection) {
         const observer = new IntersectionObserver((entries) => {
-          galleryInView = entries.some((entry) => entry.isIntersecting);
-        }, { threshold: [0, 0.08, 0.2, 0.4] });
+          galleryInView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.22);
+          if (galleryInView) startGalleryAuto();
+          else stopGalleryAuto();
+        }, { threshold: [0.12, 0.22, 0.4], rootMargin: '0px 0px -8% 0px' });
         observer.observe(gallerySection);
+      } else {
+        galleryInView = true;
+        startGalleryAuto();
       }
 
       document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) startGalleryAuto();
+        if (!document.hidden && galleryInView) startGalleryAuto();
+        else if (document.hidden) stopGalleryAuto();
       });
-
-      startGalleryAuto();
     }
 
     if (galleryClose) galleryClose.addEventListener('click', closeGallery);
