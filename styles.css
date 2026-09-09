@@ -4336,10 +4336,48 @@ body[data-active-version="4"] .bgm-toggle {
 
 .v5-mail {
   display: grid;
+  grid-template-columns: auto auto auto;
   justify-content: center;
   align-items: center;
+  gap: 0.08rem;
   padding: 4.2rem 0.2rem 1.2rem;
   background: var(--v5-black);
+}
+
+.v5-hearts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.v5-letter-heart {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.45rem;
+  color: #241e18;
+  font-family: var(--v5-sans);
+  font-size: 0.56rem;
+  font-weight: 700;
+}
+
+.v5-letter-heart::before {
+  content: "♥";
+  position: absolute;
+  font-size: 1.62rem;
+  line-height: 1;
+  color: var(--v5-cream);
+}
+
+.v5-hearts--lilac .v5-letter-heart::before {
+  color: var(--v5-lilac);
+}
+
+.v5-letter-heart b {
+  position: relative;
+  z-index: 1;
 }
 
 .v5-mail-stage {
