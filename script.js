@@ -449,9 +449,84 @@
       }
       const mailStage = root.querySelector('.v5-mail-stage');
       const photostrip = root.querySelector('.v5-photostrip');
+      const celebratePhotos = Array.from(root.querySelectorAll('.v5-celebrate-photo img'));
+      const celebrateSection = root.querySelector('.v5-celebrate');
+      if (celebratePhotos.length > 1 && !reducePolaroidMotion.matches) {
+        let celebrateIndex = 0;
+        let celebrateTimer = null;
+        let celebrateInView = false;
+        function stopCelebrate() {
+          if (celebrateTimer) {
+            window.clearInterval(celebrateTimer);
+            celebrateTimer = null;
+          }
+        }
+        function startCelebrate() {
+          stopCelebrate();
+          celebrateTimer = window.setInterval(() => {
+            if (!celebrateInView || document.hidden) return;
+            celebratePhotos[celebrateIndex].classList.remove('is-active');
+            celebrateIndex = (celebrateIndex + 1) % celebratePhotos.length;
+            celebratePhotos[celebrateIndex].classList.add('is-active');
+          }, 2000);
+        }
+        if ('IntersectionObserver' in window && celebrateSection) {
+          const celebrateObserver = new IntersectionObserver((entries) => {
+            celebrateInView = entries.some((entry) => entry.isIntersecting);
+            if (celebrateInView) startCelebrate();
+            else stopCelebrate();
+          }, { threshold: 0.28 });
+          celebrateObserver.observe(celebrateSection);
+        } else {
+          celebrateInView = true;
+          startCelebrate();
+        }
+      }
+      const mailSection = root.querySelector('.v5-mail');
+      const messageSection = root.querySelector('.v5-message');
+      const headingSections = [
+        celebrateSection,
+        id('gallery'),
+        id('location'),
+        id('timeline'),
+        id('account'),
+        id('rsvp'),
+      ].filter(Boolean);
+      function revealHeadings(section) {
+        section.classList.add('is-head-in');
+      }
+      function revealMail() {
+        if (photostrip) photostrip.classList.add('is-in');
+      }
+      function revealMessage() {
+        if (messageSection) messageSection.classList.add('is-in');
+      }
+      const riseEls = Array.from(root.querySelectorAll([
+        '.v5-celebrate-title',
+        '.v5-celebrate-date',
+        '.v5-celebrate-venue',
+        '.v5-bubble--img',
+        '#v5-gallery-track',
+        '#v5-location > .v5-venue',
+        '#v5-location > .v5-venue-details',
+        '#v5-location > .v5-yakdo-btn',
+        '#v5-location .v5-transport-block',
+        '#v5-timeline .v5-timeline-item',
+        '#v5-account > .v5-account-message',
+        '#v5-account > .v5-account-toggle',
+        '#v5-account > .v5-account-list',
+        '#v5-rsvp > .v5-rsvp-message',
+        '#v5-rsvp > .v5-rsvp-actions',
+      ].join(', ')));
+      function revealRise(el) {
+        el.classList.add('is-rise-in');
+      }
       if (reducePolaroidMotion.matches) {
         people.forEach(revealPolaroid);
-        if (photostrip) photostrip.classList.add('is-in');
+        revealMail();
+        revealMessage();
+        headingSections.forEach(revealHeadings);
+        riseEls.forEach(revealRise);
       } else {
         people.forEach((person) => {
           const observer = new IntersectionObserver((entries) => {
@@ -463,15 +538,53 @@
           }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
           observer.observe(person);
         });
-        if (mailStage && photostrip) {
+        if (mailSection) {
           const mailObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
-              photostrip.classList.add('is-in');
+              revealMail();
               mailObserver.disconnect();
             });
-          }, { threshold: 0.28, rootMargin: '0px 0px -8% 0px' });
-          mailObserver.observe(mailStage);
+          }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
+          mailObserver.observe(mailSection);
+        }
+        if (messageSection) {
+          const messageObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              revealMessage();
+              messageObserver.disconnect();
+            });
+          }, { threshold: 0.28, rootMargin: '0px 0px -6% 0px' });
+          messageObserver.observe(messageSection);
+        }
+        headingSections.forEach((section) => {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              revealHeadings(section);
+              observer.disconnect();
+            });
+          }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+          observer.observe(section);
+        });
+        if ('IntersectionObserver' in window) {
+          const riseObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              revealRise(entry.target);
+              riseObserver.unobserve(entry.target);
+            });
+          }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+          riseEls.forEach((el) => {
+            if (el.hasAttribute('hidden')) {
+              revealRise(el);
+              return;
+            }
+            riseObserver.observe(el);
+          });
+        } else {
+          riseEls.forEach(revealRise);
         }
       }
     }
@@ -886,11 +999,11 @@
       galleryAnimating = true;
       const start = galleryTrack.scrollLeft;
       const delta = left - start;
-      const duration = 850;
+      const duration = 480;
       const startTime = performance.now();
       function tick(now) {
         const t = Math.min(1, (now - startTime) / duration);
-        const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        const eased = 1 - Math.pow(1 - t, 3);
         galleryTrack.scrollLeft = start + delta * eased;
         if (t < 1) {
           galleryAnimFrame = requestAnimationFrame(tick);
@@ -1080,11 +1193,14 @@
     if (galleryTrack) {
       let dragPointer = null;
       let dragStartX = 0;
+      let dragStartY = 0;
       let dragStartScroll = 0;
+      let dragStartTime = 0;
       let pressX = 0;
       let pressY = 0;
       let pressSlide = null;
       let didDrag = false;
+      let axisLocked = null;
       let openedOnPointerUp = false;
 
       function nearestSlideIndex() {
@@ -1124,55 +1240,54 @@
         pressX = event.clientX;
         pressY = event.clientY;
         dragStartX = event.clientX;
+        dragStartY = event.clientY;
         dragStartScroll = galleryTrack.scrollLeft;
+        dragStartTime = performance.now();
         didDrag = false;
+        axisLocked = null;
         openedOnPointerUp = false;
         pauseGalleryAuto();
-        if (event.pointerType === 'touch') {
-          dragPointer = null;
-          return;
-        }
+        stopGalleryScrollAnim();
         dragPointer = event.pointerId;
       });
 
       galleryTrack.addEventListener('pointermove', (event) => {
         if (dragPointer == null || event.pointerId !== dragPointer) return;
         const deltaX = event.clientX - dragStartX;
-        const deltaY = event.clientY - pressY;
-        if (!didDrag && Math.hypot(deltaX, deltaY) > 8) {
-          didDrag = true;
-          galleryTrack.classList.add('is-dragging');
-          if (galleryTrack.setPointerCapture) galleryTrack.setPointerCapture(event.pointerId);
+        const deltaY = event.clientY - dragStartY;
+        if (!axisLocked && Math.hypot(deltaX, deltaY) > 7) {
+          axisLocked = Math.abs(deltaX) > Math.abs(deltaY) * 1.05 ? 'x' : 'y';
+          if (axisLocked === 'x') {
+            didDrag = true;
+            galleryTrack.classList.add('is-dragging');
+            if (galleryTrack.setPointerCapture) galleryTrack.setPointerCapture(event.pointerId);
+          }
         }
-        if (!didDrag) return;
+        if (axisLocked !== 'x') return;
+        event.preventDefault();
         galleryTrack.scrollLeft = dragStartScroll - deltaX;
-      });
+      }, { passive: false });
 
       function endTrackPointer(event) {
-        const slide = pressSlide;
-        const startScroll = dragStartScroll;
-        if (event.pointerType === 'touch') {
-          pressSlide = null;
-          dragPointer = null;
-          if (event.type === 'pointercancel') return;
-          const scrolled = Math.abs(galleryTrack.scrollLeft - startScroll);
-          if (scrolled < 10 && slide) {
-            openedOnPointerUp = true;
-            openSlide(slide);
-          }
-          return;
-        }
         if (dragPointer == null || (event && event.pointerId !== dragPointer)) return;
-        const dragged = didDrag;
+        const slide = pressSlide;
+        const dragged = didDrag && axisLocked === 'x';
+        const startScroll = dragStartScroll;
+        const elapsed = Math.max(16, performance.now() - dragStartTime);
+        const velocity = (galleryTrack.scrollLeft - startScroll) / elapsed;
         dragPointer = null;
         pressSlide = null;
+        axisLocked = null;
         galleryTrack.classList.remove('is-dragging');
         if (event.type === 'pointercancel') {
           didDrag = false;
           return;
         }
         if (dragged) {
-          galleryIndex = nearestSlideIndex();
+          let next = nearestSlideIndex();
+          if (velocity > 0.55) next = Math.min(gallerySlides.length - 1, next + 1);
+          else if (velocity < -0.55) next = Math.max(0, next - 1);
+          galleryIndex = next;
           renderGallery(galleryIndex, 'smooth');
           didDrag = false;
           return;
@@ -1351,7 +1466,7 @@
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {
-    4: 'assets/v5-bgm.mp3',
+    4: 'assets/v5-bgm.mp3?v=fluttering',
   };
   const defaultBgm = 'assets/wedding-song.mp3';
 
