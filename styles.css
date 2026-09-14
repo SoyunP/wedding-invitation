@@ -4230,7 +4230,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   --bgm-color: #b8a4de;
   background: #111111;
   color: #b8a4de;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.16), 0 1px 4px rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================================
@@ -4330,9 +4330,10 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 
 .v5-save-names {
   margin: 0;
-  font-family: var(--v5-sans);
+  font-family: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
   font-size: 1.22rem;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 300;
   letter-spacing: 0.12em;
   color: #f6f2ea;
 }
