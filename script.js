@@ -1159,7 +1159,7 @@
       photostripOpen.addEventListener('click', () => {
         const photo = photostripOpen.querySelector('img');
         openStandalonePhoto(
-          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.png',
+          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.jpg',
           (photo && photo.getAttribute('alt')) || "We're getting Married!!!"
         );
       });
@@ -1533,7 +1533,7 @@
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {
-    4: 'assets/v5-bgm.mp3?v=married-slowed',
+    4: 'assets/v5-bgm.mp3?v=free-love',
   };
   const defaultBgm = 'assets/wedding-song.mp3';
 

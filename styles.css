@@ -4519,9 +4519,9 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-hero-polaroid {
   position: absolute;
   left: 50%;
-  top: 8%;
+  top: 10%;
   z-index: 1;
-  width: 74%;
+  width: 66%;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -4545,7 +4545,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   overflow: hidden;
   width: 100%;
   margin: 0;
-  aspect-ratio: 1024 / 830;
+  aspect-ratio: 1024 / 797;
   background: transparent;
 }
 
