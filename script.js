@@ -442,6 +442,22 @@
 
     if (prefix === 'v5') {
       const reducePolaroidMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function syncLetterReveal() {
+        if (document.body.dataset.activeVersion !== String(versionKey)) return;
+        if (reducePolaroidMotion.matches) {
+          root.style.setProperty('--reveal', '1');
+          root.classList.add('is-letter-open');
+          return;
+        }
+        const max = Math.max(1, window.innerHeight * 0.92);
+        const progress = Math.min(1, Math.max(0, window.scrollY / max));
+        const reveal = progress * progress * (3 - 2 * progress);
+        root.style.setProperty('--reveal', reveal.toFixed(4));
+        root.classList.toggle('is-letter-open', reveal >= 0.995);
+      }
+      window.addEventListener('scroll', syncLetterReveal, { passive: true });
+      window.addEventListener('resize', syncLetterReveal);
+      syncLetterReveal();
       const people = Array.from(root.querySelectorAll('.v5-person'));
       function revealPolaroid(person) {
         const polaroid = person.querySelector('.v5-polaroid');
@@ -503,8 +519,9 @@
       }
       const riseEls = Array.from(root.querySelectorAll([
         '.v5-celebrate-title',
-        '.v5-celebrate-date',
         '.v5-celebrate-venue',
+        '.v5-celebrate-date',
+        '.v5-hero-couple',
         '.v5-bubble--img',
         '#v5-gallery-track',
         '#v5-location > .v5-venue',
@@ -867,16 +884,6 @@
         openMap('assets/v2-samcheonggak-yakdo.png', '삼청각 약도');
       });
     }
-    const photostripOpen = id('photostrip-open');
-    if (photostripOpen) {
-      photostripOpen.addEventListener('click', () => {
-        const photo = photostripOpen.querySelector('img');
-        openMap(
-          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.png',
-          (photo && photo.getAttribute('alt')) || '포토스트립'
-        );
-      });
-    }
     root.querySelectorAll('.v5-polaroid-open').forEach((btn) => {
       btn.addEventListener('click', () => {
         const photo = btn.querySelector('.v5-polaroid-photo');
@@ -899,14 +906,14 @@
     const galleryModal = id('gallery-modal');
     const galleryModalImage = id('gallery-modal-image');
     const galleryCount = id('gallery-count');
+    const galleryPager = id('gallery-pager');
     const galleryClose = id('gallery-close');
     const galleryPrev = id('gallery-prev');
     const galleryNext = id('gallery-next');
     const galleryMain = id('gallery-main');
     const galleryMainImage = id('gallery-main-image');
-    const galleryThumbs = Array.from(root.querySelectorAll('.v2-gallery-thumb'));
     const gallerySlides = Array.from(root.querySelectorAll('.v3-gallery-slide'));
-    const galleryItems = gallerySlides.length ? gallerySlides : galleryThumbs;
+    const galleryItems = gallerySlides.length ? gallerySlides : Array.from(root.querySelectorAll('.v2-gallery-thumb'));
     const gallerySources = galleryItems.map((btn) => {
     const img = btn.querySelector('img');
     return img
@@ -914,6 +921,23 @@
       : { src: '', alt: 'Gallery image' };
   }).filter((item) => item.src);
     const galleryTrack = id('gallery-track');
+    const thumbsRow = id('gallery-thumbs');
+    if (thumbsRow && gallerySources.length && !thumbsRow.querySelector('.v2-gallery-thumb')) {
+      gallerySources.forEach((item, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'v2-gallery-thumb';
+        btn.setAttribute('aria-label', (i + 1) + '번째 사진으로 이동');
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        btn.appendChild(img);
+        thumbsRow.appendChild(btn);
+      });
+    }
+    const galleryThumbs = Array.from(root.querySelectorAll('.v2-gallery-thumb'));
     const galleryGrid = id('gallery-grid');
     const galleryGridInner = id('gallery-grid-inner');
     const galleryGridClose = id('gallery-grid-close');
@@ -1026,9 +1050,9 @@
       }
       galleryIndex = nextIndex;
       const current = gallerySources[galleryIndex];
-      if (galleryCount) {
-        galleryCount.textContent = (galleryIndex + 1) + ' / ' + count;
-      }
+      const label = (galleryIndex + 1) + ' / ' + count;
+      if (galleryCount) galleryCount.textContent = label;
+      if (galleryPager) galleryPager.textContent = label;
       if (galleryModalImage) {
         galleryModalImage.src = current.src;
         galleryModalImage.alt = current.alt;
@@ -1054,7 +1078,22 @@
     function openGallery(index) {
       if (!galleryModal || !gallerySources.length) return;
       pauseGalleryAuto();
+      galleryModal.classList.remove('is-solo');
       renderGallery(index, 'auto');
+      galleryModal.classList.add('is-open');
+      galleryModal.setAttribute('aria-hidden', 'false');
+      syncGalleryLock();
+    }
+
+    function openStandalonePhoto(src, alt) {
+      if (!galleryModal || !galleryModalImage || !src) {
+        openMap(src, alt);
+        return;
+      }
+      pauseGalleryAuto();
+      galleryModal.classList.add('is-solo');
+      galleryModalImage.src = src;
+      galleryModalImage.alt = alt || '';
       galleryModal.classList.add('is-open');
       galleryModal.setAttribute('aria-hidden', 'false');
       syncGalleryLock();
@@ -1062,12 +1101,13 @@
 
     function closeGallery() {
       if (!galleryModal) return;
-      galleryModal.classList.remove('is-open');
+      galleryModal.classList.remove('is-open', 'is-solo');
       galleryModal.setAttribute('aria-hidden', 'true');
       syncGalleryLock();
     }
 
     function moveGallery(step) {
+      if (galleryModal && galleryModal.classList.contains('is-solo')) return;
       renderGallery(galleryIndex + step);
     }
 
@@ -1101,14 +1141,27 @@
     }
 
     galleryThumbs.forEach((btn, i) => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        pauseGalleryAuto();
         renderGallery(i);
-        if (!galleryMain && !galleryTrack) openGallery(i);
       });
     });
     if (galleryMain) {
       galleryMain.addEventListener('click', () => {
         openGallery(galleryIndex);
+      });
+    }
+
+    const photostripOpen = id('photostrip-open');
+    if (photostripOpen) {
+      photostripOpen.addEventListener('click', () => {
+        const photo = photostripOpen.querySelector('img');
+        openStandalonePhoto(
+          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.png',
+          (photo && photo.getAttribute('alt')) || "We're getting Married!!!"
+        );
       });
     }
     if (galleryGridClose) galleryGridClose.addEventListener('click', closeGrid);
@@ -1128,7 +1181,6 @@
       });
     }
 
-    const thumbsRow = id('gallery-thumbs');
     const thumbsPrev = id('gallery-thumbs-prev');
     const thumbsNext = id('gallery-thumbs-next');
 
@@ -1163,14 +1215,17 @@
         dragStartX = event.clientX;
         dragStartScroll = thumbsRow.scrollLeft;
         didDrag = false;
-        thumbsRow.classList.add('is-dragging');
-        thumbsRow.setPointerCapture(event.pointerId);
       });
 
       thumbsRow.addEventListener('pointermove', (event) => {
         if (dragPointer == null || event.pointerId !== dragPointer) return;
         const delta = event.clientX - dragStartX;
-        if (Math.abs(delta) > 4) didDrag = true;
+        if (!didDrag && Math.abs(delta) < 10) return;
+        if (!didDrag) {
+          didDrag = true;
+          thumbsRow.classList.add('is-dragging');
+          if (thumbsRow.setPointerCapture) thumbsRow.setPointerCapture(event.pointerId);
+        }
         thumbsRow.scrollLeft = dragStartScroll - delta;
       });
 
@@ -1232,7 +1287,17 @@
       }
 
       galleryTrack.addEventListener('scroll', () => {
-        galleryIndex = nearestSlideIndex();
+        const next = nearestSlideIndex();
+        if (next === galleryIndex) return;
+        galleryIndex = next;
+        const count = gallerySources.length;
+        const label = (galleryIndex + 1) + ' / ' + count;
+        if (galleryPager) galleryPager.textContent = label;
+        galleryThumbs.forEach((btn, i) => {
+          const active = i === galleryIndex;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-current', active ? 'true' : 'false');
+        });
       }, { passive: true });
 
       galleryTrack.addEventListener('pointerdown', (event) => {
@@ -1345,6 +1410,8 @@
         if (!document.hidden && galleryInView) startGalleryAuto();
         else if (document.hidden) stopGalleryAuto();
       });
+
+      renderGallery(0, 'auto');
     }
 
     if (galleryClose) galleryClose.addEventListener('click', closeGallery);
@@ -1367,7 +1434,7 @@
       }
 
       function onSwipeStart(x, y, target) {
-        if (!galleryLightboxOpen() || swipeTargetIsChrome(target)) {
+        if (!galleryLightboxOpen() || galleryModal.classList.contains('is-solo') || swipeTargetIsChrome(target)) {
           swipeStartX = null;
           return;
         }
@@ -1466,7 +1533,7 @@
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {
-    4: 'assets/v5-bgm.mp3?v=fluttering',
+    4: 'assets/v5-bgm.mp3?v=married-slowed',
   };
   const defaultBgm = 'assets/wedding-song.mp3';
 
