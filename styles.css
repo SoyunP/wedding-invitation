@@ -2176,10 +2176,13 @@ body.is-handoff .envelope-stage {
   padding-inline: 0;
   scroll-padding-inline: 0;
   gap: 0;
+  touch-action: pan-x;
 }
 
 #version-4 #v5-gallery .v3-gallery-slide {
   background: #111111;
+  pointer-events: none;
+  cursor: grab;
 }
 
 #version-4 #v5-gallery .v5-portrait-note {
@@ -2323,7 +2326,7 @@ body.is-handoff .envelope-stage {
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: pan-x;
 }
 
 .v3-gallery-track::-webkit-scrollbar {
@@ -2348,8 +2351,9 @@ body.is-handoff .envelope-stage {
   overflow: hidden;
   background: #e4dfd5;
   scroll-snap-align: center;
-  cursor: zoom-in;
+  cursor: grab;
   pointer-events: auto;
+  touch-action: pan-x;
   -webkit-tap-highlight-color: rgba(95, 87, 50, 0.18);
 }
 

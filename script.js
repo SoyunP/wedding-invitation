@@ -1287,6 +1287,7 @@
       }
 
       galleryTrack.addEventListener('scroll', () => {
+        if (!galleryAnimating) pauseGalleryAuto();
         const next = nearestSlideIndex();
         if (next === galleryIndex) return;
         galleryIndex = next;
@@ -1301,6 +1302,7 @@
       }, { passive: true });
 
       galleryTrack.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') return;
         pressSlide = slideFromEvent(event);
         pressX = event.clientX;
         pressY = event.clientY;
@@ -1335,7 +1337,6 @@
 
       function endTrackPointer(event) {
         if (dragPointer == null || (event && event.pointerId !== dragPointer)) return;
-        const slide = pressSlide;
         const dragged = didDrag && axisLocked === 'x';
         const startScroll = dragStartScroll;
         const elapsed = Math.max(16, performance.now() - dragStartTime);
@@ -1354,31 +1355,19 @@
           else if (velocity < -0.55) next = Math.max(0, next - 1);
           galleryIndex = next;
           renderGallery(galleryIndex, 'smooth');
-          didDrag = false;
-          return;
         }
-        if (slide) {
-          openedOnPointerUp = true;
-          openSlide(slide);
-        }
+        didDrag = false;
       }
 
       galleryTrack.addEventListener('pointerup', endTrackPointer);
       galleryTrack.addEventListener('pointercancel', endTrackPointer);
 
       galleryTrack.addEventListener('click', (event) => {
-        const slide = slideFromEvent(event);
-        if (openedOnPointerUp || didDrag || !slide) {
-          if (openedOnPointerUp || didDrag) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          openedOnPointerUp = false;
+        if (didDrag) {
+          event.preventDefault();
+          event.stopPropagation();
           didDrag = false;
-          return;
         }
-        event.preventDefault();
-        openSlide(slide);
       }, true);
 
       root.querySelectorAll('[data-gallery-tab]').forEach((tab) => {
