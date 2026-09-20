@@ -501,6 +501,7 @@
       const mailSection = root.querySelector('.v5-mail');
       const messageSection = root.querySelector('.v5-message');
       const headingSections = [
+        root.querySelector('.v5-save'),
         celebrateSection,
         id('gallery'),
         id('location'),

@@ -4497,7 +4497,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 
 .v5-hero-kicker {
   margin: 0;
-  font-family: "Pinyon Script", "The Nautigal", cursive;
+  font-family: "Great Vibes", "Pinyon Script", cursive;
   font-size: clamp(1.95rem, 7.2vw, 2.45rem);
   font-style: normal;
   font-weight: 400;
@@ -4523,9 +4523,9 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-hero-polaroid {
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 12%;
   z-index: 1;
-  width: 66%;
+  width: 58%;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -4551,6 +4551,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   margin: 0;
   aspect-ratio: 1024 / 797;
   background: transparent;
+  border-radius: 5px;
 }
 
 .v5-hero-photo {
@@ -4558,6 +4559,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 5px;
 }
 
 .v5-hero-caption {
@@ -4620,7 +4622,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 .v5-celebrate {
-  padding: 3.2rem 0 4.4rem;
+  padding: 1.6rem 0 4.4rem;
   background: var(--v5-black);
   color: #f6f2ea;
   text-align: center;
@@ -4636,7 +4638,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-celebrate-kicker {
   margin: 0 0 1.35rem;
   font-family: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
-  font-size: clamp(1.4rem, 4.4vw, 1.75rem);
+  font-size: clamp(1.1rem, 3.4vw, 1.35rem);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -4962,15 +4964,13 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 .v5-person:nth-child(1) .v5-polaroid-photo {
-  object-position: 40% 50%;
-  transform: scale(1.32);
-  transform-origin: 40% 48%;
+  object-position: 40% 36%;
+  transform: none;
 }
 
 .v5-person:nth-child(2) .v5-polaroid-photo {
-  object-position: center 62%;
-  transform: scale(1.48);
-  transform-origin: center 56%;
+  object-position: center 58%;
+  transform: none;
 }
 
 .v5-polaroid-border {
@@ -5502,8 +5502,8 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   transform: translateY(-0.85rem);
 }
 
-.v5-celebrate.is-head-in .v5-celebrate-star,
-.v5-celebrate.is-head-in .v5-celebrate-kicker,
+.v5-save.is-head-in .v5-celebrate-star,
+.v5-save.is-head-in .v5-celebrate-kicker,
 #v5-gallery.is-head-in > .v2-section-title,
 #v5-location.is-head-in > .v5-section-badge,
 #v5-location.is-head-in > h2,
@@ -5516,7 +5516,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   animation: v5-drop-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.v5-celebrate.is-head-in .v5-celebrate-kicker,
+.v5-save.is-head-in .v5-celebrate-kicker,
 #v5-location.is-head-in > h2,
 #v5-timeline.is-head-in > h2,
 #v5-account.is-head-in > h2,
