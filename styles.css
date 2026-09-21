@@ -4941,7 +4941,8 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none;
 }
 
 .v5-polaroid-frame {
@@ -4961,15 +4962,16 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   display: block;
   object-fit: cover;
   object-position: center 28%;
+  filter: brightness(0.88);
 }
 
 .v5-person:nth-child(1) .v5-polaroid-photo {
-  object-position: 40% 36%;
+  object-position: center 42%;
   transform: none;
 }
 
 .v5-person:nth-child(2) .v5-polaroid-photo {
-  object-position: center 58%;
+  object-position: center 45%;
   transform: none;
 }
 
@@ -5667,6 +5669,8 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-location {
   background: #fff;
   color: #1a1816;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
 }
 
 .v5-location .v5-section-badge,

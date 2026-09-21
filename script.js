@@ -885,13 +885,6 @@
         openMap('assets/v2-samcheonggak-yakdo.png', '삼청각 약도');
       });
     }
-    root.querySelectorAll('.v5-polaroid-open').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const photo = btn.querySelector('.v5-polaroid-photo');
-        if (!photo) return;
-        openMap(photo.getAttribute('src'), photo.getAttribute('alt') || '사진');
-      });
-    });
     if (mapClose) mapClose.addEventListener('click', closeMap);
     if (mapModal) {
       mapModal.addEventListener('click', (event) => {
