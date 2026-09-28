@@ -531,7 +531,6 @@
         '#v5-location .v5-transport-block',
         '#v5-timeline .v5-timeline-item',
         '#v5-account > .v5-account-message',
-        '#v5-account > .v5-account-toggle',
         '#v5-account > .v5-account-list',
         '#v5-rsvp > .v5-rsvp-message',
         '#v5-rsvp > .v5-rsvp-actions',

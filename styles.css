@@ -5109,13 +5109,18 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   font-weight: 600;
 }
 
+#v5-account {
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+}
+
 .v5-account-message {
-  margin: 0 auto 1.4rem;
+  margin: 0 auto 1rem;
   max-width: 22rem;
   color: rgba(246, 242, 234, 0.72);
   font-family: var(--v5-sans);
-  font-size: 0.92rem;
-  line-height: 1.8;
+  font-size: 0.86rem;
+  line-height: 1.7;
 }
 
 .v5-venue {
@@ -5403,58 +5408,34 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   text-decoration: none;
 }
 
-.v5-account-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 1.1rem 0 1.2rem;
-}
-
-.v5-account-tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.28rem;
-  min-width: 6.2rem;
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(246, 242, 234, 0.22);
-  border-radius: 999px;
-  background: transparent;
-  color: #f6f2ea;
-  font: inherit;
-  cursor: pointer;
-}
-
-.v5-account-tab.is-active {
-  background: var(--v5-lilac);
-  border-color: var(--v5-lilac);
-  color: #241e30;
-}
-
 .v5-account-list {
-  display: none;
-  gap: 0.7rem;
+  display: grid;
+  gap: 0.38rem;
   width: 100%;
   max-width: 360px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.v5-account-list[hidden] {
-  display: none;
+.v5-account-side {
+  margin: 0.55rem 0 0.1rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--v5-lilac);
 }
 
-.v5-account-list.is-active {
-  display: grid;
+.v5-account-side:first-child {
+  margin-top: 0;
 }
 
 .v5-account-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
+  gap: 0.55rem;
   width: 100%;
-  padding: 0.85rem 0.95rem;
+  padding: 0.48rem 0.7rem;
   border: 0;
   background: rgba(255, 255, 255, 0.05);
   color: inherit;
@@ -5469,17 +5450,22 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 
 .v5-account-card div {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.08rem;
+}
+
+.v5-account-card div span:first-child {
+  font-size: 0.78rem;
 }
 
 .v5-account-card span:last-child {
   color: rgba(246, 242, 234, 0.7);
-  font-size: 0.96rem;
+  font-size: 0.78rem;
 }
 
 .v5-account-copy {
   color: var(--v5-lilac);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  flex-shrink: 0;
 }
 
 .v5-section-badge {
@@ -5549,7 +5535,6 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 #v5-location .v5-transport-block,
 #v5-timeline .v5-timeline-item,
 #v5-account > .v5-account-message,
-#v5-account > .v5-account-toggle,
 #v5-account > .v5-account-list,
 #v5-rsvp > .v5-rsvp-message,
 #v5-rsvp > .v5-rsvp-actions {
@@ -5569,7 +5554,6 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 #v5-location .v5-transport-block.is-rise-in,
 #v5-timeline .v5-timeline-item.is-rise-in,
 #v5-account > .v5-account-message.is-rise-in,
-#v5-account > .v5-account-toggle.is-rise-in,
 #v5-account > .v5-account-list.is-rise-in,
 #v5-rsvp > .v5-rsvp-message.is-rise-in,
 #v5-rsvp > .v5-rsvp-actions.is-rise-in {
@@ -5627,7 +5611,6 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   #v5-location .v5-transport-block,
   #v5-timeline .v5-timeline-item,
   #v5-account > .v5-account-message,
-  #v5-account > .v5-account-toggle,
   #v5-account > .v5-account-list,
   #v5-rsvp > .v5-rsvp-message,
   #v5-rsvp > .v5-rsvp-actions {
