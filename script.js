@@ -111,8 +111,20 @@
 
     const copyLinkBtn = id('copy-link-btn');
     if (copyLinkBtn) {
-      copyLinkBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(window.location.href).then(() => showToast('Link copied!'));
+      copyLinkBtn.addEventListener('click', async () => {
+        const url = window.location.href;
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: document.title,
+              url: url,
+            });
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+        navigator.clipboard.writeText(url).then(() => showToast('링크가 복사되었습니다.'));
       });
     }
 
@@ -710,11 +722,12 @@
         if (!isV3Form || !rsvpSubmit) return;
         const data = new FormData(rsvpForm);
         const attending = data.get('attendance') !== '불가';
+        const phoneInput = rsvpForm.querySelector('input[name="phone"]');
         rsvpSubmit.disabled = !(
           data.get('name') &&
           data.get('side') &&
           data.get('attendance') &&
-          (!attending || data.get('phone')) &&
+          (!attending || !phoneInput || data.get('phone')) &&
           (!attending || data.get('meal')) &&
           data.get('consent') === 'yes'
         );

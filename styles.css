@@ -4781,7 +4781,10 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 .v5-open-invite {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   width: fit-content;
   margin: 0.95rem auto 0;
   padding: 0.78rem 1.55rem;
@@ -4796,6 +4799,11 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   line-height: 1.2;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.v5-rsvp-actions .v5-open-invite {
+  letter-spacing: 0.12em;
+  text-transform: none;
 }
 
 .v5-celebrate-date {
@@ -5299,6 +5307,10 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   left: 0;
 }
 
+.v5-route-note {
+  font-style: italic;
+}
+
 .v5-route-title {
   display: flex;
   align-items: center;
@@ -5338,10 +5350,29 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   color: rgba(246, 242, 234, 0.58);
 }
 
+.v5-route li.v5-route-time {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding-left: 0;
+}
+
+.v5-route li.v5-route-time::before {
+  content: none;
+}
+
+.v5-route-time svg {
+  flex-shrink: 0;
+  width: 0.92em;
+  height: 0.92em;
+  margin-top: 0.32em;
+}
+
 .v5-shuttle-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.35rem;
   margin-top: 0.9rem;
   padding: 0.5rem 1rem;
   border: 1px solid rgba(246, 242, 234, 0.28);
@@ -5351,6 +5382,12 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   font-family: var(--v5-sans);
   font-size: 0.82rem;
   cursor: pointer;
+}
+
+.v5-shuttle-btn svg {
+  display: block;
+  width: 0.95em;
+  height: 0.95em;
 }
 
 .v5-timeline-list {
@@ -5711,12 +5748,20 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   line-height: 1.85;
 }
 
+.v5-rsvp-message p:last-child {
+  font-weight: 700;
+}
+
 .v5-rsvp-actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.7rem;
   margin-top: 1.2rem;
+}
+
+.v5-rsvp-actions .v5-open-invite {
+  margin-top: 0;
 }
 
 .v5-rsvp .v5-copy {
@@ -5796,6 +5841,26 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   color: var(--v5-body);
   font-family: var(--v5-serif);
   font-style: italic;
+}
+
+.v5-footer .v5-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  min-width: 0;
+  min-height: 2.35rem;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--v5-body);
+  border-radius: 0;
+  background: transparent;
+  color: var(--v5-body);
+  font-family: "Outfit", "Noto Sans KR", sans-serif;
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 #v5-rsvp-modal {
