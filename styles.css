@@ -2176,13 +2176,14 @@ body.is-handoff .envelope-stage {
   padding-inline: 0;
   scroll-padding-inline: 0;
   gap: 0;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
 }
 
 #version-4 #v5-gallery .v3-gallery-slide {
   background: #111111;
   pointer-events: none;
   cursor: grab;
+  touch-action: pan-x pan-y;
 }
 
 #version-4 #v5-gallery .v5-portrait-note {
@@ -2212,7 +2213,7 @@ body.is-handoff .envelope-stage {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.2rem 1rem 0.55rem;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   cursor: grab;

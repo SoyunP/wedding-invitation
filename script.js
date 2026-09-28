@@ -462,7 +462,24 @@
       const saveSection = root.querySelector('.v5-save');
       if (openInvite && saveSection) {
         openInvite.addEventListener('click', () => {
-          saveSection.scrollIntoView({ behavior: reducePolaroidMotion.matches ? 'auto' : 'smooth', block: 'start' });
+          const top = saveSection.getBoundingClientRect().top + window.scrollY;
+          if (reducePolaroidMotion.matches) {
+            window.scrollTo(0, top);
+            return;
+          }
+          const start = window.scrollY;
+          const delta = top - start;
+          const duration = 1600;
+          const startTime = performance.now();
+          function tick(now) {
+            const t = Math.min(1, (now - startTime) / duration);
+            const eased = t < 0.5
+              ? 4 * t * t * t
+              : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            window.scrollTo(0, start + delta * eased);
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
         });
       }
       const booth = root.querySelector('#v5-booth');
