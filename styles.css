@@ -2173,27 +2173,39 @@ body.is-handoff .envelope-stage {
 }
 
 #version-4 #v5-gallery .v3-gallery-track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  overflow: visible;
   padding-inline: 0;
   scroll-padding-inline: 0;
-  gap: 0;
-  touch-action: pan-x pan-y;
+  scroll-snap-type: none;
+  cursor: default;
+  touch-action: pan-y;
 }
 
 #version-4 #v5-gallery .v3-gallery-slide {
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1;
   background: #111111;
-  pointer-events: none;
-  cursor: grab;
-  touch-action: pan-x pan-y;
+  pointer-events: auto;
+  cursor: pointer;
+  scroll-snap-align: unset;
+  touch-action: manipulation;
+}
+
+#version-4 #v5-gallery .v3-gallery-slide img {
+  object-fit: cover;
 }
 
 #version-4 #v5-gallery .v5-portrait-note {
-  position: absolute;
-  left: 0.55rem;
-  bottom: 1.15rem;
-  width: min(68%, 350px);
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
+  display: none;
+}
+
+#version-4 #v5-gallery .v5-gallery-pager,
+#version-4 #v5-gallery .v5-gallery-thumbs {
+  display: none;
 }
 
 .v5-gallery-pager {
@@ -2701,7 +2713,7 @@ body.v2-gallery-modal-open {
 }
 
 #v5-gallery-modal .v2-gallery-modal-image {
-  max-height: min(68vh, 68dvh);
+  max-height: min(78vh, 78dvh);
 }
 
 #v5-gallery-modal.is-solo .v2-gallery-nav,

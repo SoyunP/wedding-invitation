@@ -1077,7 +1077,7 @@
       if (!gallerySources.length) return;
       const count = gallerySources.length;
       const nextIndex = (index + count) % count;
-      if (galleryTrack && gallerySlides[nextIndex]) {
+      if (galleryTrack && gallerySlides[nextIndex] && prefix !== 'v5') {
         scrollGalleryTrack(nextIndex, behavior);
       }
       galleryIndex = nextIndex;
@@ -1156,7 +1156,7 @@
 
     function startGalleryAuto() {
       stopGalleryAuto();
-      if ((prefix !== 'v3' && prefix !== 'v4' && prefix !== 'v5') || !galleryTrack || gallerySources.length < 2) return;
+      if ((prefix !== 'v3' && prefix !== 'v4') || !galleryTrack || gallerySources.length < 2) return;
       galleryAutoTimer = window.setInterval(() => {
         if (!galleryInView || galleryUserPause || galleryAnimating || document.hidden || galleryLightboxOpen()) return;
         renderGallery(galleryIndex + 1);
@@ -1185,7 +1185,14 @@
         openGallery(galleryIndex);
       });
     }
-
+    if (prefix === 'v5') {
+      gallerySlides.forEach((slide, i) => {
+        slide.addEventListener('click', (event) => {
+          event.preventDefault();
+          openGallery(i);
+        });
+      });
+    }
     const photostripOpen = id('photostrip-open');
     if (photostripOpen) {
       photostripOpen.addEventListener('click', () => {
@@ -1334,7 +1341,7 @@
       }, { passive: true });
 
       galleryTrack.addEventListener('pointerdown', (event) => {
-        if (event.pointerType === 'touch') return;
+        if (prefix === 'v5' || event.pointerType === 'touch') return;
         pressSlide = slideFromEvent(event);
         pressX = event.clientX;
         pressY = event.clientY;
