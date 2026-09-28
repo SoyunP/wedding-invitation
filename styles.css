@@ -4380,10 +4380,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 .v5-letter-frame {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
+  display: none;
 }
 
 .v5-letter-bar {
@@ -4497,12 +4494,12 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 
 .v5-hero-kicker {
   margin: 0;
-  font-family: "Great Vibes", "Pinyon Script", cursive;
-  font-size: clamp(1.95rem, 7.2vw, 2.45rem);
+  font-family: "Outfit", "Noto Sans KR", sans-serif;
+  font-size: 0.98rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
   color: #f6f2ea;
 }
 
