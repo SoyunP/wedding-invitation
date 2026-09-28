@@ -458,6 +458,28 @@
       window.addEventListener('scroll', syncLetterReveal, { passive: true });
       window.addEventListener('resize', syncLetterReveal);
       syncLetterReveal();
+      const openInvite = root.querySelector('#v5-open-invite');
+      const saveSection = root.querySelector('.v5-save');
+      if (openInvite && saveSection) {
+        openInvite.addEventListener('click', () => {
+          saveSection.scrollIntoView({ behavior: reducePolaroidMotion.matches ? 'auto' : 'smooth', block: 'start' });
+        });
+      }
+      const booth = root.querySelector('#v5-booth');
+      if (booth) {
+        if (reducePolaroidMotion.matches) {
+          booth.classList.add('is-print');
+        } else {
+          const boothObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || document.body.dataset.activeVersion !== String(versionKey)) return;
+              booth.classList.add('is-print');
+              boothObserver.disconnect();
+            });
+          }, { threshold: 0.42 });
+          boothObserver.observe(booth);
+        }
+      }
       const people = Array.from(root.querySelectorAll('.v5-person'));
       function revealPolaroid(person) {
         const polaroid = person.querySelector('.v5-polaroid');
@@ -523,7 +545,7 @@
         '.v5-celebrate-venue',
         '.v5-celebrate-date',
         '.v5-hero-couple',
-        '.v5-bubble--img',
+        '.v5-person-label',
         '#v5-gallery-track',
         '#v5-location > .v5-venue',
         '#v5-location > .v5-venue-details',
@@ -1152,7 +1174,7 @@
       photostripOpen.addEventListener('click', () => {
         const photo = photostripOpen.querySelector('img');
         openStandalonePhoto(
-          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.jpg',
+          photo ? photo.getAttribute('src') : 'assets/v5-photostrip.jpg?v=print',
           (photo && photo.getAttribute('alt')) || "We're getting Married!!!"
         );
       });

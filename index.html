@@ -19,7 +19,7 @@
   <link rel="image_src" href="assets/v3-celebrate-photo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Outfit:wght@300;400;500&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=The+Nautigal:wght@400;700&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Outfit:wght@300;400;500&family=Petit+Formal+Script&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=The+Nautigal:wght@400;700&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     (function () {
@@ -75,24 +75,20 @@
 
     <main class="v5-main">
       <section class="v5-hero" id="v5-invitation">
-        <div class="v5-hero-intro">
-          <span class="v5-hero-star" aria-hidden="true">✦</span>
-          <p class="v5-hero-kicker">With love</p>
+        <p class="v5-hero-kicker">WE ARE GETTING MARRIED!</p>
+        <h1 class="v5-hero-names">Sangwon <span aria-hidden="true">&amp;</span> Soyun</h1>
+        <div class="v5-booth" id="v5-booth">
+          <div class="v5-booth-body">
+            <img class="v5-booth-machine" src="assets/v5-booth-machine.png?v=frame2" alt="" width="474" height="886" decoding="async">
+            <div class="v5-booth-chute">
+              <button class="v5-booth-strip" type="button" id="v5-photostrip-open" aria-label="포토스트립 크게 보기">
+                <img class="v5-booth-strip-img" src="assets/v5-photostrip.jpg?v=print" alt="포토부스 사진" width="193" height="1024" decoding="async">
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="v5-hero-stage">
-          <img class="v5-hero-envelope" src="assets/v5-envelope.png" alt="" width="752" height="782" decoding="async">
-          <figure class="v5-hero-polaroid">
-            <button class="v5-hero-polaroid-open" type="button" id="v5-photostrip-open" aria-label="포토스트립 크게 보기">
-              <span class="v5-hero-frame">
-                <img class="v5-hero-photo" src="assets/v5-photostrip.jpg" alt="We're getting Married!!!" width="1024" height="797" decoding="async">
-              </span>
-            </button>
-          </figure>
-          <p class="v5-hero-caption">J <span aria-hidden="true">♥</span> S</p>
-        </div>
-        <p class="v5-celebrate-venue">삼청각 일화당</p>
-        <p class="v5-celebrate-date">2026.11.14 1:30 PM</p>
-        <p class="v5-hero-couple">상원 <span aria-hidden="true">♥</span> 소연</p>
+        <p class="v5-celebrate-date">11. 14. 2026</p>
+        <button class="v5-open-invite" id="v5-open-invite" type="button">OPEN INVITATION</button>
       </section>
 
       <section class="v5-save">
@@ -130,9 +126,7 @@
               </span>
             </span>
           </figure>
-          <div class="v5-bubble v5-bubble--img">
-            <img class="v5-bubble-img" src="assets/v5-bubble-sangwon.png?v=6" alt="지현호 · 김윤정의 아들 상원" width="1024" height="342" decoding="async">
-          </div>
+          <p class="v5-person-label">지현호 김윤정의 아들 상원 🩷</p>
         </article>
 
         <article class="v5-person">
@@ -144,9 +138,7 @@
               </span>
             </span>
           </figure>
-          <div class="v5-bubble v5-bubble--img">
-            <img class="v5-bubble-img" src="assets/v5-bubble-soyeon.png?v=5" alt="박수근 · 이혜경의 딸 소연" width="1024" height="384" decoding="async">
-          </div>
+          <p class="v5-person-label">박수근 이혜경의 딸 소연 🩷</p>
         </article>
       </section>
 
@@ -325,7 +317,7 @@
         <div class="v5-rsvp-message">
           <p>소중한 날, 함께해 주실 분들을 위해</p>
           <p>정성껏 자리를 준비하고 있습니다.</p>
-          <p>참석 여부를 알려주시면 감사하겠습니다. 🤍</p>
+          <p>참석 여부를 알려주시면 감사하겠습니다. 🩷</p>
         </div>
         <div class="v5-rsvp-actions">
           <button class="v5-rsvp-btn js-rsvp-open" id="v5-rsvp-open" type="button">참석의사 전달하기<svg class="v5-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.4 11.2 19.2 4.4c.9-.4 1.8.5 1.4 1.4l-6.8 15.8c-.4.9-1.7.8-2-.1l-2.1-6.3-6.3-2.1c-.9-.3-1-1.6-.1-2Z"/></svg></button>
