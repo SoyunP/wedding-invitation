@@ -1537,7 +1537,7 @@
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {
-    4: 'assets/v5-bgm.mp3?v=free-love',
+    4: 'assets/v5-bgm.mp3?v=sun-rai',
   };
   const defaultBgm = 'assets/wedding-song.mp3';
 
