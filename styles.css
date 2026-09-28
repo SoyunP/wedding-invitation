@@ -4511,7 +4511,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-hero-names {
   margin: 0 0 1.05rem;
   font-family: "Petit Formal Script", "Allura", "Great Vibes", cursive;
-  font-size: clamp(2.35rem, 9vw, 3.05rem);
+  font-size: clamp(1.85rem, 7.2vw, 2.45rem);
   font-weight: 400;
   font-style: normal;
   letter-spacing: -0.02em;
@@ -4749,23 +4749,34 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   letter-spacing: 0.02em;
 }
 
-.v5-hero .v5-celebrate-date {
-  margin: 1.25rem 0 0;
-  color: var(--v5-body);
-  font-family: "Petit Formal Script", "Allura", "Great Vibes", cursive;
-  font-size: clamp(1.45rem, 5.4vw, 1.85rem);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1.15;
-}
-
 .v5-hero-couple {
-  margin: 0.4rem 0 0;
+  margin: 0.45rem 0 0;
   color: var(--v5-body);
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.78rem;
   font-weight: 400;
   letter-spacing: 0.12em;
+  line-height: 1.3;
+}
+
+.v5-hero .v5-celebrate-date {
+  margin: 1.05rem 0 0;
+  color: var(--v5-body);
+  font-family: "Petit Formal Script", "Allura", "Great Vibes", cursive;
+  font-size: clamp(1.45rem, 5.4vw, 1.85rem);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+
+.v5-hero-venue {
+  margin: 0.4rem 0 0;
+  color: var(--v5-body);
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   line-height: 1.3;
 }
 
