@@ -128,6 +128,14 @@
       });
     }
 
+    const topBtn = id('top-btn');
+    if (topBtn) {
+      topBtn.addEventListener('click', () => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }
+
     bindMobileNav(id('menu-btn'), id('nav'), root.querySelector('.v2-nav-close'));
 
     const accountTabs = Array.from(root.querySelectorAll('[data-account-tab]'));
@@ -664,17 +672,51 @@
     }
 
     const rsvpModal = id('rsvp-modal');
+    const rsvpDialog = id('rsvp-dialog');
+    const rsvpIntro = id('rsvp-intro');
+    const rsvpFormWrap = id('rsvp-form-wrap');
+    const rsvpStart = id('rsvp-start');
     const rsvpOpenButtons = root.querySelectorAll('.js-rsvp-open');
+    const rsvpAlreadyButtons = root.querySelectorAll('.js-rsvp-already');
     const rsvpClose = id('rsvp-close');
     const rsvpForm = id('rsvp-form');
+    const rsvpDoneKey = 'wedding-rsvp-submitted';
 
-    function openRsvp() {
+    function hasRsvpDone() {
+      try {
+        return localStorage.getItem(rsvpDoneKey) === '1';
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function markRsvpDone() {
+      try {
+        localStorage.setItem(rsvpDoneKey, '1');
+      } catch (err) {}
+    }
+
+    function showRsvpIntro() {
+      if (rsvpDialog) rsvpDialog.classList.add('is-intro');
+      if (rsvpIntro) rsvpIntro.hidden = false;
+      if (rsvpFormWrap) rsvpFormWrap.hidden = true;
+    }
+
+    function showRsvpForm() {
+      if (rsvpDialog) rsvpDialog.classList.remove('is-intro');
+      if (rsvpIntro) rsvpIntro.hidden = true;
+      if (rsvpFormWrap) rsvpFormWrap.hidden = false;
+      const firstField = rsvpModal && rsvpModal.querySelector('input[name="name"]');
+      if (firstField) firstField.focus();
+    }
+
+    function openRsvp(options) {
       if (!rsvpModal) return;
+      showRsvpIntro();
       rsvpModal.classList.add('is-open');
       rsvpModal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('v2-rsvp-modal-open');
-      const firstField = rsvpModal.querySelector('input[name="name"]');
-      if (firstField) firstField.focus();
+      if (options && options.form) showRsvpForm();
     }
 
     function closeRsvp() {
@@ -682,9 +724,14 @@
       rsvpModal.classList.remove('is-open');
       rsvpModal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('v2-rsvp-modal-open');
+      showRsvpIntro();
     }
 
-    rsvpOpenButtons.forEach((btn) => btn.addEventListener('click', openRsvp));
+    rsvpOpenButtons.forEach((btn) => btn.addEventListener('click', () => openRsvp()));
+    if (rsvpStart) rsvpStart.addEventListener('click', showRsvpForm);
+    rsvpAlreadyButtons.forEach((btn) => btn.addEventListener('click', () => {
+      closeRsvp();
+    }));
     if (rsvpClose) rsvpClose.addEventListener('click', closeRsvp);
     if (rsvpModal) {
       rsvpModal.addEventListener('click', (event) => {
@@ -825,6 +872,7 @@
         rsvpForm.reset();
         setGuestCount(0);
         syncAttendingFields();
+        markRsvpDone();
         closeRsvp();
         showToast('전달되었습니다.');
         fetch(rsvpSheetUrl, {
@@ -848,6 +896,10 @@
           sendRsvp();
         });
       }
+    }
+
+    if (prefix === 'v5' && rsvpModal && !hasRsvpDone()) {
+      window.setTimeout(() => openRsvp({ skipFocus: true }), 80);
     }
 
     const shuttleModal = id('shuttle-modal');

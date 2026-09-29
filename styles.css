@@ -4151,6 +4151,44 @@ body.v2-rsvp-modal-open {
   cursor: not-allowed;
 }
 
+.v3-rsvp-already {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.72rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6b6560;
+  font-family: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+#v5-rsvp-modal .v3-rsvp-dialog.is-intro {
+  width: min(100%, 405px);
+  max-height: none;
+  padding: 2.1rem 1.45rem 1.45rem;
+  text-align: center;
+}
+
+.v5-rsvp-intro h3 {
+  margin-bottom: 0.85rem;
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.v5-rsvp-intro .v5-rsvp-message p {
+  margin: 0;
+  color: var(--v5-muted);
+}
+
+.v5-rsvp-intro .v5-open-invite {
+  margin-top: 1.15rem;
+}
+
 @media (max-width: 400px) {
   .v3-rsvp-name-row {
     grid-template-columns: 1fr;
@@ -4840,7 +4878,8 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   cursor: pointer;
 }
 
-.v5-rsvp-actions .v5-open-invite {
+.v5-rsvp-actions .v5-open-invite,
+.v5-rsvp-intro .v5-open-invite {
   letter-spacing: 0.12em;
   text-transform: none;
   background: #111111;
@@ -5885,12 +5924,20 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   font-style: italic;
 }
 
+.v5-footer-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
 .v5-footer .v5-copy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  margin-top: 1rem;
+  margin-top: 0;
   min-width: 0;
   min-height: 2.35rem;
   padding: 0.45rem 1.1rem;

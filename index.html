@@ -339,78 +339,93 @@
       <footer class="v5-footer">
         <p>With love, Sangwon &amp; Soyun</p>
         <p>2026.11.14</p>
-        <button class="v5-copy" id="v5-copy-link-btn" type="button">청첩장 공유하기<svg class="v5-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a4 4 0 0 1 0-5.66l2.12-2.12a4 4 0 0 1 5.66 5.66l-1.06 1.06-1.42-1.41 1.06-1.06a2 2 0 1 0-2.83-2.83l-2.12 2.12a2 2 0 0 0 0 2.83zm2.8-2.8a4 4 0 0 1 0 5.66l-2.12 2.12a4 4 0 1 1-5.66-5.66l1.06-1.06 1.42 1.41-1.06 1.06a2 2 0 1 0 2.83 2.83l2.12-2.12a2 2 0 0 0 0-2.83z"/></svg></button>
+        <div class="v5-footer-actions">
+          <button class="v5-copy" id="v5-copy-link-btn" type="button">청첩장 공유하기<svg class="v5-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a4 4 0 0 1 0-5.66l2.12-2.12a4 4 0 0 1 5.66 5.66l-1.06 1.06-1.42-1.41 1.06-1.06a2 2 0 1 0-2.83-2.83l-2.12 2.12a2 2 0 0 0 0 2.83zm2.8-2.8a4 4 0 0 1 0 5.66l-2.12 2.12a4 4 0 1 1-5.66-5.66l1.06-1.06 1.42 1.41-1.06 1.06a2 2 0 1 0 2.83 2.83l2.12-2.12a2 2 0 0 0 0-2.83z"/></svg></button>
+          <button class="v5-copy" id="v5-top-btn" type="button">맨위로 가기<svg class="v5-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+        </div>
       </footer>
 
       <div class="v2-rsvp-modal" id="v5-rsvp-modal" aria-hidden="true">
-        <div class="v2-rsvp-dialog v3-rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="v5-rsvp-dialog-title">
+        <div class="v2-rsvp-dialog v3-rsvp-dialog is-intro" id="v5-rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="v5-rsvp-dialog-title">
           <button class="v2-rsvp-close" id="v5-rsvp-close" type="button" aria-label="닫기">&times;</button>
-          <h3 id="v5-rsvp-dialog-title">참석 의사 전달</h3>
-          <p class="v3-rsvp-lead">원활한 예식 진행을 위해 참석 정보를 미리 알려주시면 감사하겠습니다.</p>
-          <form class="v2-rsvp-form v3-rsvp-form" id="v5-rsvp-form" novalidate>
-            <fieldset class="v2-rsvp-field">
-              <legend class="visually-hidden">참석 여부</legend>
-              <div class="v3-rsvp-attend">
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="attendance" value="가능" required>
-                  <span class="v3-rsvp-attend-card">가능<span class="v3-rsvp-check" aria-hidden="true"></span></span>
-                </label>
-                <label class="v3-rsvp-attend-choice">
-                  <input type="radio" name="attendance" value="불가">
-                  <span class="v3-rsvp-attend-card">불가<span class="v3-rsvp-check" aria-hidden="true"></span></span>
-                </label>
-              </div>
-            </fieldset>
-            <div class="v3-rsvp-name-row">
-              <label class="v2-rsvp-field">
-                <span>성함</span>
-                <input type="text" name="name" autocomplete="name" placeholder="성함을 입력해 주세요." required>
-              </label>
-              <fieldset class="v2-rsvp-field v3-rsvp-sides">
-                <legend class="visually-hidden">구분</legend>
-                <label class="v3-rsvp-side">
-                  <input type="radio" name="side" value="신랑측" required>
-                  <span>신랑측</span>
-                </label>
-                <label class="v3-rsvp-side">
-                  <input type="radio" name="side" value="신부측">
-                  <span>신부측</span>
-                </label>
-              </fieldset>
+          <div class="v5-rsvp-intro" id="v5-rsvp-intro">
+            <h3 id="v5-rsvp-dialog-title">참석 의사 전달</h3>
+            <div class="v5-rsvp-message">
+              <p>소중한 날, 함께해 주실 분들을 위해</p>
+              <p>정성껏 자리를 준비하고 있습니다.</p>
+              <p>참석 여부를 알려주시면 감사하겠습니다. 🙏💌</p>
             </div>
-            <div class="v3-rsvp-attending-only">
-              <div class="v3-rsvp-row">
-                <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
-                <div class="v3-rsvp-counter">
-                  <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
-                  <span data-guest-count>0</span>
-                  <input type="hidden" name="guests" value="0">
-                  <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
-                </div>
-              </div>
+            <button class="v5-open-invite" id="v5-rsvp-start" type="button">참석 의사 전달하기<svg class="v5-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.4 11.2 19.2 4.4c.9-.4 1.8.5 1.4 1.4l-6.8 15.8c-.4.9-1.7.8-2-.1l-2.1-6.3-6.3-2.1c-.9-.3-1-1.6-.1-2Z"/></svg></button>
+            <button class="v3-rsvp-already js-rsvp-already" type="button">네, 이미 전달했습니다</button>
+          </div>
+          <div class="v5-rsvp-form-wrap" id="v5-rsvp-form-wrap" hidden>
+            <h3>참석 의사 전달</h3>
+            <p class="v3-rsvp-lead">원활한 예식 진행을 위해 참석 정보를 미리 알려주시면 감사하겠습니다.</p>
+            <form class="v2-rsvp-form v3-rsvp-form" id="v5-rsvp-form" novalidate>
               <fieldset class="v2-rsvp-field">
-                <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+                <legend class="visually-hidden">참석 여부</legend>
                 <div class="v3-rsvp-attend">
                   <label class="v3-rsvp-attend-choice">
-                    <input type="radio" name="meal" value="식사함">
-                    <span class="v3-rsvp-attend-card">식사함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                    <input type="radio" name="attendance" value="가능" required>
+                    <span class="v3-rsvp-attend-card">가능<span class="v3-rsvp-check" aria-hidden="true"></span></span>
                   </label>
                   <label class="v3-rsvp-attend-choice">
-                    <input type="radio" name="meal" value="식사안함">
-                    <span class="v3-rsvp-attend-card">식사안함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                    <input type="radio" name="attendance" value="불가">
+                    <span class="v3-rsvp-attend-card">불가<span class="v3-rsvp-check" aria-hidden="true"></span></span>
                   </label>
                 </div>
               </fieldset>
-            </div>
-            <label class="v3-rsvp-consent">
-              <span class="v3-rsvp-consent-head">
-                <input type="checkbox" name="consent" value="yes">
-                동의합니다.
-              </span>
-              <span class="v3-rsvp-consent-copy">원활한 예식 준비와 참석 확인을 위해 성함, 참석 여부 및 동행 인원 정보를 수집·이용합니다.</span>
-            </label>
-            <button class="v2-rsvp-submit v3-rsvp-submit" type="button">신랑 &amp; 신부에게 전달하기</button>
-          </form>
+              <div class="v3-rsvp-name-row">
+                <label class="v2-rsvp-field">
+                  <span>성함</span>
+                  <input type="text" name="name" autocomplete="name" placeholder="성함을 입력해 주세요." required>
+                </label>
+                <fieldset class="v2-rsvp-field v3-rsvp-sides">
+                  <legend class="visually-hidden">구분</legend>
+                  <label class="v3-rsvp-side">
+                    <input type="radio" name="side" value="신랑측" required>
+                    <span>신랑측</span>
+                  </label>
+                  <label class="v3-rsvp-side">
+                    <input type="radio" name="side" value="신부측">
+                    <span>신부측</span>
+                  </label>
+                </fieldset>
+              </div>
+              <div class="v3-rsvp-attending-only">
+                <div class="v3-rsvp-row">
+                  <p class="v3-rsvp-row-label"><span class="v3-rsvp-required">*</span> 추가인원</p>
+                  <div class="v3-rsvp-counter">
+                    <button type="button" data-guest-step="-1" aria-label="추가인원 줄이기">−</button>
+                    <span data-guest-count>0</span>
+                    <input type="hidden" name="guests" value="0">
+                    <button type="button" data-guest-step="1" aria-label="추가인원 늘리기">+</button>
+                  </div>
+                </div>
+                <fieldset class="v2-rsvp-field">
+                  <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
+                  <div class="v3-rsvp-attend">
+                    <label class="v3-rsvp-attend-choice">
+                      <input type="radio" name="meal" value="식사함">
+                      <span class="v3-rsvp-attend-card">식사함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                    </label>
+                    <label class="v3-rsvp-attend-choice">
+                      <input type="radio" name="meal" value="식사안함">
+                      <span class="v3-rsvp-attend-card">식사안함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+              <label class="v3-rsvp-consent">
+                <span class="v3-rsvp-consent-head">
+                  <input type="checkbox" name="consent" value="yes">
+                  동의합니다.
+                </span>
+                <span class="v3-rsvp-consent-copy">원활한 예식 준비와 참석 확인을 위해 성함, 참석 여부 및 동행 인원 정보를 수집·이용합니다.</span>
+              </label>
+              <button class="v2-rsvp-submit v3-rsvp-submit" type="button">신랑 &amp; 신부에게 전달하기</button>
+            </form>
+          </div>
         </div>
       </div>
 
