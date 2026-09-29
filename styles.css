@@ -871,7 +871,7 @@ body:not(.is-handoff) .site-header {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-  z-index: 400;
+  z-index: 2000;
 }
 
 .toast.show {
@@ -4527,7 +4527,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-booth {
   position: relative;
   width: min(60%, 222px);
-  margin: 0 0 1.15rem;
+  margin: 0 0 0.45rem;
 }
 
 .v5-booth-body {
@@ -4750,7 +4750,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 .v5-hero-couple {
-  margin: 0.45rem 0 0;
+  margin: 0.15rem 0 0;
   color: var(--v5-body);
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.78rem;
@@ -4772,12 +4772,51 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 
 .v5-hero-venue {
   margin: 0.4rem 0 0;
-  color: var(--v5-body);
+  color: #6b5848;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.06em;
   line-height: 1.3;
+}
+
+.v5-scroll-hint {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin: 0.5rem auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--v5-body);
+  cursor: pointer;
+}
+
+.v5-scroll-hint svg {
+  display: block;
+  width: 1.45rem;
+  height: 1.45rem;
+  animation: v5-scroll-hint 1.8s ease-in-out infinite;
+}
+
+@keyframes v5-scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(0.35rem);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v5-scroll-hint svg {
+    animation: none;
+    opacity: 0.8;
+  }
 }
 
 .v5-open-invite {
@@ -4804,6 +4843,9 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 .v5-rsvp-actions .v5-open-invite {
   letter-spacing: 0.12em;
   text-transform: none;
+  background: #111111;
+  border-color: #111111;
+  color: var(--v5-ivory);
 }
 
 .v5-celebrate-date {
@@ -5942,6 +5984,12 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
 }
 
 #v5-rsvp-modal .v3-rsvp-submit {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0.6rem;
+  pointer-events: auto;
   background: #1a1816;
   color: #fff;
   font-family: var(--v5-sans);

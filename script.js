@@ -699,7 +699,7 @@
     if (rsvpForm) {
       const guestInput = rsvpForm.querySelector('input[name="guests"]');
       const guestDisplay = rsvpForm.querySelector('[data-guest-count]');
-      const rsvpSubmit = rsvpForm.querySelector('[type="submit"]');
+      const rsvpSubmit = rsvpForm.querySelector('.v3-rsvp-submit, [type="submit"]');
       const isV3Form = rsvpForm.classList.contains('v3-rsvp-form');
 
       function guestCount() {
@@ -718,19 +718,11 @@
         });
       });
 
+      let rsvpSending = false;
+      const rsvpSheetUrl = 'https://script.google.com/macros/s/AKfycbw3mVLf00yM7S5GU2ubBdnmT1hBa7h10QvbZvNruW3m3r50_QMVogTvyVXQ_Bsovpjt/exec';
+
       function updateRsvpSubmit() {
-        if (!isV3Form || !rsvpSubmit) return;
-        const data = new FormData(rsvpForm);
-        const attending = data.get('attendance') !== '불가';
-        const phoneInput = rsvpForm.querySelector('input[name="phone"]');
-        rsvpSubmit.disabled = !(
-          data.get('name') &&
-          data.get('side') &&
-          data.get('attendance') &&
-          (!attending || !phoneInput || data.get('phone')) &&
-          (!attending || data.get('meal')) &&
-          data.get('consent') === 'yes'
-        );
+        if (rsvpSubmit) rsvpSubmit.disabled = false;
       }
 
       function syncAttendingFields() {
@@ -770,13 +762,8 @@
         updateRsvpSubmit();
       }
 
-      let rsvpSending = false;
-      const rsvpSheetUrl = 'https://script.google.com/macros/s/AKfycbw3mVLf00yM7S5GU2ubBdnmT1hBa7h10QvbZvNruW3m3r50_QMVogTvyVXQ_Bsovpjt/exec';
-
-      rsvpForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+      function sendRsvp() {
         if (rsvpSending) return;
-
         const formData = new FormData(rsvpForm);
         const attendanceRaw = String(formData.get('attendance') || '');
         const attending = attendanceRaw !== '불가';
@@ -787,15 +774,26 @@
         const additionalGuests = guestCount();
         const consent = formData.get('consent');
 
-        const valid = Boolean(
-          name &&
-          side &&
-          attendanceRaw &&
-          consent === 'yes' &&
-          (!attending || contact) &&
-          (!attending || meal)
-        );
-        if (!valid) return;
+        if (!attendanceRaw) {
+          showToast('참석 여부를 선택해 주세요.');
+          return;
+        }
+        if (!name) {
+          showToast('성함을 입력해 주세요.');
+          return;
+        }
+        if (!side) {
+          showToast('신랑측/신부측을 선택해 주세요.');
+          return;
+        }
+        if (attending && !meal) {
+          showToast('식사여부를 선택해 주세요.');
+          return;
+        }
+        if (consent !== 'yes') {
+          showToast('개인정보 수집에 동의해 주세요.');
+          return;
+        }
 
         const data = Object.fromEntries(formData.entries());
 
@@ -816,37 +814,40 @@
 
         rsvpSending = true;
         if (rsvpSubmit) rsvpSubmit.disabled = true;
-
+        const payload = {
+          attendance: attendanceRaw === '불가' ? '참석 불가' : '참석 가능',
+          name,
+          side,
+          contact: attending ? contact : '',
+          additionalGuests,
+          meal: attending ? meal : '',
+        };
+        rsvpForm.reset();
+        setGuestCount(0);
+        syncAttendingFields();
+        closeRsvp();
+        showToast('전달되었습니다.');
         fetch(rsvpSheetUrl, {
           method: 'POST',
-          body: JSON.stringify({
-            attendance: attendanceRaw === '불가' ? '참석 불가' : '참석 가능',
-            name,
-            side,
-            contact: attending ? contact : '',
-            additionalGuests,
-            meal: attending ? meal : '',
-          }),
-        })
-          .then((response) => {
-            if (!response.ok) throw new Error('rsvp-failed');
-          })
-          .then(() => {
-            rsvpForm.reset();
-            setGuestCount(0);
-            syncAttendingFields();
-            updateRsvpSubmit();
-            closeRsvp();
-            showToast('참석 의사가 전달되었습니다.');
-          })
-          .catch(() => {
-            showToast('전송 중 문제가 발생했습니다. 다시 시도해주세요.');
-            updateRsvpSubmit();
-          })
-          .finally(() => {
-            rsvpSending = false;
-          });
+          keepalive: true,
+          body: JSON.stringify(payload),
+        }).catch(() => {}).finally(() => {
+          rsvpSending = false;
+          updateRsvpSubmit();
+        });
+      }
+
+      rsvpForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendRsvp();
       });
+      if (rsvpSubmit) {
+        rsvpSubmit.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          sendRsvp();
+        });
+      }
     }
 
     const shuttleModal = id('shuttle-modal');
@@ -1574,7 +1575,7 @@
   const bgm = document.getElementById('bgm');
   const bgmToggle = document.getElementById('bgm-toggle');
   const bgmByVersion = {
-    4: 'assets/v5-bgm.mp3?v=sun-rai',
+    4: 'assets/v5-bgm.mp3?v=free-love',
   };
   const defaultBgm = 'assets/wedding-song.mp3';
 

@@ -89,8 +89,13 @@
         </div>
         <p class="v5-hero-couple">상원 ❤️ 소연</p>
         <p class="v5-celebrate-date">11. 14. 2026</p>
-        <p class="v5-hero-venue">삼청각 일화당</p>
-        <button class="v5-open-invite" id="v5-open-invite" type="button">OPEN INVITATION</button>
+        <p class="v5-hero-venue">토요일 1:30 pm · 삼청각 일화당</p>
+        <button class="v5-scroll-hint" id="v5-open-invite" type="button" aria-label="청첩장 아래로 보기">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M6 6.5l6 6 6-6"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M6 12.5l6 6 6-6"/>
+          </svg>
+        </button>
       </section>
 
       <section class="v5-save">
@@ -168,7 +173,8 @@
             <img src="assets/v5-portrait-casual.jpg?v=2" alt="흰 배경에서 손을 잡고 웃는 상원과 소연" width="731" height="1024" loading="lazy" decoding="async">
             <img class="v5-portrait-note" src="assets/v5-portrait-note.png?v=6" alt="" width="963" height="372" loading="lazy" decoding="async">
           </button>
-          <button class="v3-gallery-slide" type="button" data-gallery-index="26" aria-label="갤러리 사진 26"><img src="assets/v5-gallery-26.jpg" alt="반지와 부토니에" width="767" height="1024" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="28" aria-label="갤러리 사진 28"><img src="assets/v5-gallery-28.jpg" alt="손을 잡고 있는 상원과 소연" width="731" height="1024" loading="lazy" decoding="async"></button>
+          <button class="v3-gallery-slide" type="button" data-gallery-index="29" aria-label="갤러리 사진 29"><img src="assets/v5-gallery-29.jpg" alt="베일 아래 마주 보는 상원과 소연" width="731" height="1024" loading="lazy" decoding="async"></button>
         </div>
         <p class="v5-gallery-pager" id="v5-gallery-pager" aria-live="polite">1 / 20</p>
         <div class="v5-gallery-thumbs" id="v5-gallery-thumbs" aria-label="갤러리 썸네일"></div>
@@ -341,7 +347,7 @@
           <button class="v2-rsvp-close" id="v5-rsvp-close" type="button" aria-label="닫기">&times;</button>
           <h3 id="v5-rsvp-dialog-title">참석 의사 전달</h3>
           <p class="v3-rsvp-lead">원활한 예식 진행을 위해 참석 정보를 미리 알려주시면 감사하겠습니다.</p>
-          <form class="v2-rsvp-form v3-rsvp-form" id="v5-rsvp-form">
+          <form class="v2-rsvp-form v3-rsvp-form" id="v5-rsvp-form" novalidate>
             <fieldset class="v2-rsvp-field">
               <legend class="visually-hidden">참석 여부</legend>
               <div class="v3-rsvp-attend">
@@ -386,7 +392,7 @@
                 <legend><span class="v3-rsvp-required">*</span> 식사여부</legend>
                 <div class="v3-rsvp-attend">
                   <label class="v3-rsvp-attend-choice">
-                    <input type="radio" name="meal" value="식사함" required>
+                    <input type="radio" name="meal" value="식사함">
                     <span class="v3-rsvp-attend-card">식사함<span class="v3-rsvp-check" aria-hidden="true"></span></span>
                   </label>
                   <label class="v3-rsvp-attend-choice">
@@ -398,12 +404,12 @@
             </div>
             <label class="v3-rsvp-consent">
               <span class="v3-rsvp-consent-head">
-                <input type="checkbox" name="consent" value="yes" required>
+                <input type="checkbox" name="consent" value="yes">
                 동의합니다.
               </span>
               <span class="v3-rsvp-consent-copy">원활한 예식 준비와 참석 확인을 위해 성함, 참석 여부 및 동행 인원 정보를 수집·이용합니다.</span>
             </label>
-            <button class="v2-rsvp-submit v3-rsvp-submit" type="submit" disabled>신랑 &amp; 신부에게 전달하기</button>
+            <button class="v2-rsvp-submit v3-rsvp-submit" type="button">신랑 &amp; 신부에게 전달하기</button>
           </form>
         </div>
       </div>
@@ -522,7 +528,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <audio id="bgm" loop preload="auto">
-    <source src="assets/v5-bgm.mp3?v=sun-rai" type="audio/mpeg">
+    <source src="assets/v5-bgm.mp3?v=free-love" type="audio/mpeg">
   </audio>
   <button class="bgm-toggle" id="bgm-toggle" type="button" aria-label="음악 재생/정지">
     <svg viewBox="0 0 24 24" aria-hidden="true">
