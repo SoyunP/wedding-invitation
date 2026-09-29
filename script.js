@@ -581,7 +581,6 @@
         '.v5-celebrate-title',
         '.v5-celebrate-venue',
         '.v5-celebrate-date',
-        '.v5-hero-couple',
         '.v5-person-label',
         '#v5-gallery-track',
         '#v5-location > .v5-venue',
