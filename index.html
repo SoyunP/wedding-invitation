@@ -227,18 +227,8 @@
               </ul>
             </div>
             <div class="v5-route">
-              <p class="v5-route-title"><span class="v5-route-dot v5-route-dot--line3" aria-hidden="true"></span>3호선 · 안국역 5번 출구</p>
-              <ul>
-                <li class="v5-route-time"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 1.8a8.2 8.2 0 1 1 0 16.4 8.2 8.2 0 0 1 0-16.4Zm.7 3.4h-1.6v5.15l3.9 2.3.8-1.36-3.1-1.84V7.2Z"/></svg>약 40분 간격 운행</li>
-              </ul>
-            </div>
-            <div class="v5-route">
               <p class="v5-route-title">첫차</p>
-              <p>양 노선 모두 오전 11시부터 운행</p>
-            </div>
-            <div class="v5-route">
-              <p class="v5-route-title">추천 탑승</p>
-              <p class="v5-route-note">보다 원활한 탑승을 위해<br>한성대입구역 셔틀 이용을 추천드립니다.</p>
+              <p>오전 11시부터 운행</p>
             </div>
             <button class="v5-shuttle-btn" id="v5-shuttle-open" type="button"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 1.8a8.2 8.2 0 1 1 0 16.4 8.2 8.2 0 0 1 0-16.4Zm.7 3.4h-1.6v5.15l3.9 2.3.8-1.36-3.1-1.84V7.2Z"/></svg>셔틀버스 시간표 보기</button>
           </div>
@@ -251,8 +241,8 @@
         <h2>예식 순서</h2>
         <ol class="v5-timeline-list">
           <li class="v5-timeline-item">
-            <p class="v5-timeline-time">12:30 PM~</p>
-            <p class="v5-timeline-label">하객 입장 &amp; 웰컴 티</p>
+            <p class="v5-timeline-time">1:00 PM~</p>
+            <p class="v5-timeline-label">하객 입장 &amp; 웰컴 티 · Welcome Reception</p>
           </li>
           <li class="v5-timeline-item">
             <p class="v5-timeline-time">1:30 PM</p>
@@ -434,17 +424,7 @@
         <div class="v2-shuttle-dialog" role="dialog" aria-modal="true" aria-labelledby="v5-shuttle-title">
           <button class="v2-shuttle-close" id="v5-shuttle-close" type="button" aria-label="닫기">&times;</button>
           <h3 id="v5-shuttle-title">삼청각 셔틀버스 시간표</h3>
-          <div class="v2-shuttle-tabs" role="tablist">
-            <button class="v2-shuttle-tab is-active" type="button" role="tab" aria-selected="true" data-shuttle-tab="hansung">
-              <span class="v3-line-dot v3-line-dot--4" aria-hidden="true"></span>
-              한성대입구
-            </button>
-            <button class="v2-shuttle-tab" type="button" role="tab" aria-selected="false" data-shuttle-tab="anguk">
-              <span class="v3-line-dot v3-line-dot--3" aria-hidden="true"></span>
-              안국
-            </button>
-          </div>
-          <div class="v2-shuttle-panel is-active" id="v5-shuttle-hansung" role="tabpanel">
+          <div class="v2-shuttle-panel is-active" id="v5-shuttle-hansung">
             <p class="v2-shuttle-route">4호선 한성대입구역 6번 출구</p>
             <table class="v2-shuttle-table">
               <thead>
@@ -475,37 +455,6 @@
                 <tr><td>20:00</td><td>20:10</td><td>19:50</td></tr>
                 <tr><td>20:30</td><td>20:40</td><td>20:20</td></tr>
                 <tr><td>21:00</td><td>21:10</td><td>20:50</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="v2-shuttle-panel" id="v5-shuttle-anguk" role="tabpanel" hidden>
-            <p class="v2-shuttle-route">3호선 안국역 5번 출구</p>
-            <table class="v2-shuttle-table">
-              <thead>
-                <tr>
-                  <th>역 출발</th>
-                  <th>삼청각 도착</th>
-                  <th>삼청각 출발</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>11:00</td><td>11:15</td><td>10:45</td></tr>
-                <tr><td>11:40</td><td>11:55</td><td>11:25</td></tr>
-                <tr><td>12:20</td><td>12:35</td><td>12:05</td></tr>
-                <tr><td>13:00</td><td>13:15</td><td>12:45</td></tr>
-                <tr><td>13:40</td><td>13:55</td><td>13:25</td></tr>
-                <tr><td>14:20</td><td>14:35</td><td>14:05</td></tr>
-                <tr><td>15:00</td><td>15:15</td><td>14:45</td></tr>
-                <tr><td>15:40</td><td>15:55</td><td>15:25</td></tr>
-                <tr class="v2-shuttle-break"><td colspan="3">미운행 15:55–16:25</td></tr>
-                <tr><td>16:40</td><td>16:55</td><td>16:25</td></tr>
-                <tr><td>17:20</td><td>17:35</td><td>17:05</td></tr>
-                <tr><td>18:00</td><td>18:15</td><td>17:45</td></tr>
-                <tr><td>18:40</td><td>18:55</td><td>18:25</td></tr>
-                <tr><td>19:20</td><td>19:35</td><td>19:05</td></tr>
-                <tr><td>20:00</td><td>20:15</td><td>19:45</td></tr>
-                <tr><td>20:40</td><td>20:55</td><td>20:25</td></tr>
-                <tr><td>21:20</td><td>21:35</td><td>21:05</td></tr>
               </tbody>
             </table>
           </div>

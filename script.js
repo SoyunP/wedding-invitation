@@ -904,9 +904,6 @@
     const shuttleModal = id('shuttle-modal');
     const shuttleOpen = id('shuttle-open');
     const shuttleClose = id('shuttle-close');
-    const shuttleTabs = Array.from(root.querySelectorAll('.v2-shuttle-tab'));
-    const shuttleHansung = id('shuttle-hansung');
-    const shuttleAnguk = id('shuttle-anguk');
 
     function openShuttle() {
       if (!shuttleModal) return;
@@ -922,22 +919,6 @@
       document.body.classList.remove('v2-shuttle-modal-open');
     }
 
-    function setShuttleTab(name) {
-      shuttleTabs.forEach((tab) => {
-        const active = tab.dataset.shuttleTab === name;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', String(active));
-      });
-      if (shuttleHansung) {
-        shuttleHansung.classList.toggle('is-active', name === 'hansung');
-        shuttleHansung.hidden = name !== 'hansung';
-      }
-      if (shuttleAnguk) {
-        shuttleAnguk.classList.toggle('is-active', name === 'anguk');
-        shuttleAnguk.hidden = name !== 'anguk';
-      }
-    }
-
     if (shuttleOpen) shuttleOpen.addEventListener('click', openShuttle);
     if (shuttleClose) shuttleClose.addEventListener('click', closeShuttle);
     if (shuttleModal) {
@@ -945,9 +926,6 @@
         if (event.target === shuttleModal) closeShuttle();
       });
     }
-    shuttleTabs.forEach((tab) => {
-      tab.addEventListener('click', () => setShuttleTab(tab.dataset.shuttleTab));
-    });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && shuttleModal && shuttleModal.classList.contains('is-open')) {
         closeShuttle();
