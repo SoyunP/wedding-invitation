@@ -4185,6 +4185,12 @@ body.v2-rsvp-modal-open {
   font-weight: 400;
 }
 
+.v5-rsvp-title-star {
+  margin: 0 0.45em;
+  font-size: 0.6em;
+  vertical-align: 0.25em;
+}
+
 .v5-rsvp-intro .v5-rsvp-message p {
   margin: 0;
   font-size: 0.94rem;
@@ -4819,6 +4825,10 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   margin-top: 0.2rem;
 }
 
+.v5-hero .v5-hero-rsvp {
+  margin-top: 1.2rem;
+}
+
 .v5-scroll-hint {
   display: grid;
   place-items: center;
@@ -4879,6 +4889,7 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   cursor: pointer;
 }
 
+.v5-hero-rsvp,
 .v5-rsvp-actions .v5-open-invite,
 .v5-rsvp-intro .v5-open-invite {
   letter-spacing: 0.12em;
@@ -4886,6 +4897,30 @@ body[data-active-version="4"] .bgm-toggle.is-playing {
   background: #111111;
   border-color: #111111;
   color: var(--v5-ivory);
+}
+
+.v5-rsvp-intro .v5-open-invite,
+.v5-rsvp-intro .v3-rsvp-already {
+  min-width: 14rem;
+}
+
+.v5-rsvp-intro .v3-rsvp-already {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0.55rem auto 0;
+  padding: 0.78rem 1.55rem;
+  border: 1px solid #111111;
+  border-radius: 0;
+  background: transparent;
+  color: #111111;
+  font-family: "Outfit", "Noto Sans KR", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-decoration: none;
 }
 
 .v5-celebrate-date {
